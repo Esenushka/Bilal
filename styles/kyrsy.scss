@@ -1,0 +1,160 @@
+$color: #66097b;
+
+.block-top {
+  background: url(https://animationschool.ru/wp-content/themes/as_underscores_theme/images/courses-top.jpg)
+    no-repeat center;
+  background-size: cover;
+  border-radius: 20px;
+  width: 100%;
+  height: 220px;
+  color: white;
+  overflow: hidden;
+  margin-top: 14px;
+  margin-bottom: 31px;
+  padding-left: 94px;
+  padding-top: 36px;
+  box-shadow: 5px 5px 0 rgb(0 0 0 / 8%);
+  div:nth-of-type(1) {
+    text-shadow: 4px 4px 0 rgb(0 0 0 / 24%);
+    font-size: 72px;
+    color: #fff;
+    padding-bottom: 23px;
+    font-weight: 800;
+  }
+  div:nth-of-type(2) {
+    text-shadow: 4px 4px 0 rgb(0 0 0 / 24%);
+    font-size: 26px;
+  }
+}
+
+.kyrs-filter {
+  display: flex;
+  grid-gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+  a {
+    padding: 7px 15px;
+    font-size: 16px;
+    border-radius: 16px;
+    border: 1px solid #e1e1e1;
+    color: black;
+  }
+  a.active {
+    background: #262626;
+    color: white;
+  }
+}
+.kyrs_wrapper {
+  overflow: hidden;
+}
+.kyrs-cards_wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  grid-gap: 25px;
+}
+.kyrs-card {
+  height: fit-content;
+  border-bottom: 4px solid #e2e2e2;
+  border-right: 4px solid #e2e2e2;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+  margin-bottom: 30px;
+  img {
+    object-fit: cover;
+    overflow: hidden;
+  }
+}
+.kyrs-card_text_wrapper {
+  height: 185px;
+  position: relative;
+}
+.kyrs-card_text {
+  top: -5px;
+  background: white;
+  height: fit-content;
+  padding: 15px 25px;
+  padding-bottom: 80px;
+  position: absolute;
+  transition: 0.5s;
+  .kyrs-card_title {
+    font-size: 25px;
+    font-weight: 700;
+  }
+  .kyrs-card_des {
+    margin-bottom: 60px;
+    margin-top: 40px;
+  }
+  .kyrs-card-text_block {
+    div:nth-of-type(2) {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+  }
+}
+.kyrs-card:hover .kyrs-card_text {
+  top: -280px;
+}
+
+.nothing {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 25px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .block-top {
+    background-image: none;
+    background-color: #262626;
+    height: fit-content;
+    padding-bottom: 40px;
+    div:nth-of-type(1) {
+      font-size: 50px;
+    }
+    div:nth-of-type(2) {
+      font-size: 18px;
+    }
+  }
+  .kyrs-fade_left {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .kyrs-fade_right {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@media (max-width: 512px) {
+  .block-top {
+    padding-left: 23px;
+    padding-bottom: 30px;
+    div:nth-of-type(1) {
+      font-size: 31px;
+    }
+  }
+  .kyrs-card_text {
+    .kyrs-card_title {
+      font-size: 18px;
+    }
+    .kyrs-card_des {
+      font-size: 14px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+    .kyrs-card-text_block {
+      div:nth-of-type(2) {
+        font-size: 15px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .kyrs-card:hover .kyrs-card_text {
+    top: -180px;
+  }
+}
