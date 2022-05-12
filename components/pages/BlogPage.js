@@ -8,15 +8,10 @@ import BlogCard from '../common/BlogCard/BlogCard';
 export default function BlogPage() {
   const router = useRouter();
   const query = Object.keys(router.query)[0];
-  const Joined = blogArticlesList
-    .map((el) =>
-      query === undefined ? (
-        <BlogCard {...el} />
-      ) : (
-        el.directions.map((item) => (item === query ? <BlogCard {...el} /> : ''))
-      ),
-    )
-    .join('');
+  const Joined = blogArticlesList.map((el) =>
+    query === undefined ? <BlogCard {...el} /> :
+      el.directions.map((item) => item === query ? <BlogCard {...el} /> : '')
+  ).join("").replace(/,/g, '')
   return (
     <div className="container">
       <div className="block-top blog_block-top">
@@ -34,17 +29,19 @@ export default function BlogPage() {
         ))}
       </div>
       <div className="kyrs-cards_wrapper">
-        {Joined ? (
-          blogArticlesList.map((el) =>
-            query === undefined ? (
-              <BlogCard key={el.id} {...el} />
-            ) : (
-              el.directions.map((item) => (item === query ? <BlogCard key={el.id} {...el} /> : ''))
-            ),
+        {
+          Joined ? (
+            blogArticlesList.map((el) =>
+              query === undefined ? (
+                <BlogCard key={el.id} {...el} />
+              ) : (
+                el.directions.map((item) => (item === query ? <BlogCard key={el.id} {...el} /> : ''))
+              )
+            )
+          ) : (
+            <div className="nothing">Такой статьи пока нет!</div>
           )
-        ) : (
-          <div className="nothing">Такой статьи пока нет!</div>
-        )}
+        }
       </div>
       <br />
     </div>
