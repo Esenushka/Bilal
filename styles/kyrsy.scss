@@ -86,8 +86,8 @@ $color: #66097b;
     font-weight: 700;
   }
   .kyrs-card_des {
-    margin-bottom: 60px;
-    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
   }
   .kyrs-card-text_block {
     div:nth-of-type(2) {
@@ -156,5 +156,36 @@ $color: #66097b;
   }
   .kyrs-card:hover .kyrs-card_text {
     top: -180px;
+  }
+}
+
+.header-kyrs_wrapper {
+  height: 12vh;
+  position: relative;
+  margin-bottom: 20px;
+}
+.header-kyrs {
+  background: white;
+  display: flex;
+  overflow: hidden;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  height: 12vh;
+  width: 100%;
+  position: fixed;
+  .btn {
+      height: 50px;
+      width: 250px;
+    margin: 0;
+  }
+  span {
+      width: 100% !important;
+      height: 100% !important;
+    position: absolute;
+  }
+  img{
+      
+      object-fit: contain;
   }
 }

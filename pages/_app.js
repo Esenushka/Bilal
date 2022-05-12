@@ -3,6 +3,8 @@ import '../styles/style.scss'
 import '../styles/header.scss'
 import '../styles/footer.scss'
 import '../styles/kyrsy.scss'
+import '../styles/contacts.scss'
+import '../styles/blog.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

@@ -21,10 +21,10 @@ export default function Header() {
                         <NavLink href={"#"}>
                             Работы студентов
                         </NavLink>
-                        <NavLink href={"#"}>
+                        <NavLink href={"/contacts"}>
                             Контакты
                         </NavLink>
-                        <NavLink href={"#"}>
+                        <NavLink href={"/blog"}>
                             Блог
                         </NavLink>
                         <div className="header_phone-number">
@@ -59,10 +59,10 @@ export default function Header() {
                     <NavLink onClick={() => { setActive(false) }} href={"#"}>
                         Работы студентов
                     </NavLink>
-                    <NavLink onClick={() => { setActive(false) }} href={"#"}>
+                    <NavLink onClick={() => { setActive(false) }} href={"/contacts"}>
                         Контакты
                     </NavLink>
-                    <NavLink onClick={() => { setActive(false) }} href={"#"}>
+                    <NavLink onClick={() => { setActive(false) }} href={"/blog"}>
                         Блог
                     </NavLink>
                 </div>

@@ -1,0 +1,69 @@
+$color: #66097b;
+
+.blog_block-top {
+  background-image: url(https://animationschool.ru/wp-content/themes/as_underscores_theme/images/blog-top.jpg);
+}
+.blog-card {
+  overflow: hidden;
+  width: 550px;
+  background: white;
+  border-radius: 30px;
+  border-bottom: 4px solid #e2e2e2;
+  border-right: 4px solid #e2e2e2;
+  cursor: pointer;
+  span {
+    width: 100% !important;
+  }
+  img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+}
+.blog-text {
+  background: white;
+  padding: 24px 24px;
+  div:nth-of-type(1) {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 9px;
+  }
+  div:nth-of-type(2) {
+    font-size: 17px;
+    font-weight: 300;
+  }
+}
+@media (max-width: 1200px) {
+  .blog-card {
+    width: 400px;
+  }
+  .kyrs-cards_wrapper {
+    justify-content: center;
+    grid-gap: 30px;
+  }
+}
+@media (max-width: 960px) {
+  .blog-card {
+    width: 70%;
+  }
+  .kyrs-cards_wrapper {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+@media(max-width: 600px){
+    .blog-card{
+        width: 100%;
+    }
+    .blog-text {
+  padding: 20px 24px;
+  div:nth-of-type(1) {
+    font-size: 20px;
+
+  }
+  div:nth-of-type(2) {
+    font-size: 15px;
+
+  }
+}
+}
