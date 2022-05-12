@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useEffect } from 'react';
 
 export default function KyrsCardInside({title}) {
-   console.log(title);
+   
     return (
         <div>
             <div className='header-kyrs_wrapper'>

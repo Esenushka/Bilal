@@ -12,7 +12,6 @@ export default function KyrsCard() {
     useEffect(() => {
         directionCardList.forEach((el) => el.id == id ? setData(el) : false)
     }, [id]);
-    console.log(id);
     return (
         <div>
             <Head>
