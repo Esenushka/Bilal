@@ -8,7 +8,7 @@ import Head from "next/head"
 export default function KyrsCard() {
     const [data, setData] = useState({})
     const router = useRouter()
-    const id = router.query?.id
+    const id = router.query?.id || 0
     useEffect(() => {
         directionCardList.forEach((el) => el.id == id ? setData(el) : false)
     }, [id]);
@@ -17,7 +17,7 @@ export default function KyrsCard() {
             <Head>
                 <title>{data.title}</title>
             </Head>
-            <KyrsCardInside title={data.title} />
+            <KyrsCardInside {...data} />
             <Footer />
         </div>
     )

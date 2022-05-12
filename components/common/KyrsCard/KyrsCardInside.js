@@ -2,8 +2,15 @@ import Header from '../Header/Header';
 import Image from "next/image"
 import { useEffect } from 'react';
 
-export default function KyrsCardInside({title}) {
-   
+export default function KyrsCardInside(
+    {
+        title, imgUrl, secondImgUrl,
+        des, teachers, start, duration,
+        price, register, freePlace,
+        forWho, about
+    }) {
+
+        console.dir(imgUrl)
     return (
         <div>
             <div className='header-kyrs_wrapper'>
@@ -34,10 +41,13 @@ export default function KyrsCardInside({title}) {
             <Header />
             <div className='container'>
                 <div className='kyrs-card_main-block'>
-                    {/* <Image
-                    loader={()=>imgUrl}
-                    src={imgUrl} layout="fill"
-                    alt='test'/> */}
+                    <Image
+                        loader={() => imgUrl}
+                        src={imgUrl || "https://demofree.sirv.com/nope-not-here.jpg"}
+                        alt={title}
+                        width={800}
+                        height={800}
+                    />
                 </div>
             </div>
         </div>
