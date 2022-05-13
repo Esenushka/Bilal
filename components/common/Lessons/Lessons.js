@@ -87,7 +87,8 @@ export default function Lessons() {
       <div className="lessons_card-wrapper container">
         {LessonsDesList.map((el) => (
           <div className="lessons_card" key={el.id}>
-            <Image loader={() => el.url} width={80} height={80} src={el.url} alt="card" />
+            <Image
+            unoptimized width={80} height={80} src={el.url} alt="card" />
             <div>
               <div>{el.title}</div>
               <div>{el.des}</div>

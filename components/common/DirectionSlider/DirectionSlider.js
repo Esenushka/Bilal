@@ -36,20 +36,23 @@ export default function DirectionSlider() {
     }
     return (
         <div>
-            <Slider className="direction_slider" {...settings}>
-                {
-                    directionList.map((el) => <DirectionSliderCard
-                        key={el.id}
-                        direction={el.direction}
-                        url={el.url}
-                        urlDirection={el.urlDirection}
-                    />)
-                }
+            {
+                directionList.length < 5 ? <div className='direction_cards'>
+                    {directionList.map((el) => <DirectionSliderCard key={el.id} {...el} />)}
+                </div> :
+                    <Slider className="direction_slider" {...settings}>
+                        {
+                            directionList.map((el) => <DirectionSliderCard
+                                key={el.id}
+                                {...el}
+                            />)
+                        }
 
-            </Slider>
+                    </Slider>
+            }
             <div className='response_direction container'>
                 {
-                    directionList.map((el) => <Link key={el.id} href={"kyrsy" + "$" + el.urlDirection}>
+                    directionList.map((el) => <Link key={el.id} href={"/kyrsy" + "$" + el.urlDirection}>
                         <a>
                             <div>{el.direction}</div>
                             <div></div>

@@ -573,6 +573,14 @@ $color: #66097b;
 .direction_slider .slick-track {
   padding: 15px 0;
 }
+.direction_cards{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  .direction_card{
+    margin-bottom: 40px;
+  }
+}
 @media (max-width: 1400px) {
   .main_slider-block_name {
     width: 80%;
@@ -608,6 +616,9 @@ $color: #66097b;
   }
 }
 @media (max-width: 768px) {
+  .direction_cards{
+    display: none;
+  }
   .direction_slider {
     display: none !important;
   }
