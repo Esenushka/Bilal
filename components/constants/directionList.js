@@ -22,5 +22,6 @@ export const directionList = [
         direction: "Приклодные напровления",
         urlDirection: "applied",
         id: 4
-    },
+    }, 
+   
 ]

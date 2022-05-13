@@ -48,7 +48,7 @@ export default function StudentsSlider() {
     <Slider {...settings}>
       {studentsWork.map((el) => (
         <div className="students-work" key={el.id}>
-          <Image loader={() => el.url} width={1000} height={610} src={el.url} alt={el.name} />
+          <Image unoptimized width={1000} height={610} src={el.url} alt={el.name} />
           <div>
             <div>{el.name}</div>
             <div>{el.direction}</div>

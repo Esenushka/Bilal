@@ -7,7 +7,7 @@ export default function DirectionSliderCard({ url, direction, urlDirection }) {
         <Link href={"/kyrsy" + "?" + urlDirection}>
             <a className='direction_card'>
                 <Image
-                    loader={() => url}
+                    unoptimized
                     width={255}
                     height={230}
                     src={url}

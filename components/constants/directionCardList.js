@@ -1,6 +1,6 @@
 export const directionCardList = [
     {
-        imgUrl: "https://animationschool.ru/wp-content/uploads/2020/12/glavnaya_2D_animatsiya._Vvedenie-1-346x366.jpg",
+        imgUrl: "https://animationschool.ru/wp-content/uploads/2020/12/glavnaya_2D_animatsiya._Vvedenie-1-760x590.jpg",
         secondImgUrl: "https://animationschool.ru/wp-content/uploads/2021/09/Scenario_Alpha_357x674-1.png" ,
         des: "Бесплатные мини-курсы. Знакомство с 2D анимацией.",
         title: "2D анимация. Введения",
@@ -16,7 +16,7 @@ export const directionCardList = [
         id: 1
     },
     {
-        imgUrl: "https://animationschool.ru/wp-content/uploads/2020/08/Master-klass_po_3D_animatsii-346x366.jpg",
+        imgUrl: "https://animationschool.ru/wp-content/uploads/2020/08/Master-klass_po_3D_animatsii-760x590.jpg",
         secondImgUrl: "https://animationschool.ru/wp-content/uploads/2021/09/Scenario_Alpha_357x674-1.png",
         des: "Бесплатные мини-курсы. Знакомство с 3D анимацией.",
         title: "3D анимация. Введения",

@@ -48,30 +48,18 @@ export default function Header() {
       <div className={'burger-modal ' + (active ? 'active' : '')}>
         <div>
           <NavLink
-            onClick={() => {
-              setActive(false);
-            }}
             href={'/kyrsy'}>
             Курсы
           </NavLink>
           <NavLink
-            onClick={() => {
-              setActive(false);
-            }}
             href={'#'}>
             Работы студентов
           </NavLink>
           <NavLink
-            onClick={() => {
-              setActive(false);
-            }}
             href={'/contacts'}>
             Контакты
           </NavLink>
           <NavLink
-            onClick={() => {
-              setActive(false);
-            }}
             href={'/blog'}>
             Блог
           </NavLink>
@@ -79,9 +67,6 @@ export default function Header() {
         <div>
           <a href="tel:8 999 333 15 03">8 (999) 333-15-03</a>
           <Link
-            onClick={() => {
-              setActive(false);
-            }}
             href="/contacts">
             Заказать звонок
           </Link>

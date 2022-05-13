@@ -2,11 +2,12 @@ import React from 'react'
 import Image from "next/image"
 import Link from "next/link"
 
-export default function KyrsCard({ imgUrl, title, des, teachers, start, duration, price ,id,freePlace}) {
+export default function KyrsCard({ imgUrl, title, des, teachers, start, duration, price, id, freePlace }) {
     return (
         <Link href={"/kyrsy/" + id}>
             <div className="kyrs-card">
-                <Image loader={() => imgUrl}
+                <Image
+                    unoptimized
                     src={imgUrl}
                     alt={title}
                     width={350}

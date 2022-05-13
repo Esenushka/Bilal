@@ -5,9 +5,7 @@ export default function MainSliderBlock({ url, name, des }) {
     return (
         <div className="main_slider-block">
             <Image
-                loader={() =>
-                    url
-                }
+                unoptimized
                 width={1000}
                 height={510}
                 src={url} alt="MainSlide" />
