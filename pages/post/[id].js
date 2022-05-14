@@ -1,0 +1,24 @@
+import Footer from '../../components/common/Footer/Footer';
+import BlogCardInside from '../../components/common/BlogCard/BlogCardInside.js';
+import { useState, useEffect } from 'react';
+import { directionCardList } from '../../components/constants/directionCardList';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+
+export default function KyrsCard() {
+  const [data, setData] = useState({});
+  const router = useRouter();
+  const id = router.query?.id || 0;
+  useEffect(() => {
+    directionCardList.forEach((el) => (el.id == id ? setData(el) : false));
+  }, [id]);
+  return (
+    <div>
+      <Head>
+        <title>{data.title}</title>
+      </Head>
+      <BlogCardInside {...data} />
+      <Footer />
+    </div>
+  );
+}

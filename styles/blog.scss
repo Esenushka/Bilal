@@ -23,6 +23,7 @@ $color: #66097b;
 .blog-text {
   background: white;
   padding: 24px 24px;
+  color: #000;
   div:nth-of-type(1) {
     font-size: 24px;
     font-weight: 700;
@@ -66,4 +67,65 @@ $color: #66097b;
 
   }
 }
+}
+.post-block-top{
+  background-position: right;
+  background-size: contain;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 30px;
+  height: 224px;
+  box-shadow:5px 5px 0 rgb(0 0 0 / 8%);
+  .block-top{
+    width: 60%;
+    margin: 0;
+    height: 100%;
+    border-radius: 0px;
+    font-size: 2em;
+    background-image:none;
+    background-color: #2A2A2A;
+    position: relative;
+
+  }
+  .post-img{
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    img{
+      width: 100%;
+      object-fit: cover;
+      height: 100%;
+      
+    }
+    &::before{
+      content: "";
+      width: 15%;
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      height: 100%;
+      background: #262626;
+      background: rgba(0,0,0,0);
+      background: linear-gradient(to left,rgba(0,0,0,0),#262626);
+    }
+    
+  }
+  .post-title{
+    
+    h2{
+      font-size: 0.7em;
+    }
+  }
+
+}
+.post-content{
+  padding: 40px 90px;
+  box-shadow:5px 5px 0 rgb(0 0 0 / 8%);
+  border-radius:30px;
+  background-color:white;
+  margin-bottom: 70px;
+  font-size: 20px;
+  line-height: 1.5;
 }
