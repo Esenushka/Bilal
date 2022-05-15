@@ -1,13 +1,29 @@
 import { useRouter } from "next/router"
 import Link from "next/link";
-import { directionList } from "../constants/directionList";
 import { directionCardList } from "../constants/directionCardList";
 import KyrsCard from "../common/KyrsCard/KyrsCard";
 import Image from "next/image"
+import { db } from "../../config/firebase";
+import { useEffect,useState } from "react";
 
 export default function KyrsyPage() {
   const router = useRouter()
   const query = Object.keys(router.query)[0]
+  const [directionList, setDirectionList] = useState([])
+
+  useEffect(() => {
+    db.collection("directionList")
+      .get()
+      .then((snapshot) => {
+
+        const direction = []
+        snapshot.forEach((doc) => {
+          direction.push({ ...doc.data(), id: doc.id })
+        })
+        setDirectionList(direction)
+      })
+  }, [])
+
   const Joined = (
     directionCardList.map((el) =>
       query === undefined ? <KyrsCard {...el} /> : el.directions.map((item) => item === query ? <KyrsCard {...el} /> : "")
@@ -35,15 +51,15 @@ export default function KyrsyPage() {
       </div>
       <div className="kyrs-cards_wrapper">
         {
-         Joined ? (
+          Joined ? (
             directionCardList.map((el) =>
               query === undefined ? <KyrsCard key={el.id} {...el} /> : el.directions.map((item) => item === query ? <KyrsCard {...el} /> : "")
             )
-         ) : <div className="nothing">
-           Такого курса пока нет!
-         </div>
+          ) : <div className="nothing">
+            Такого курса пока нет!
+          </div>
         }
-        
+
       </div>
       <div className='step_wrapper kyrs_wrapper'>
         {<Image

@@ -1,7 +1,8 @@
 $color: #66097b;
 
 .admin_wrapper {
-    height: 100vh;
+  
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,21 +10,151 @@ $color: #66097b;
     width: 30%;
     display: flex;
     flex-direction: column;
-    
   }
   label {
     display: flex;
     flex-direction: column;
   }
   input {
-      background: transparent;
+    background: transparent;
     border: 1px solid gray;
     border-radius: 20px;
     padding: 15px;
     outline: none;
     margin-bottom: 20px;
   }
-  .btn{
-      margin-top: 10px;
+  .btn {
+    margin-top: 10px;
+  }
+}
+.admin_navbar-wrapper{
+  display: flex;
+  justify-content: center;
+  height: 100px;
+}
+.admin_navbar {
+  position: fixed;
+  width: 510px;
+  height: 80px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0 10px 10px;
+  ul {
+    padding-left: 0;
+    display: flex;
+    width: 100%;
+    grid-gap: 15px;
+  }
+  li {
+    position: relative;
+    z-index: 2;
+    list-style: none;
+    p{
+      color: black;
+      position: absolute;
+      top: -50px;
+      left: 3px;
+      text-align: center;
+    }
+   
+  }
+  a {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  .icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+  }
+  .icon::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--clr);
+    border-radius: 50%;
+    filter: blur(5px);
+    opacity: 0;
+  }
+  a.active {
+    .icon {
+      transform: translateY(35px);
+      background: var(--clr);
+    }
+  }
+  a.active .icon::before {
+    opacity: 0.5;
+  }
+   a:nth-of-type(1).active ~ .indicators {
+    transform: translateX((calc(105px * 0)));
+  }
+   a:nth-of-type(2).active ~ .indicators {
+    transform: translateX((calc(105px * 1)));
+  }
+  a:nth-of-type(3).active ~ .indicators {
+    transform: translateX((calc(105px * 2)));
+  }
+  a:nth-of-type(4).active ~ .indicators {
+    transform: translateX((calc(105px * 3)));
+  }
+  
+  
+  a:nth-of-type(2){
+    p{
+      top: -80px;
+      left: -8px;
+    }
+  }
+  
+  a:nth-of-type(2).active{
+    p{
+      top: -30px !important;
+    }
+  }
+    a:nth-of-type(3){
+    p{
+      left: -8px;
+    }
+  }
+
+  a:nth-of-type(4){
+    p{
+      left: 10px;
+    }
+  }
+
+
+   a.active p {
+     top: -15px;
+  }
+}
+.indicators {
+  position: absolute;
+  width: 70px;
+  left: 10px;
+  border-radius: 50%;
+  height: 70px;
+  background: #fff;
+  bottom: -30px;
+  z-index: 1;
+  transition: 0.5s;
+}
+.kyrs-edit_wrapper{
+  .direction-title{
+    margin-top: 15px;
   }
 }
