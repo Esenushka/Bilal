@@ -1,0 +1,110 @@
+.add {
+  > div:nth-of-type(1) {
+    height: 225px;
+    width: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.add:hover {
+  img {
+    transform: scale(1);
+  }
+}
+
+.added{
+    span {
+    height: 255px !important;
+  }
+}
+
+.kyrs_edit {
+  
+  position: relative;
+  margin-top: 50px;
+  margin-left: 80px;
+  overflow: hidden;
+}
+.kyrs_edit-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  .kyrs-filter {
+    width: 100%;
+    margin-right: 80px;
+    margin-top: 50px;
+    align-items: center;
+    a {
+      color: #262626;
+      transition: 0.4s;
+    }
+    a:hover {
+      cursor: pointer;
+      background: #262626;
+      color: #fff;
+    }
+  }
+}
+.kyrs-edit_right {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.new-kyrs {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  input {
+    width: 38%;
+    border: 1px solid gray;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    padding: 12px;
+  }
+  .btn {
+    margin-top: 10px;
+  }
+}
+.file-input {
+  padding: 10px !important;
+  width: 100% !important;
+}
+
+.back-to-dasboard {
+  position: absolute;
+  left: 15px;
+  transform: rotate(180deg);
+  transition: 0.3s;
+  cursor: pointer;
+}
+.back-to-dasboard:hover {
+  left: 13px;
+}
+.updated {
+  position: absolute;
+  top: -60px;
+  width: 100%;
+  height: 60px;
+  font-size: 20px;
+  color: black;
+  background: rgb(88, 154, 196);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s;
+}
+.updated.active {
+  top: 0;
+}
+.buttons {
+  grid-gap: 15px;
+}
+.btn-delete {
+  background: red;
+}

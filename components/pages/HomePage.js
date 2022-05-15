@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 export default function HomePage() {
     const [offset, setOffset] = useState();
     const [innerWidth, setInnerWidth] = useState(0)
+    
 
     const handleScroll = () => setOffset(window.pageYOffset);
 

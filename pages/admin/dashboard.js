@@ -1,7 +1,11 @@
-import React from 'react'
+import AdminNavBar from '../../components/common/AdminNavBar/AdminNavBar'
+import KyrsEdit from '../../components/common/KyrsEdit/KyrsEdit'
 
 export default function Dashboard(props) {
   return (
-    <div>dashboard</div>
+    <div>
+      <AdminNavBar {...props}/>
+      <KyrsEdit/>
+    </div>
   )
 }

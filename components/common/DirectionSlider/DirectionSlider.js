@@ -1,10 +1,24 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import Slider from 'react-slick/lib/slider'
 import DirectionSliderCard from './DirectionSliderCard'
 import Link from 'next/link'
-import { directionList } from '../../constants/directionList'
+import { db } from "../../../config/firebase"
 
 export default function DirectionSlider() {
+    const [directionList, setDirectionList] = useState([])
+
+    useEffect(() => {
+        db.collection("directionList")
+            .get()
+            .then((snapshot) => {
+
+                const direction = []
+                snapshot.forEach((doc) => {
+                    direction.push({ ...doc.data(), id: doc.id })
+                })
+                setDirectionList(direction)
+            })
+    }, [])
     const settings = {
         dots: false,
         infinite: true,
@@ -34,6 +48,8 @@ export default function DirectionSlider() {
             }
         ]
     }
+
+
     return (
         <div>
             {
