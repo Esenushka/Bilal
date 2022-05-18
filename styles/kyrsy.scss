@@ -426,9 +426,10 @@ $color: #66097b;
   }
 }
 @media (max-width: 960px) {
+  
   .kyrs-card_main-block {
     flex-direction: column;
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
     span {
       width: 100% !important;
@@ -437,6 +438,7 @@ $color: #66097b;
   .video-invite {
     iframe {
       height: 380px;
+      width: 100%;
     }
   }
   .kyrs-card_info {
@@ -456,6 +458,12 @@ $color: #66097b;
   }
 }
 @media (max-width: 512px) {
+  .comment{
+    width: 95%;
+  }
+  .kyrs-card_info .container > div:nth-of-type(1){
+    width: 70%;
+  }
   .comment-inputs_wrapper form {
     width: 80%;
   }

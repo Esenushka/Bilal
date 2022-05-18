@@ -24,9 +24,9 @@ export default function KyrsCard({ imgUrl, title, teachers, start, duration, pri
                         </div>
                        
                         <div className="kyrs-card-text_block">
-                            <div>Преподаватель:</div>
+                            <div>{teachers?.length > 1 ? "Преподователи:" : "Преподователь"}</div>
                             <div>
-                                {teachers.map((el) => el)}
+                                {teachers.map((el,index) => teachers?.length > 1 ? el + (index === teachers?.length - 1 ? "" : ", ") : el)}
                             </div>
                         </div>
                         <div className="kyrs-card-text_block">

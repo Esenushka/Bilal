@@ -46,6 +46,7 @@ export default function KyrsCardInside({
                 setComments(commentData)
             });
     }, [id]);
+
     return (
         <div>
             <BlockTop />
@@ -64,18 +65,16 @@ export default function KyrsCardInside({
                         <div className="kyrs-card-text_block">
                             <div>{teachers?.length > 1 ? 'Преподватели:' : 'Преподователь:'}</div>
                             <div>
-                                {teachers?.length > 1
-                                    ? teachers?.map((el) => el + ', ')
-                                    : teachers?.map((el) => el)}
+                                {teachers?.map((el, index) => teachers?.length > 1 ? el + (index === teachers?.length - 1 ? "" : ", ") : el)}    
                             </div>
                         </div>
                         <div className="kyrs-card-text_block">
                             <div>Регистрация открыта до:</div>
-                            <div>{new Date(register * 1000).toLocaleDateString()}</div>
+                            <div>{new Date(register?.seconds * 1000).toLocaleDateString()}</div>
                         </div>
                         <div className="kyrs-card-text_block">
                             <div>Старт курса:</div>
-                            <div>{new Date(start * 1000).toLocaleDateString()}</div>
+                            <div>{new Date(start?.seconds * 1000 ).toLocaleDateString()}</div>
                         </div>
                         <div className="kyrs-card-text_block">
                             <div>Длительность:</div>
@@ -100,7 +99,7 @@ export default function KyrsCardInside({
                         allowFullScreen></iframe>
                 </div>
             </div>
-            <div className="kyrs-card_info ">
+            <div className="kyrs-card_info">
                 <div className="container">
                     <div>
                         <Image

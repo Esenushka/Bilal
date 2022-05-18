@@ -574,8 +574,11 @@ $color: #66097b;
   padding: 15px 0;
 }
 .direction_cards{
+  width: 75%;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  grid-gap: 20px;
+  justify-content: center;
   flex-wrap: wrap;
   .direction_card{
     margin-bottom: 40px;

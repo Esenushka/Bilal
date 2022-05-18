@@ -77,7 +77,7 @@ $color: #66097b;
     border-radius: 50%;
   }
   .icon::before {
-    content: "";
+    content: '';
     position: absolute;
     top: -7px;
     left: 0;
@@ -162,21 +162,27 @@ $color: #66097b;
     display: none;
   }
 }
-.kyrs-edit-card{
-  .container{
-    > input:nth-of-type(1){
-      border-bottom: none ;
-      border-radius: 20px 20px 0 0 ;
-      margin-bottom: 0;
-      margin-top: 40px;
+.kyrs-edit-card {
+  .container {
+    > div:nth-of-type(1) {
+      display: flex;
+      justify-content: left;
+      width: 80%;
+      input {
+        width: 40%;
+        border-bottom: none;
+        border-radius: 20px 20px 0 0;
+        margin-bottom: 0;
+        margin-top: 40px;
+      }
     }
-    
-    .edit-card{
+
+    .edit-card {
       border-radius: 0 30px 30px 30px;
     }
   }
-    input {
-      margin-top: 0px;
+  input {
+    margin-top: 0px;
     background: transparent;
     border: 1px solid gray;
     border-radius: 20px;
@@ -185,76 +191,136 @@ $color: #66097b;
     margin-bottom: 20px;
   }
 }
-.kyrs-edit-card{
+.kyrs-edit-card {
   .kyrs-card_main-text {
     padding: 15px 15px;
   }
-  textarea{
+  textarea {
     resize: none;
     outline: none;
     width: 100%;
     height: 200px;
-     background: transparent;
+    background: transparent;
     border: 1px solid gray;
     border-radius: 20px;
     padding: 15px;
   }
 }
-.kyrs-card-text_title{
-  input{
+.kyrs-card-text_title {
+  input {
     width: 100%;
     font-size: 20px;
   }
 }
-.kyrs-card-text_block{
-  input{
+.kyrs-card-text_block {
+  input {
     margin-bottom: 10px;
   }
 }
-.video-input{
+.video-input {
   display: flex;
   justify-content: center;
-  div{
+  div {
     width: 80%;
   }
-  input{
+  input {
     width: 40%;
-     border-bottom: none ;
-      border-radius: 20px 20px 0 0 ;
-      margin-bottom: 0;
-      margin-top: 40px;
+    border-bottom: none;
+    border-radius: 20px 20px 0 0;
+    margin-bottom: 0;
+    margin-top: 40px;
   }
 }
-.edit-video{
-  iframe{
+.edit-video {
+  iframe {
     width: 80%;
     border-radius: 0 30px 30px 30px;
   }
 }
-.kyrs-edit-card{
-  .comment{
+.kyrs-edit-card {
+  .comment {
     position: relative;
   }
 }
-.delete-comment{
+.delete-comment {
   cursor: pointer;
   position: absolute;
   right: 15px;
   top: 15px;
 }
-.teachers-edit-label{
+.teachers-edit-label {
   display: flex;
   align-items: center;
   grid-gap: 15px;
-  span{
+  span {
     width: 30px !important;
   }
-  img{
+  img {
     cursor: pointer;
     object-fit: contain;
   }
 }
+.edit-info .container > div:nth-of-type(1) {
+  display: flex !important;
+  flex-direction: column;
+  grid-gap: 25px;
+  justify-content: space-around;
+}
+.edit-info_input{
+  width: 100% !important;
+  border: 1px solid gray !important;
+  border-radius: 30px !important;
+  margin-bottom: 40px !important;
+}
+@media (max-width: 960px) {
+  .edit-info_input{
+    width: 40% !important;
+  }
+  .kyrs-edit-card{
+    .container{
+      > div:nth-of-type(1){
+        width: 100%;
+        align-items: center;
+        input{
+          width: 80%;
+        }
+      }
+    }
+  }
+  .kyrs-card_main-block{
+    border: none;
+  }
+  .kyrs-edit-card .container .edit-card{
+    border-radius: 0 0 30px 30px;
+  }
+  .edit-video {
+    iframe {
+      width: 100%;
+      border-radius: 0 0 30px 30px;
+    }
+  }
+  .video-input {
+    justify-content: left;
+    div {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+  }
+  .edit-info .container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .kyrs-card-text_block input {
+    width: 55%;
+  }
+}
 @media (max-width: 768px) {
+  .edit-info_input{
+    width: 70% !important;
+  }
   .admin_wrapper {
     form {
       width: 60%;
@@ -262,6 +328,9 @@ $color: #66097b;
   }
 }
 @media (max-width: 512px) {
+  .edit-info_input{
+    width: 85% !important;
+  }
   .admin_wrapper {
     form {
       width: 75%;

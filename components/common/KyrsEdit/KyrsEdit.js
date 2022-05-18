@@ -68,6 +68,12 @@ export default function KyrsEdit() {
                             </a>
                         </Link>)
                     }
+                    <Link href={"/admin/direction/newDirection"}>
+                            <a>
+                                <div>Добавить напровление</div>
+                                <div></div>
+                            </a>
+                    </Link>
                 </div>
             </div>
             <div className="direction-title">

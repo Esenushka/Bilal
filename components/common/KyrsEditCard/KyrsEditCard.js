@@ -114,7 +114,9 @@ export default function KyrsEditCard() {
                 </div>
             </Link>
             <div className="container">
-                <input type={"file"} />
+                <div>
+                    <input type={"file"} />
+                </div>
                 <div className="kyrs-card_main-block edit-card">
                     <Image
                         unoptimized
@@ -211,7 +213,9 @@ export default function KyrsEditCard() {
                 <div className="direction-title">ВИДЕОПРИГЛАШЕНИЕ</div>
                 <div className='video-input'>
                     <div>
-                        <input type={"text"}
+                        <input
+                        onChange={(e) => setNewDate({...newData,videoInvite: e.target.value})}
+                        type={"text"}
                             required
                             defaultValue={videoInvite} />
                     </div>
@@ -224,7 +228,7 @@ export default function KyrsEditCard() {
                         allowFullScreen></iframe>
                 </div>
             </div>
-            <div className="kyrs-card_info ">
+            <div className="kyrs-card_info edit-info">
                 <div className="container">
                     <div>
                         <Image
@@ -233,6 +237,10 @@ export default function KyrsEditCard() {
                             alt={'Второя картинка'}
                             width={600}
                             height={700}
+                        />
+                        <input className='edit-info_input'
+                            type={"file"}
+
                         />
                     </div>
                     <div className="kyrs-card_about">

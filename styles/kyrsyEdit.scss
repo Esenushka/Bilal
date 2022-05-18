@@ -59,7 +59,7 @@
   width: 80%;
   align-items: center;
   input {
-    width: 38%;
+    width: 300px;
     border: 1px solid gray;
     border-radius: 20px;
     margin-bottom: 20px;
@@ -72,7 +72,7 @@
 }
 .file-input {
   padding: 10px !important;
-  width: 100% !important;
+  width: 300px;
 }
 
 .back-to-dasboard {
@@ -125,5 +125,48 @@
 .add-edit-image{
   span{
     width: fit-content !important;
+  }
+}
+@media(max-width: 960px){
+  .kyrs_edit-wrapper{
+    flex-direction: column;
+    align-items: center;
+  }
+  .kyrs_edit{
+    margin-left: 0;
+
+  }
+  .kyrs-edit_right{
+    width: 100%;
+  }
+  .kyrs_edit-wrapper .kyrs-filter{
+    margin-right: 0;
+  }
+  
+}
+@media(max-width: 512px){
+  .buttons{
+    .btn{
+      width: 150px;
+      height: 50px;
+    }
+  }
+  .new-kyrs{
+    input{
+      width: 240px;
+    }
+  }
+  .kyrs-edit-right{
+    .file-input{
+      width: 240px;
+    }
+  }
+}
+@media(max-width: 320px){
+  .buttons{
+    .btn{
+      width: 120px;
+      height: 45px;
+    }
   }
 }
