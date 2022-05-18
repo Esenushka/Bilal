@@ -3,9 +3,12 @@ import DirectionSliderCard from '../DirectionSlider/DirectionSliderCard'
 import Link from 'next/link'
 import { useState, useEffect } from "react"
 import Image from "next/image"
+import KyrsCard from "../KyrsCard/KyrsCard"
 
 export default function KyrsEdit() {
     const [directionList, setDirectionList] = useState([])
+    const [directionCardList, setDirectionCardList] = useState([])
+
     useEffect(() => {
         db.collection("directionList")
             .get()
@@ -17,6 +20,16 @@ export default function KyrsEdit() {
                 })
                 setDirectionList(direction)
             })
+        db.collection("directionCardList")
+            .get()
+            .then((snapshot) => {
+                const directionCards = []
+                snapshot.forEach((doc) => {
+                    directionCards.push({ ...doc.data(), id: doc.id })
+                })
+                setDirectionCardList(directionCards)
+            });
+
     }, [])
 
     return (
@@ -28,7 +41,7 @@ export default function KyrsEdit() {
                 {
                     <div className='direction_cards'>
                         {directionList.map((el) => <DirectionSliderCard key={el.id} {...el} />)}
-                        <Link href={"/admin/dashboard/newKyrs"}>
+                        <Link href={"/admin/direction/newDirection"}>
                             <div className="direction_card kyrs-card add ">
                                 <div><Image
                                     width={100}
@@ -48,7 +61,7 @@ export default function KyrsEdit() {
 
                 <div className='response_direction container'>
                     {
-                        directionList.map((el) => <Link key={el.id} href={"/kyrsy" + "$" + el.urlDirection}>
+                        directionList.map((el) => <Link key={el.id} href={"/admin/direction/" + el.id}>
                             <a>
                                 <div>{el.direction}</div>
                                 <div></div>
@@ -57,7 +70,26 @@ export default function KyrsEdit() {
                     }
                 </div>
             </div>
-
+            <div className="direction-title">
+                Курсы
+            </div>
+            <div className="kyrs-cards_wrapper">
+               {
+                        directionCardList.map((el) =>
+                            <KyrsCard key={el.id} {...el} /> 
+                        )
+               }
+                <Link href={"/admin/kyrs/newKyrs"}>
+                    <div className="kyrs-card edit-card-add">
+                        <Image
+                            src={"/add.png"}
+                            alt="addImg"
+                            width={350}
+                            height={515}
+                        />
+                    </div>
+                </Link>
+            </div>
         </div>
     )
 }

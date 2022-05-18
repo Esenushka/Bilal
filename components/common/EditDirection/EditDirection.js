@@ -30,7 +30,6 @@ export default function EditDirection() {
             })
     }, [id])
 
-    console.log(directionItem);
 
     const getUrl = async (name) => await storageRef
         .ref()

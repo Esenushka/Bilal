@@ -70,10 +70,11 @@ $color: #66097b;
   }
 }
 .kyrs-card_text_wrapper {
-  height: 185px;
+  height: 150px;
   position: relative;
 }
 .kyrs-card_text {
+  width: 100%;
   top: -5px;
   background: white;
   height: fit-content;
@@ -84,11 +85,9 @@ $color: #66097b;
   .kyrs-card_title {
     font-size: 25px;
     font-weight: 700;
-  }
-  .kyrs-card_des {
     margin-bottom: 20px;
-    margin-top: 20px;
   }
+
   .kyrs-card-text_block {
     div:nth-of-type(2) {
       font-size: 20px;
@@ -98,7 +97,7 @@ $color: #66097b;
   }
 }
 .kyrs-card:hover .kyrs-card_text {
-  top: -280px;
+  top: -260px;
 }
 
 .nothing {

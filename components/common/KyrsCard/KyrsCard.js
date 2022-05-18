@@ -1,11 +1,14 @@
 import React from 'react'
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from 'next/router'
 
-export default function KyrsCard({ imgUrl, title, des, teachers, start, duration, price, id, freePlace }) {
-    
+export default function KyrsCard({ imgUrl, title, teachers, start, duration, price, id, freePlace }) {
+
+    const router = useRouter()
+
     return (
-        <Link href={"/kyrsy/" + id}>
+        <Link href={router.pathname === "/admin/dashboard" ? ("/admin/kyrs/" + id) : ("/kyrsy/" + id)}>
             <div className="kyrs-card">
                 <Image
                     unoptimized
@@ -19,9 +22,7 @@ export default function KyrsCard({ imgUrl, title, des, teachers, start, duration
                         <div className="kyrs-card_title">
                             {title}
                         </div>
-                        <div className="kyrs-card_des">
-                            {des}
-                        </div>
+                       
                         <div className="kyrs-card-text_block">
                             <div>Преподаватель:</div>
                             <div>
@@ -31,7 +32,7 @@ export default function KyrsCard({ imgUrl, title, des, teachers, start, duration
                         <div className="kyrs-card-text_block">
                             <div>Старт курса:</div>
                             <div>
-                                {start}
+                                {new Date(start * 1000).toLocaleDateString()}
                             </div>
                         </div>
                         <div className="kyrs-card-text_block">

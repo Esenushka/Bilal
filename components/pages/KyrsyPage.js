@@ -1,28 +1,39 @@
 import { useRouter } from "next/router"
 import Link from "next/link";
-import { directionCardList } from "../constants/directionCardList";
 import KyrsCard from "../common/KyrsCard/KyrsCard";
 import Image from "next/image"
 import { db } from "../../config/firebase";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function KyrsyPage() {
   const router = useRouter()
   const query = Object.keys(router.query)[0]
   const [directionList, setDirectionList] = useState([])
+  const [directionCardList, setDirectionCardList] = useState([])
 
   useEffect(() => {
     db.collection("directionList")
       .get()
       .then((snapshot) => {
-
         const direction = []
         snapshot.forEach((doc) => {
           direction.push({ ...doc.data(), id: doc.id })
         })
         setDirectionList(direction)
-      })
+      });
+
+    db.collection("directionCardList")
+      .get()
+      .then((snapshot) => {
+        const directionCards = []
+        snapshot.forEach((doc) => {
+          directionCards.push({ ...doc.data(), id: doc.id })
+        })
+        setDirectionCardList(directionCards)
+      });
+
   }, [])
+
 
   const Joined = (
     directionCardList.map((el) =>

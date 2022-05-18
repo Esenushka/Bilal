@@ -1,7 +1,6 @@
 $color: #66097b;
 
 .admin_wrapper {
-  
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -27,13 +26,13 @@ $color: #66097b;
     margin-top: 10px;
   }
 }
-.admin_navbar-wrapper{
+.admin_navbar-wrapper {
   display: flex;
   justify-content: center;
   height: 100px;
 }
 .admin_navbar {
-  position: fixed;
+  position: absolute;
   width: 510px;
   height: 80px;
   background: #fff;
@@ -51,14 +50,13 @@ $color: #66097b;
     position: relative;
     z-index: 2;
     list-style: none;
-    p{
+    p {
       color: black;
       position: absolute;
       top: -50px;
       left: 3px;
       text-align: center;
     }
-   
   }
   a {
     cursor: pointer;
@@ -99,10 +97,10 @@ $color: #66097b;
   a.active .icon::before {
     opacity: 0.5;
   }
-   a:nth-of-type(1).active ~ .indicators {
+  a:nth-of-type(1).active ~ .indicators {
     transform: translateX((calc(105px * 0)));
   }
-   a:nth-of-type(2).active ~ .indicators {
+  a:nth-of-type(2).active ~ .indicators {
     transform: translateX((calc(105px * 1)));
   }
   a:nth-of-type(3).active ~ .indicators {
@@ -111,35 +109,33 @@ $color: #66097b;
   a:nth-of-type(4).active ~ .indicators {
     transform: translateX((calc(105px * 3)));
   }
-  
-  
-  a:nth-of-type(2){
-    p{
+
+  a:nth-of-type(2) {
+    p {
       top: -80px;
       left: -8px;
     }
   }
-  
-  a:nth-of-type(2).active{
-    p{
+
+  a:nth-of-type(2).active {
+    p {
       top: -30px !important;
     }
   }
-    a:nth-of-type(3){
-    p{
+  a:nth-of-type(3) {
+    p {
       left: -8px;
     }
   }
 
-  a:nth-of-type(4){
-    p{
+  a:nth-of-type(4) {
+    p {
       left: 10px;
     }
   }
 
-
-   a.active p {
-     top: -15px;
+  a.active p {
+    top: -15px;
   }
 }
 .indicators {
@@ -153,8 +149,133 @@ $color: #66097b;
   z-index: 1;
   transition: 0.5s;
 }
-.kyrs-edit_wrapper{
-  .direction-title{
+.kyrs-edit_wrapper {
+  .direction-title {
     margin-top: 15px;
+  }
+}
+.admin-burger-wrapper {
+  display: none;
+}
+.admin_navbar-wrapper {
+  .header {
+    display: none;
+  }
+}
+.kyrs-edit-card{
+  .container{
+    > input:nth-of-type(1){
+      border-bottom: none ;
+      border-radius: 20px 20px 0 0 ;
+      margin-bottom: 0;
+      margin-top: 40px;
+    }
+    
+    .edit-card{
+      border-radius: 0 30px 30px 30px;
+    }
+  }
+    input {
+      margin-top: 0px;
+    background: transparent;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 15px;
+    outline: none;
+    margin-bottom: 20px;
+  }
+}
+.kyrs-edit-card{
+  .kyrs-card_main-text {
+    padding: 15px 15px;
+  }
+  textarea{
+    resize: none;
+    outline: none;
+    width: 100%;
+    height: 200px;
+     background: transparent;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 15px;
+  }
+}
+.kyrs-card-text_title{
+  input{
+    width: 100%;
+    font-size: 20px;
+  }
+}
+.kyrs-card-text_block{
+  input{
+    margin-bottom: 10px;
+  }
+}
+.video-input{
+  display: flex;
+  justify-content: center;
+  div{
+    width: 80%;
+  }
+  input{
+    width: 40%;
+     border-bottom: none ;
+      border-radius: 20px 20px 0 0 ;
+      margin-bottom: 0;
+      margin-top: 40px;
+  }
+}
+.edit-video{
+  iframe{
+    width: 80%;
+    border-radius: 0 30px 30px 30px;
+  }
+}
+.kyrs-edit-card{
+  .comment{
+    position: relative;
+  }
+}
+.delete-comment{
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+.teachers-edit-label{
+  display: flex;
+  align-items: center;
+  grid-gap: 15px;
+  span{
+    width: 30px !important;
+  }
+  img{
+    cursor: pointer;
+    object-fit: contain;
+  }
+}
+@media (max-width: 768px) {
+  .admin_wrapper {
+    form {
+      width: 60%;
+    }
+  }
+}
+@media (max-width: 512px) {
+  .admin_wrapper {
+    form {
+      width: 75%;
+    }
+  }
+  .admin_navbar-wrapper {
+    justify-content: end;
+  }
+  .admin_navbar {
+    display: none;
+  }
+  .admin_navbar-wrapper {
+    .header {
+      display: flex;
+    }
   }
 }

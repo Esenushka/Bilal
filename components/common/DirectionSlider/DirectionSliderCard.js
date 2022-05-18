@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 export default function DirectionSliderCard({ url, direction,id , urlDirection }) {
     const router = useRouter()
     return (
-        <Link href={router.pathname === "/admin/dashboard" ? ("/admin/dashboard/" + id) : ("/kyrsy" + "?" + urlDirection) }>
+        <Link href={router.pathname === "/admin/dashboard" ? ("/admin/direction/" + id) : ("/kyrsy" + "?" + urlDirection) }>
             <a className='direction_card'>
                 <Image
                     unoptimized

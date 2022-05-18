@@ -2,13 +2,17 @@ import React from 'react'
 import { NavLink } from "../NavLink/NavLink"
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import firebase from '../../../config/firebase'
+import { useState } from 'react'
 
 export default function AdminNavBar() {
+    const [active, setActive] = useState(false)
     const router = useRouter()
-    const logout = () => {
+    const logout = async () => {
         const confirm = window.confirm("Вы уверены")
         if (confirm) {
-            router.push("/")
+            await router.push("/")
+            firebase.auth().signOut()
         }
     }
 
@@ -21,7 +25,7 @@ export default function AdminNavBar() {
                             <p>Курсы</p>
                             <div style={{ "--clr": "#77d94a" }}>
                                 <span className='icon'>
-                                    
+
                                     <Image
                                         src="/online-course.png"
                                         alt='course'
@@ -97,6 +101,46 @@ export default function AdminNavBar() {
                     </a>
                     <div className='indicators'></div>
                 </ul>
+            </div>
+            <div className='header container'>
+                <div className="logo">
+                    <NavLink href={'/'}>
+                        <Image width={50} height={50} src="/favicon.ico" alt="Logo" />
+                    </NavLink>
+                </div>
+                <div
+                    onClick={() => {
+                        setActive(!active);
+                    }}
+                    className={'wrapper-menu ' + (active ? 'open' : '')}>
+                    <div className="line-menu half start"></div>
+                    <div className="line-menu"></div>
+                    <div className="line-menu half end"></div>
+                </div>
+            </div>
+            <div className={'burger-modal ' + (active ? 'active' : '')}>
+                <div>
+                    <NavLink
+                        href={'/admin/dashboard'}>
+                        Курсы
+                    </NavLink>
+                    <NavLink
+                        href={'/admin/studentsWorks'}>
+                        Работы студентов
+                    </NavLink>
+                    <NavLink
+                        href={'/admin/medias'}>
+                        Контакты
+                    </NavLink>
+                    <NavLink
+                        href={'/admin/blog'}>
+                        Блог
+                    </NavLink>
+                    <a
+                        onClick={logout}>
+                        Выйти
+                    </a>
+                </div>
             </div>
         </div>
     )
