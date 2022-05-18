@@ -1,7 +1,7 @@
-import Head from 'next/head'
-import Footer from '../components/common/Footer/Footer'
-import Header from '../components/common/Header/Header'
-import HomePage from '../components/pages/HomePage'
+import Head from 'next/head';
+import Footer from '../components/common/Footer/Footer';
+import Header from '../components/common/Header/Header';
+import HomePage from '../components/pages/HomePage';
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <Header />
       <HomePage />
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }

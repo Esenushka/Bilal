@@ -78,6 +78,10 @@ $color: #66097b;
   height: 224px;
   box-shadow:5px 5px 0 rgb(0 0 0 / 8%);
   .block-top{
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    align-items:center;
     width: 60%;
     margin: 0;
     height: 100%;
@@ -86,7 +90,9 @@ $color: #66097b;
     background-image:none;
     background-color: #2A2A2A;
     position: relative;
-
+    h2{
+      margin: 0;
+    }
   }
   .post-img{
     width: 40%;
