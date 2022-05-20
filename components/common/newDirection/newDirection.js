@@ -12,6 +12,7 @@ export default function NewDirection() {
     const [urlDirection, setUrlDirection] = useState("")
     const [file, setFile] = useState("");
     const [fileData, setFileData] = useState("");
+    const [disabled, setDisabled] = useState(false)
 
     const rout = useRouter();
 
@@ -32,6 +33,7 @@ export default function NewDirection() {
         }
 
         if (fileData) {
+            setDisabled(true)
             storageRef.ref("items/" + fileData.name).put(fileData).then(() => {
                 getUrl(fileData.name).then((url) => {
                     db.collection("directionList").add({
@@ -41,6 +43,7 @@ export default function NewDirection() {
                         .then(() => {
                             rout.push("/admin/dashboard")
                         })
+
 
                 })
             });
@@ -106,8 +109,8 @@ export default function NewDirection() {
     return (
         <div className='kyrs_edit-wrapper'>
             <div className={"direction_card kyrs_edit " + (file ? "added" : "add")}>
-               {
-                    file ? 
+                {
+                    file ?
                         <Image
                             unoptimized
                             width={355}
@@ -115,7 +118,7 @@ export default function NewDirection() {
                             src={file}
                             alt="addImage"
                         />
-                    : 
+                        :
                         <div>
                             <Image
                                 unoptimized
@@ -125,10 +128,12 @@ export default function NewDirection() {
                                 alt="addImage"
                             />
                         </div>
-               }
+                }
                 <div>
                     <div>{direction}</div>
-                    <div></div>
+                    {
+                        direction ? <div></div> : ""
+                    }
                 </div>
             </div>
             <div className='kyrs-edit_right'>
@@ -165,7 +170,7 @@ export default function NewDirection() {
                     </div>
                     <input onChange={(e) => { addDirection(e) }} required placeholder='Название напровления' type={"text"} />
                     <div className='btn-wrapper'>
-                        <button className='btn'>
+                        <button disabled={disabled} className='btn'>
                             Добавить
                         </button>
                     </div>

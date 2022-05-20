@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 export default function KyrsCardInside({
     title,
-    imgUrl,
+    url,
     secondImgUrl,
     teachers,
     start,
@@ -55,7 +55,7 @@ export default function KyrsCardInside({
                 <div className="kyrs-card_main-block">
                     <Image
                         unoptimized
-                        src={imgUrl || "/file-image.png"}
+                        src={url || "/file-image.png"}
                         alt={'Главная картинка'}
                         width={300}
                         height={500}
@@ -65,7 +65,7 @@ export default function KyrsCardInside({
                         <div className="kyrs-card-text_block">
                             <div>{teachers?.length > 1 ? 'Преподватели:' : 'Преподователь:'}</div>
                             <div>
-                                {teachers?.map((el, index) => teachers?.length > 1 ? el + (index === teachers?.length - 1 ? "" : ", ") : el)}    
+                                {teachers?.map((el, index) => teachers?.length > 1 ? el + (index === teachers?.length - 1 ? "" : ", ") : el)}
                             </div>
                         </div>
                         <div className="kyrs-card-text_block">
@@ -74,7 +74,7 @@ export default function KyrsCardInside({
                         </div>
                         <div className="kyrs-card-text_block">
                             <div>Старт курса:</div>
-                            <div>{new Date(start?.seconds * 1000 ).toLocaleDateString()}</div>
+                            <div>{new Date(start?.seconds * 1000).toLocaleDateString()}</div>
                         </div>
                         <div className="kyrs-card-text_block">
                             <div>Длительность:</div>
@@ -92,11 +92,12 @@ export default function KyrsCardInside({
                 </div>
                 <div className="direction-title">ВИДЕОПРИГЛАШЕНИЕ</div>
                 <div className="video-invite">
-                    <iframe
+                    <video
+                        controls
                         width="920"
                         height="518"
                         src={videoInvite}
-                        allowFullScreen></iframe>
+                    ></video>
                 </div>
             </div>
             <div className="kyrs-card_info">

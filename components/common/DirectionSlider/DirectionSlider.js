@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { db } from "../../../config/firebase"
 
 export default function DirectionSlider() {
-    const [directionList, setDirectionList] = useState([])
+    const [directionCardList, setDirectionCardList] = useState([])
 
     useEffect(() => {
-        db.collection("directionList")
+        db.collection("directionCardList")
             .get()
             .then((snapshot) => {
 
@@ -16,7 +16,7 @@ export default function DirectionSlider() {
                 snapshot.forEach((doc) => {
                     direction.push({ ...doc.data(), id: doc.id })
                 })
-                setDirectionList(direction)
+                setDirectionCardList(direction)
             })
     }, [])
     const settings = {
@@ -53,14 +53,18 @@ export default function DirectionSlider() {
     return (
         <div>
             {
-                directionList.length < 5 ? <div className='direction_cards'>
-                    {directionList.map((el) => <DirectionSliderCard key={el.id} {...el} />)}
+                directionCardList?.length < 5 ? <div className='direction_cards'>
+                    {directionCardList.map((el) => <DirectionSliderCard key={el.id} url={el.url}
+                        direction={el.direction}
+                        urlDirection={el.urlDirection}/>)}
                 </div> :
                     <Slider className="direction_slider" {...settings}>
                         {
-                            directionList.map((el) => <DirectionSliderCard
+                            directionCardList.map((el) => <DirectionSliderCard
                                 key={el.id}
-                                {...el}
+                                url={el.url}
+                                direction={el.direction}
+                                urlDirection={el.urlDirection}
                             />)
                         }
 
@@ -68,7 +72,7 @@ export default function DirectionSlider() {
             }
             <div className='response_direction container'>
                 {
-                    directionList.map((el) => <Link key={el.id} href={"/kyrsy" + "$" + el.urlDirection}>
+                    directionCardList.map((el) => <Link key={el.id} href={"/kyrsy" + "$" + el.urlDirection}>
                         <a>
                             <div>{el.direction}</div>
                             <div></div>

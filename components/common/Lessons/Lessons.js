@@ -99,7 +99,6 @@ export default function Lessons() {
       <div className="direction-title">РАБОТЫ СТУДЕНТОВ</div>
       <div className="students_work_wrapper">
         <StudentsSlider />
-        <div>Портфолио школы за 2021</div>
         <div className="btn_wrapper">
           <Link href={'#'}>
             <button className="btn">СМОТРЕТЬ ЕЩЕ</button>

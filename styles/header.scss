@@ -6,6 +6,11 @@ $color: #66097b;
   align-items: center;
   justify-content: space-evenly;
 }
+.logo{
+  img{
+    object-fit: contain;
+  }
+}
 .navbar {
   display: flex;
   align-items: center;
@@ -30,7 +35,7 @@ $color: #66097b;
   font-weight: 600;
   margin-left: 15px;
   position: relative;
-  width: 170px;
+  width: 190px;
 }
 .header_phone-modal {
   background: white;

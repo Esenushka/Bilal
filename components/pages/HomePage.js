@@ -27,14 +27,13 @@ export default function HomePage() {
             <MainSlider />
             <div className='direction-title'>Напровления обучения</div>
             <DirectionSlider />
-            <Link href={"#"}>
+            <Link href={"/kyrsy "}>
                 <div className='btn-wrapper'>
                     <button className='btn'>Все курсы</button>
                 </div>
             </Link>
             <Quiz />
             <Lessons />
-            <div className='direction-title container'>НАШИ ДРУЗЬЯ И ПАРТНЁРЫ</div>
             <div className='container'>
                 <div className='step_wrapper'>
                     {innerWidth > 990 ? <Image className={'fade_left ' + (innerWidth > 1200 ? (offset > 3500 ? "active" : "") : (offset > 4100 ? "active" : ""))} width={270} height={270} src={"/sh1.png"} alt="sh1" /> : ""}

@@ -1,0 +1,61 @@
+$color: #66097b;
+
+.preloader{
+    z-index: 1000;
+    position: fixed;
+    display: none;
+    background: rgba($color: #000000, $alpha: 0.4);
+    top: 0;
+    width: 100%;
+    height: 100vh;
+}
+.preloader.active{
+    display: block;
+}
+
+svg {
+  position: fixed;
+  width: 240px;
+  height: 120px;
+  top: 0; right: 0;
+  bottom: 0; left: 0; 
+  margin: auto;
+
+}
+
+svg #plug,
+svg #socket {
+  fill: $color;
+}
+
+svg #loop-normal {
+  fill: none;
+  stroke: $color;
+  stroke-width: 12;
+}
+
+svg #loop-offset {
+  display: none;
+}
+
+.credit {
+  position: absolute;
+  bottom: 100px;
+  width: 100%;
+  text-align: center;
+}
+
+.credit a {
+  color: $color;
+  font: 800 75% "Open Sans", sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.load{
+  color: white;
+  font: 800 75% "Open Sans", sans-serif;
+  text-transform: uppercase;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}

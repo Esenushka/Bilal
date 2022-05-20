@@ -97,7 +97,7 @@ $color: #66097b;
   }
 }
 .kyrs-card:hover .kyrs-card_text {
-  top: -260px;
+  top: -300px;
 }
 
 .nothing {
@@ -142,7 +142,7 @@ $color: #66097b;
   display: flex;
   justify-content: center;
   margin-bottom: 80px;
-  iframe {
+  video {
     border-radius: 30px;
     border: none;
   }
@@ -436,7 +436,7 @@ $color: #66097b;
     }
   }
   .video-invite {
-    iframe {
+    video {
       height: 380px;
       width: 100%;
     }
@@ -472,7 +472,7 @@ $color: #66097b;
     margin: 0;
   }
   .video-invite {
-    iframe {
+    video {
       height: 300px;
     }
   }

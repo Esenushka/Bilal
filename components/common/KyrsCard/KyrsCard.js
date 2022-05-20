@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from 'next/router'
 
-export default function KyrsCard({ imgUrl, title, teachers, start, duration, price, id, freePlace }) {
+export default function KyrsCard({ url, title, teachers, start, duration, price, id, freePlace,des }) {
 
     const router = useRouter()
 
@@ -12,7 +12,7 @@ export default function KyrsCard({ imgUrl, title, teachers, start, duration, pri
             <div className="kyrs-card">
                 <Image
                     unoptimized
-                    src={imgUrl}
+                    src={url}
                     alt={title}
                     width={350}
                     height={365}
@@ -22,17 +22,19 @@ export default function KyrsCard({ imgUrl, title, teachers, start, duration, pri
                         <div className="kyrs-card_title">
                             {title}
                         </div>
-                       
+                       <div className='kyrs-card-text_des'>
+                        {des}
+                       </div>
                         <div className="kyrs-card-text_block">
                             <div>{teachers?.length > 1 ? "Преподователи:" : "Преподователь"}</div>
                             <div>
-                                {teachers.map((el,index) => teachers?.length > 1 ? el + (index === teachers?.length - 1 ? "" : ", ") : el)}
+                                {teachers?.map((el,index) => teachers?.length > 1 ? el + (index === teachers?.length - 1 ? "" : ", ") : el)}
                             </div>
                         </div>
                         <div className="kyrs-card-text_block">
                             <div>Старт курса:</div>
                             <div>
-                                {new Date(start * 1000).toLocaleDateString()}
+                                {new Date(start?.seconds * 1000).toLocaleDateString()}
                             </div>
                         </div>
                         <div className="kyrs-card-text_block">

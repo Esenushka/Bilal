@@ -10,21 +10,30 @@ export default function MainSlider() {
         autoplay: true,
         autoplaySpeed: 5000,
         pauseOnHover: true,
-        centerPadding: "240px",
+        centerPadding: "0px",
         centerMode: true,
-        slidesToShow: 1,
+        slidesToShow: 3,
         responsive: [
             {
                 breakpoint: 1200,
                 settings: {
-                    centerPadding: "110px"
+                    centerPadding: "0px"
                 }
             },
             {
                 breakpoint: 900,
                 settings: {
+                    centerMode: true,
+                    centerPadding: "220px",
+                    slidesToShow: 1,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
                     centerMode: false,
                     centerPadding: 0,
+                    slidesToShow: 1,
                 }
             }
         ]

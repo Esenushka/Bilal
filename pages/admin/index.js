@@ -1,6 +1,7 @@
 import React from "react"
 import firebase from "./../../config/firebase.js";
 import { useRouter } from "next/router"
+import  Head  from "next/head";
 
 export default function Admin({ isAuth }) {
   const router = useRouter()
@@ -23,6 +24,11 @@ export default function Admin({ isAuth }) {
 
   return (
     <div className='admin_wrapper'>
+      <Head>
+        <title>
+          Вход в админ панель
+        </title>
+      </Head>
       <form onSubmit={submit}>
         <label>
           <div>Почта</div>

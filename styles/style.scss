@@ -37,8 +37,9 @@ $color: #66097b;
 }
 
 .main_slider-block {
+  height: 600px;
   overflow: hidden;
-  width: 90%;
+  width: 80%;
   text-transform: uppercase;
   position: relative;
   color: white;
@@ -49,28 +50,31 @@ $color: #66097b;
   justify-content: end;
   span {
     z-index: -1 !important;
+    height: 600px !important;
   }
   img {
+    object-fit: cover;
     height: 100% !important;
   }
   > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    grid-gap: 60px;
+    grid-gap: 40px;
     width: 100%;
     position: absolute;
-    left: 35px;
-    bottom: 45px;
+    left: 15px;
+    bottom: 70px;
+    text-align: center;
   }
 }
 .main_slider-block_name {
-  width: 70%;
-  font-size: 55px;
+  width: 90%;
+  font-size: 40px;
   text-shadow: 4px 4px 0 rgb(0 0 0 / 24%);
 }
 .main_slider-block_des {
-  width: 70%;
+  width: 90%;
   font-size: 25px;
   text-shadow: 4px 4px 0 rgb(0 0 0 / 24%);
 }
@@ -248,7 +252,7 @@ $color: #66097b;
 }
 
 .slick-next::before {
-  content: "" !important;
+  content: '' !important;
 }
 
 .label_wrapper label {
@@ -418,7 +422,7 @@ $color: #66097b;
   border-radius: 30px;
 }
 .trainning_bar::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: var(--bar);
@@ -573,14 +577,14 @@ $color: #66097b;
 .direction_slider .slick-track {
   padding: 15px 0;
 }
-.direction_cards{
+.direction_cards {
   width: 75%;
   margin: 0 auto;
   display: flex;
   grid-gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
-  .direction_card{
+  .direction_card {
     margin-bottom: 40px;
   }
 }
@@ -605,7 +609,7 @@ $color: #66097b;
 @media (max-width: 900px) {
   .main_slider-block {
     width: 95%;
-    margin: 0 auto;
+    margin: 0 30px;
   }
   .quiz .slick-next {
     left: 35.5%;
@@ -619,7 +623,7 @@ $color: #66097b;
   }
 }
 @media (max-width: 768px) {
-  .direction_cards{
+  .direction_cards {
     display: none;
   }
   .direction_slider {
@@ -627,6 +631,10 @@ $color: #66097b;
   }
   .response_direction {
     display: block;
+  }
+  .main_slider-block{
+    width: 65%;
+    margin: 0 auto;
   }
 }
 @media (max-width: 700px) {
@@ -647,6 +655,9 @@ $color: #66097b;
   }
 }
 @media (max-width: 600px) {
+  .main_slider-block{
+    width: 75%;
+  }
   .lessons_card {
     width: 100%;
   }
@@ -664,7 +675,13 @@ $color: #66097b;
   }
 }
 @media (max-width: 512px) {
-  .btn{
+  .main_slider-block{
+    width: 85%;
+    > div{
+      bottom: 30px;
+    }
+  }
+  .btn {
     width: 200px;
   }
   .students-work > div {
@@ -721,16 +738,12 @@ $color: #66097b;
     left: 24%;
     top: 72% !important;
   }
-  .main_slider-block > div {
-    left: 20px;
-    bottom: 15px;
-    grid-gap: 15px;
-  }
+
   .main_slider-block_name {
-    font-size: 32px;
+    font-size: 45px;
   }
   .main_slider-block_des {
-    font-size: 22px;
+    font-size: 28px;
   }
   .direction-title {
     font-size: 35px;
@@ -738,10 +751,8 @@ $color: #66097b;
 }
 @media (max-width: 440px) {
   .main_slider-block_name {
-    font-size: 22px;
+    font-size: 35px;
     font-weight: 700;
   }
-  .main_slider-block_des {
-    font-size: 18px;
-  }
+ 
 }

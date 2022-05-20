@@ -9,6 +9,7 @@ import '../styles/admin.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/kyrsyEdit.scss"
+import "../styles/preloader.scss"
 import { useEffect, useState } from "react"
 import firebase from "../config/firebase.js";
 import WithAuth from '../hooks/privateAuth'

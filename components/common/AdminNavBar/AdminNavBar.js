@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import firebase from '../../../config/firebase'
 import { useState } from 'react'
+import Link from "next/link"
 
 export default function AdminNavBar() {
     const [active, setActive] = useState(false)
@@ -83,6 +84,21 @@ export default function AdminNavBar() {
                             </div>
                         </li>
                     </NavLink>
+                    <Link href="/">
+                        <li className='list'>
+                            <p>Главная</p>
+                            <div style={{ "--clr": "#d9944a" }} >
+                                <span className='icon'>
+                                    <Image
+                                        src="/home.png"
+                                        alt='course'
+                                        width={35}
+                                        height={35}
+                                    />
+                                </span>
+                            </div>
+                        </li>
+                    </Link>
                     <a onClick={logout}>
                         <li className='list'>
                             <p>Выйти</p>

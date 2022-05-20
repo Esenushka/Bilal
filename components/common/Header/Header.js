@@ -11,7 +11,7 @@ export default function Header() {
         <div className="header">
           <div className="logo">
             <NavLink href={'/'}>
-              <Image width={50} height={50} src="/favicon.ico" alt="Logo" />
+              <Image width={100} height={100} src="/b2.png" alt="Logo" />
             </NavLink>
           </div>
           <div className="navbar">
@@ -21,14 +21,14 @@ export default function Header() {
             <NavLink href={'/blog'}>Блог</NavLink>
             <div className="header_phone-number">
               <div>
-                <div>8 (999) 333-15-03</div>
+                <div>+996 559 98 07 07</div>
                 <div>
                   {' '}
                   <Image width={50} height={50} src="/phone-button.png" alt="phoneButton" />
                 </div>
               </div>
               <div className="header_phone-modal">
-                <a href="tel:8 999 333 15 03">Позвонить</a>
+                <a href="tel:+996 559 98 07 07">Позвонить</a>
                 <Link href="/contacts">Заказать звонок</Link>
               </div>
               <div className="header_phone-modal-block"></div>

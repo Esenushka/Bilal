@@ -8,19 +8,9 @@ import { useEffect, useState } from "react";
 export default function KyrsyPage() {
   const router = useRouter()
   const query = Object.keys(router.query)[0]
-  const [directionList, setDirectionList] = useState([])
   const [directionCardList, setDirectionCardList] = useState([])
 
   useEffect(() => {
-    db.collection("directionList")
-      .get()
-      .then((snapshot) => {
-        const direction = []
-        snapshot.forEach((doc) => {
-          direction.push({ ...doc.data(), id: doc.id })
-        })
-        setDirectionList(direction)
-      });
 
     db.collection("directionCardList")
       .get()
@@ -37,7 +27,7 @@ export default function KyrsyPage() {
 
   const Joined = (
     directionCardList.map((el) =>
-      query === undefined ? <KyrsCard {...el} /> : el.directions.map((item) => item === query ? <KyrsCard {...el} /> : "")
+      query === undefined ? <KyrsCard {...el} /> : (el.urlDirection === query ? <KyrsCard {...el} /> : "")
     )
   ).join("")
   return (
@@ -48,7 +38,7 @@ export default function KyrsyPage() {
       </div>
       <div className="kyrs-filter">
         {
-          directionList.map((el) => <Link key={el.id} href={router.pathname + "?" + el.urlDirection}>
+          directionCardList.map((el) => <Link key={el.id} href={router.pathname + "?" + el.urlDirection}>
             <a className={query === el.urlDirection ? "active" : ""}>
               {el.direction}
             </a>
@@ -64,7 +54,7 @@ export default function KyrsyPage() {
         {
           Joined ? (
             directionCardList.map((el) =>
-              query === undefined ? <KyrsCard key={el.id} {...el} /> : el.directions.map((item) => item === query ? <KyrsCard {...el} /> : "")
+              query === undefined ? <KyrsCard key={el.id} {...el} /> : (el.urlDirection === query ? <KyrsCard {...el} /> : "")
             )
           ) : <div className="nothing">
             Такого курса пока нет!

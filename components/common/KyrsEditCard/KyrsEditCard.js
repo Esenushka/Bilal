@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { db } from '../../../config/firebase';
+import { db, storageRef } from '../../../config/firebase';
 import { useRouter } from 'next/router';
 import Link from "next/link"
 
@@ -13,14 +13,33 @@ export default function KyrsEditCard() {
     const [active, setActive] = useState(false)
     const [directionCardList, setDirectionCardList] = useState({})
     const [teachers, setTeachers] = useState([])
+    const [file, setFile] = useState("");
+    const [fileData, setFileData] = useState("");
+    const [videofile, setVideoFile] = useState("");
+    const [videoFileData, setVideoFileData] = useState("");
+    const [fileSecond, setFileSecond] = useState("");
+    const [fileSecondData, setFileSecondData] = useState("");
+    const [urlDirection, setUrlDirection] = useState("")
+    const [added, setAdded] = useState(0)
+
 
     const {
-        title, imgUrl, secondImgUrl, start, duration,
-        price, register, freePlace, forWho, about, videoInvite
+        title, url, secondImgUrl, start, duration,
+        price, register, freePlace, forWho, about, videoInvite, des, direction
     } = directionCardList
 
     const router = useRouter()
     const id = router.query?.id
+
+
+    const getUrl = async (name) => await storageRef
+        .ref()
+        .child("items/" + name)
+        .getDownloadURL()
+        .then((url) => {
+            return url
+        })
+
 
     useEffect(() => {
         db.collection("directionCardList")
@@ -31,9 +50,9 @@ export default function KyrsEditCard() {
                     directionCard.push({ ...doc.data(), id: doc.id })
                 })
                 setDirectionCardList(directionCard.find((el) => el.id === id))
-                setTeachers(directionCard.find((el) => el.id === id)?.teachers)
+                setTeachers(directionCard.find((el)=> el.id === id)?.teachers)
             });
-    }, [id]);
+    }, [id, added]);
 
     useEffect(() => {
         db.collection("directionCardList/" + id + "/comments")
@@ -51,13 +70,15 @@ export default function KyrsEditCard() {
         const day = new Date(el?.seconds * 1000).getDate();
         const month = new Date(el?.seconds * 1000).getMonth() + 1
         const year = new Date(el?.seconds * 1000).getFullYear()
-        const date = year + "-" + (month < 10 ? "0" + month : month) + "-" + day
+        const date = year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day)
         setDate(date)
     }
+
     useEffect(() => {
         getDate(register, setRegisterDate)
         getDate(start, setStartDate)
     }, [register, start])
+
 
     const deleteComment = (commentId) => {
         let res = confirm("Вы уверены?")
@@ -74,16 +95,50 @@ export default function KyrsEditCard() {
         e.preventDefault()
         const data = {
             ...newData,
-            teachers: teachers
+            teachers: teachers,
+            urlDirectionL: urlDirection
         }
-
-        for (let key in data) {
-            if (data[key]) {
-                db.collection("directionCardList").doc(id).update({ [key]: data[key] })
-                setActive(true)
+        if (newData || urlDirection === true) {
+            for (let key in data) {
+                if (data[key]) {
+                    db.collection("directionCardList").doc(id).update({ [key]: data[key] })
+                    setActive(true)
+                    setTeachers([])
+                    setNewData({})
+                    setUrlDirection("")
+                }
             }
         }
 
+        if (fileData) {
+            storageRef.ref("items/" + fileData.name).put(fileData).then(() => {
+                getUrl(fileData.name).then((url) => {
+                    db.collection("directionCardList").doc(id).update({ url: url })
+                    setActive(true)
+                })
+            })
+        }
+
+        if (videoFileData) {
+            storageRef.ref("items/" + videoFileData.name).put(videoFileData).then(() => {
+                getUrl(videoFileData.name).then((url) => {
+                    db.collection("directionCardList").doc(id).update({ videoInvite: url })
+                    setActive(true)
+                })
+            })
+
+        }
+        if (fileSecondData) {
+            storageRef.ref("items/" + fileSecondData.name).put(fileSecondData).then(() => {
+                getUrl(fileSecondData.name).then((url) => {
+                    db.collection("directionCardList").doc(id).update({ secondImgUrl: url })
+                    setActive(true)
+                })
+            })
+
+        }
+
+        setAdded(added + 1)
         setTimeout(() => {
             setActive(false)
         }, 6000)
@@ -92,7 +147,6 @@ export default function KyrsEditCard() {
     const removeTeacher = (teacherIndex) => {
         const filtered = teachers.filter((el, index) => teacherIndex !== index)
         setTeachers(filtered)
-
     }
 
     const addTeacher = (e, index) => {
@@ -100,6 +154,57 @@ export default function KyrsEditCard() {
         setTeachers([...teachers])
     }
 
+    const Delete = () => {
+        let res = confirm("Вы уверены?")
+        if (res) {
+            db.collection("directionCardList").doc(id).delete()
+            router.push("/admin/dashboard")
+        }
+    }
+
+    const handleChange = (target, setFilesData, setFiles) => {
+        const reader = new FileReader();
+        setFilesData(target.files[0]);
+        reader.readAsDataURL(target.files[0]);
+        reader.onload = (e) => {
+            const newUrl = e.target.result;
+            setFiles(newUrl);
+        };
+
+    };
+
+    const addDirection = (e) => {
+        setNewData({ ...newData, direction: e.target.value })
+        translit(e.target.value)
+    }
+
+    function translit(word) {
+        const converter = {
+            'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+            'е': 'e', 'ё': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i',
+            'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
+            'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+            'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch',
+            'ш': 'sh', 'щ': 'sch', 'ь': '', 'ы': 'y', 'ъ': '',
+            'э': 'e', 'ю': 'yu', 'я': 'ya'
+        };
+
+        word = word.toLowerCase();
+
+        let answer = '';
+        for (let i = 0; i < word.length; ++i) {
+            if (converter[word[i]] == undefined) {
+                answer += word[i];
+            } else {
+                answer += converter[word[i]];
+            }
+        }
+
+        answer = answer.replace(/[^-0-9a-z]/g, '-');
+        answer = answer.replace(/[-]+/g, '-');
+        answer = answer.replace(/^\-|-$/g, '');
+        setUrlDirection(answer)
+    }
     return (
         <form onSubmit={submit} className='kyrs-edit-card'>
             <Link href="/admin/dashboard">
@@ -113,18 +218,34 @@ export default function KyrsEditCard() {
                     />
                 </div>
             </Link>
+            <div className='direction_edit-kyrs container'>
+                <h4>Напровления</h4>
+                <input
+                    onChange={(e) => addDirection(e)}
+                    type={"text"} defaultValue={direction} />
+            </div>
             <div className="container">
                 <div>
-                    <input type={"file"} />
+                    <input
+                        onChange={({ target }) => handleChange(target, setFileData, setFile)}
+                        type={"file"} />
                 </div>
                 <div className="kyrs-card_main-block edit-card">
-                    <Image
-                        unoptimized
-                        src={imgUrl || "/file-image.png"}
-                        alt={'Главная картинка'}
-                        width={300}
-                        height={500}
-                    />
+                    {
+                        file ? <Image
+                            unoptimized
+                            src={file}
+                            alt={'Главная картинка'}
+                            width={300}
+                            height={500}
+                        /> : <Image
+                            unoptimized
+                            src={url || "/file-image.png"}
+                            alt={'Главная картинка'}
+                            width={300}
+                            height={500}
+                        />
+                    }
                     <div className="kyrs-card_main-text">
                         <div className="kyrs-card-text_title">
                             <input
@@ -133,21 +254,30 @@ export default function KyrsEditCard() {
                                 type={"text"}
                                 defaultValue={title} />
                         </div>
+                        <div className='kyrs-card-text_des'>
+                            <textarea
+                                required
+                                onChange={(e) => { setNewData({ ...newData, des: e.target.value }) }}
+                                defaultValue={des}
+                            ></textarea>
+                        </div>
                         <div className="kyrs-card-text_block">
-                            <div>{teachers?.length > 1 ? 'Преподватели:' : 'Преподователь:'}</div>
+                            <div>{directionCardList.teachers?.length > 1 ? 'Преподватели:' : 'Преподователь:'}</div>
                             <div>
                                 {
                                     teachers.length > 0 ? teachers?.map((el, index) => <label className='teachers-edit-label' key={index}>
                                         <input
                                             required
-                                            value={teachers[index]}
+                                            defaultValue={el}
                                             onChange={(e) => addTeacher(e, index)}
                                             type={"text"} />
                                         <Image onClick={() => removeTeacher(index)} src={"/minus.png"} alt="deleteImg" width={1000} height={1000} />
                                     </label>
                                     )
                                         : <label>
-                                            <input required type={"text"} />
+                                            <input
+                                                onChange={(e) => addTeacher(e, 0)}
+                                                required type={"text"} />
                                         </label>
                                 }
                                 <div className='add-edit-image'>
@@ -214,31 +344,48 @@ export default function KyrsEditCard() {
                 <div className='video-input'>
                     <div>
                         <input
-                        onChange={(e) => setNewDate({...newData,videoInvite: e.target.value})}
-                        type={"text"}
-                            required
+                            onChange={({ target }) => handleChange(target, setVideoFileData, setVideoFile)}
+                            type={"file"}
+                            accept="video/mp4"
                             defaultValue={videoInvite} />
                     </div>
                 </div>
                 <div className="video-invite edit-video">
-                    <iframe
-                        width="920"
-                        height="518"
-                        src={videoInvite}
-                        allowFullScreen></iframe>
+                    {
+                        videoFileData ?
+                            <video
+                                width="920"
+                                height="518"
+                                controls
+                                src={videofile}
+                            ></video>
+                            : <video width="920" height="518" controls src={videoInvite}>
+                            </video>
+                    }
                 </div>
             </div>
             <div className="kyrs-card_info edit-info">
                 <div className="container">
                     <div>
-                        <Image
-                            unoptimized
-                            src={secondImgUrl || "/file-image.png"}
-                            alt={'Второя картинка'}
-                            width={600}
-                            height={700}
-                        />
-                        <input className='edit-info_input'
+                        {
+                            fileSecond ?
+                                <Image
+                                    unoptimized
+                                    src={fileSecond}
+                                    alt={'Второя картинка'}
+                                    width={600}
+                                    height={700}
+                                /> : <Image
+                                    unoptimized
+                                    src={secondImgUrl || "/file-image.png"}
+                                    alt={'Второя картинка'}
+                                    width={600}
+                                    height={700}
+                                />
+                        }
+                        <input
+                            onChange={({ target }) => handleChange(target, setFileSecondData, setFileSecond)}
+                            className='edit-info_input'
                             type={"file"}
 
                         />
@@ -281,8 +428,9 @@ export default function KyrsEditCard() {
                 }
             </div>
 
-            <div className='btn-wrapper'>
+            <div className='btn-wrapper buttons'>
                 <button className='btn'>Сохранить</button>
+                <button onClick={Delete} className='btn-delete btn'>Удалить</button>
             </div>
             <div onClick={() => setActive(false)} className={'updated ' + (active ? "active" : "")}>
                 Данные изменились

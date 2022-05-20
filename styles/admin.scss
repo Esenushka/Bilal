@@ -47,6 +47,7 @@ $color: #66097b;
     grid-gap: 15px;
   }
   li {
+    cursor: pointer;
     position: relative;
     z-index: 2;
     list-style: none;
@@ -98,16 +99,16 @@ $color: #66097b;
     opacity: 0.5;
   }
   a:nth-of-type(1).active ~ .indicators {
-    transform: translateX((calc(105px * 0)));
+    transform: translateX((-7px));
   }
   a:nth-of-type(2).active ~ .indicators {
-    transform: translateX((calc(105px * 1)));
+    transform: translateX((calc(84px * 1)));
   }
   a:nth-of-type(3).active ~ .indicators {
-    transform: translateX((calc(105px * 2)));
+    transform: translateX((calc(87px * 2)));
   }
   a:nth-of-type(4).active ~ .indicators {
-    transform: translateX((calc(105px * 3)));
+    transform: translateX((calc(88.5px * 3)));
   }
 
   a:nth-of-type(2) {
@@ -232,7 +233,7 @@ $color: #66097b;
   }
 }
 .edit-video {
-  iframe {
+  video {
     width: 80%;
     border-radius: 0 30px 30px 30px;
   }
@@ -264,37 +265,58 @@ $color: #66097b;
   display: flex !important;
   flex-direction: column;
   grid-gap: 25px;
+  margin: 10px 30px;
+  padding: 0 15px;
   justify-content: space-around;
 }
-.edit-info_input{
+.edit-info_input {
   width: 100% !important;
   border: 1px solid gray !important;
   border-radius: 30px !important;
   margin-bottom: 40px !important;
 }
+.direction_edit-kyrs{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  h4{
+    margin: 15px 0;
+  }
+}
+.activeImage{
+  border-radius: 30px;
+  border: 1px solid gray;
+  > span{
+    transform: scale(0.4);
+    border-radius: 50px;
+    img{
+      object-fit: contain;
+    }
+  }
+}
 @media (max-width: 960px) {
-  .edit-info_input{
+  .edit-info_input {
     width: 40% !important;
   }
-  .kyrs-edit-card{
-    .container{
-      > div:nth-of-type(1){
+  .kyrs-edit-card {
+    .container {
+      > div:nth-of-type(1) {
         width: 100%;
         align-items: center;
-        input{
+        input {
           width: 80%;
         }
       }
     }
   }
-  .kyrs-card_main-block{
+  .kyrs-card_main-block {
     border: none;
   }
-  .kyrs-edit-card .container .edit-card{
+  .kyrs-edit-card .container .edit-card {
     border-radius: 0 0 30px 30px;
   }
   .edit-video {
-    iframe {
+    video {
       width: 100%;
       border-radius: 0 0 30px 30px;
     }
@@ -316,9 +338,23 @@ $color: #66097b;
   .kyrs-card-text_block input {
     width: 55%;
   }
+  .kyrs-edit-card .container > div:nth-of-type(1) {
+    width: 100%;
+    justify-content: center;
+  }
+}
+.kyrs-card-text_des {
+  margin-bottom: 15px;
+  textarea {
+    height: 100px;
+  }
 }
 @media (max-width: 768px) {
-  .edit-info_input{
+  .kyrs-edit-card .container > div:nth-of-type(1) {
+    justify-content: center;
+    width: 100%;
+  }
+  .edit-info_input {
     width: 70% !important;
   }
   .admin_wrapper {
@@ -328,7 +364,10 @@ $color: #66097b;
   }
 }
 @media (max-width: 512px) {
-  .edit-info_input{
+  .kyrs-edit-card .container > div:nth-of-type(1) input {
+    width: 100%;
+  }
+  .edit-info_input {
     width: 85% !important;
   }
   .admin_wrapper {

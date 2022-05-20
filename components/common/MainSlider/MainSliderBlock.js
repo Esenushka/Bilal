@@ -7,8 +7,8 @@ export default function MainSliderBlock({ url, name, des }) {
             <Image
                 unoptimized
                 width={1000}
-                height={510}
-                src={url} alt="MainSlide" />
+                height={1000}
+                src={"/photo1.jpg"} alt="MainSlide" />
             <div>
                 <div className='main_slider-block_name'>{name}</div>
                 <div className='main_slider-block_des'>

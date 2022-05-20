@@ -1,8 +1,4 @@
-
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import Head from "next/head"
-import { db } from '../../../config/firebase'
 import KyrsEditCard from '../../../components/common/KyrsEditCard/KyrsEditCard'
 
 export default function EditKyrs() {
@@ -10,7 +6,7 @@ export default function EditKyrs() {
     return (
         <div>
             <Head>
-                <title>dsd</title>
+                <title>Изменение курса</title>
             </Head>
             <KyrsEditCard />
         </div>
