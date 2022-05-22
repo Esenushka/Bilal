@@ -1,8 +1,7 @@
 import Slider from 'react-slick/lib/slider'
-import { MainSliderList } from '../../constants/mainSliderList'
 import MainSliderBlock from './MainSliderBlock'
 
-export default function MainSlider() {
+export default function MainSlider({directionCardList}) {
     const settings = {
         dots: false,
         infinite: true,
@@ -38,11 +37,14 @@ export default function MainSlider() {
             }
         ]
     }
+
+
+
     return (
         <div className='main_wrapper'>
             <Slider {...settings}>
-                {MainSliderList.map((el) =>
-                    <MainSliderBlock key={el.id} url={el.url} name={el.name} des={el.des} />
+                {directionCardList.map((el) =>
+                    <MainSliderBlock key={el.id} url={el.url} id={el.id} name={el.title} des={el.des} />
                 )}
 
             </Slider>

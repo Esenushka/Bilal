@@ -8,6 +8,8 @@ export default function contacts() {
         <div>
             <Head>
                 <title>Контакты</title>
+                <link rel='icon' href='/b2.png' />
+
             </Head>
             <Header/>
             <ContactsPage/>

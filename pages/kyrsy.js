@@ -9,6 +9,7 @@ export default function kyrsy() {
         <div className='kyrs_wrapper'>
             <Head>
                 <title>Курсы</title>
+             <link rel='icon' href='/b2.png' />
             </Head>
             <Header />
             <KyrsyPage />

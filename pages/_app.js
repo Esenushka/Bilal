@@ -10,10 +10,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/kyrsyEdit.scss"
 import "../styles/preloader.scss"
+import "../styles/media.scss"
 import { useEffect, useState } from "react"
 import firebase from "../config/firebase.js";
 import WithAuth from '../hooks/privateAuth'
 import { useRouter } from "next/router";
+import Preloader from '../components/common/Preloader/Preloader'
 
 
 function MyApp({ Component, pageProps }) {
@@ -21,6 +23,9 @@ function MyApp({ Component, pageProps }) {
   const { pathname } = useRouter();
   const [isIncludeAdmin, setIsIncludeAdmin] = useState();
   const [isAuth, setIsAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
+
+
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(async (user) => {
@@ -37,6 +42,7 @@ function MyApp({ Component, pageProps }) {
     setIsIncludeAdmin(check);
   }, [pathname]);
 
+  
   return (
     <>
       {

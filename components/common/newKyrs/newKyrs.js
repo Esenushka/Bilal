@@ -53,7 +53,7 @@ export default function NewKyrs() {
     const data = {
       ...newData,
       teachers: teachers,
-      urlDirectionL: urlDirection
+      urlDirection: urlDirection
     }
     setReload(true)
     body.style.overflowY = "hidden"
@@ -94,13 +94,15 @@ export default function NewKyrs() {
 
 
   const handleChange = (target, setFilesData, setFiles) => {
-    const reader = new FileReader();
-    setFilesData(target.files[0]);
-    reader.readAsDataURL(target.files[0]);
-    reader.onload = (e) => {
-      const newUrl = e.target.result;
-      setFiles(newUrl);
-    };
+   if(target.files.length){
+     const reader = new FileReader();
+     setFilesData(target.files[0]);
+     reader.readAsDataURL(target.files[0]);
+     reader.onload = (e) => {
+       const newUrl = e.target.result;
+       setFiles(newUrl);
+     };
+   }
 
   };
 

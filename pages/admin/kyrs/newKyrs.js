@@ -1,10 +1,14 @@
-import React from 'react'
+import Head from "next/head"
 import NewKyrs from '../../../components/common/newKyrs/newKyrs'
 
 export default function newKyrs() {
   return (
     <div>
-        <NewKyrs/>
+      <Head>
+        <title>Новый курс</title>
+        <link rel='icon' href='/b2.png' />
+      </Head>
+      <NewKyrs />
     </div>
   )
 }

@@ -2,20 +2,32 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { studentsWork } from '../../constants/studentsWork';
 import { LessonsDesList } from '../../constants/LessonsDesList';
 import StudentsSlider from '../StudentsSlider/StudentsSlider.js';
+import { db } from '../../../config/firebase';
 
 export default function Lessons() {
   const [offset, setOffset] = useState();
   const [innerWidth, setInnerWidth] = useState(0);
+  const [directionCardList, setDirectionCardList] = useState({})
+
   const handleScroll = () => setOffset(window.pageYOffset);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   });
+
   useEffect(() => {
     setInnerWidth(window.innerWidth);
+    db.collection("directionCardList")
+      .get()
+      .then((snapshot) => {
+        const direction = []
+        snapshot.forEach((doc) => {
+          direction.push({ ...doc.data(), id: doc.id })
+        })
+        setDirectionCardList(direction[0])
+      })
   }, []);
 
   return (
@@ -98,9 +110,9 @@ export default function Lessons() {
       </div>
       <div className="direction-title">РАБОТЫ СТУДЕНТОВ</div>
       <div className="students_work_wrapper">
-        <StudentsSlider />
+        <StudentsSlider id={directionCardList.id}/>
         <div className="btn_wrapper">
-          <Link href={'#'}>
+          <Link href={'/studentsworks'}>
             <button className="btn">СМОТРЕТЬ ЕЩЕ</button>
           </Link>
         </div>

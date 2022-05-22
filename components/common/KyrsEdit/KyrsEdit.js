@@ -1,28 +1,19 @@
 import { db } from "../../../config/firebase"
-import DirectionSliderCard from '../DirectionSlider/DirectionSliderCard'
 import Link from 'next/link'
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import KyrsCard from "../KyrsCard/KyrsCard"
+import Preloader from "../Preloader/Preloader"
 
 export default function KyrsEdit() {
-    const [directionList, setDirectionList] = useState([])
     const [directionCardList, setDirectionCardList] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        db.collection("directionList")
-            .get()
-            .then((snapshot) => {
-
-                const direction = []
-                snapshot.forEach((doc) => {
-                    direction.push({ ...doc.data(), id: doc.id })
-                })
-                setDirectionList(direction)
-            })
         db.collection("directionCardList")
             .get()
             .then((snapshot) => {
+                setIsLoading(false)
                 const directionCards = []
                 snapshot.forEach((doc) => {
                     directionCards.push({ ...doc.data(), id: doc.id })
@@ -31,6 +22,10 @@ export default function KyrsEdit() {
             });
 
     }, [])
+
+    if(isLoading){
+        return <Preloader full/>
+    }
 
     return (
         <div className='kyrs-edit_wrapper'>

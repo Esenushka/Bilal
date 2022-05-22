@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { db, storageRef } from '../../../config/firebase';
 import { useRouter } from 'next/router';
 import Link from "next/link"
+import firebase from 'firebase/compat/app';
+import Preloader from '../Preloader/Preloader';
 
 export default function KyrsEditCard() {
     const [comments, setComments] = useState([]);
@@ -20,8 +22,6 @@ export default function KyrsEditCard() {
     const [fileSecond, setFileSecond] = useState("");
     const [fileSecondData, setFileSecondData] = useState("");
     const [urlDirection, setUrlDirection] = useState("")
-    const [added, setAdded] = useState(0)
-
 
     const {
         title, url, secondImgUrl, start, duration,
@@ -50,14 +50,17 @@ export default function KyrsEditCard() {
                     directionCard.push({ ...doc.data(), id: doc.id })
                 })
                 setDirectionCardList(directionCard.find((el) => el.id === id))
-                setTeachers(directionCard.find((el)=> el.id === id)?.teachers)
+                setTeachers(directionCard.find((el) => el.id === id)?.teachers)
             });
-    }, [id, added]);
+    }, [id]);
+
+
 
     useEffect(() => {
         db.collection("directionCardList/" + id + "/comments")
             .get()
             .then((snapshot) => {
+
                 const commentData = []
                 snapshot.forEach((doc) => {
                     commentData.push({ ...doc.data(), id: doc.id })
@@ -103,9 +106,6 @@ export default function KyrsEditCard() {
                 if (data[key]) {
                     db.collection("directionCardList").doc(id).update({ [key]: data[key] })
                     setActive(true)
-                    setTeachers([])
-                    setNewData({})
-                    setUrlDirection("")
                 }
             }
         }
@@ -138,7 +138,6 @@ export default function KyrsEditCard() {
 
         }
 
-        setAdded(added + 1)
         setTimeout(() => {
             setActive(false)
         }, 6000)
@@ -163,13 +162,15 @@ export default function KyrsEditCard() {
     }
 
     const handleChange = (target, setFilesData, setFiles) => {
-        const reader = new FileReader();
-        setFilesData(target.files[0]);
-        reader.readAsDataURL(target.files[0]);
-        reader.onload = (e) => {
-            const newUrl = e.target.result;
-            setFiles(newUrl);
-        };
+        if (target.files.length) {
+            const reader = new FileReader();
+            setFilesData(target.files[0]);
+            reader.readAsDataURL(target.files[0]);
+            reader.onload = (e) => {
+                const newUrl = e.target.result;
+                setFiles(newUrl);
+            };
+        }
 
     };
 
@@ -205,237 +206,240 @@ export default function KyrsEditCard() {
         answer = answer.replace(/^\-|-$/g, '');
         setUrlDirection(answer)
     }
+    
     return (
-        <form onSubmit={submit} className='kyrs-edit-card'>
-            <Link href="/admin/dashboard">
-                <div className='back-to-dasboard'>
-                    <Image
-                        unoptimized
-                        width={40}
-                        height={40}
-                        alt='arrow'
-                        src={"/right-arrow.png"}
-                    />
-                </div>
-            </Link>
-            <div className='direction_edit-kyrs container'>
-                <h4>Напровления</h4>
-                <input
-                    onChange={(e) => addDirection(e)}
-                    type={"text"} defaultValue={direction} />
-            </div>
-            <div className="container">
-                <div>
-                    <input
-                        onChange={({ target }) => handleChange(target, setFileData, setFile)}
-                        type={"file"} />
-                </div>
-                <div className="kyrs-card_main-block edit-card">
-                    {
-                        file ? <Image
+        <>
+            <form onSubmit={submit} className='kyrs-edit-card'>
+                <Link href="/admin/dashboard">
+                    <div className='back-to-dasboard'>
+                        <Image
                             unoptimized
-                            src={file}
-                            alt={'Главная картинка'}
-                            width={300}
-                            height={500}
-                        /> : <Image
-                            unoptimized
-                            src={url || "/file-image.png"}
-                            alt={'Главная картинка'}
-                            width={300}
-                            height={500}
+                            width={40}
+                            height={40}
+                            alt='arrow'
+                            src={"/right-arrow.png"}
                         />
-                    }
-                    <div className="kyrs-card_main-text">
-                        <div className="kyrs-card-text_title">
-                            <input
-                                onChange={(e) => { setNewData({ ...newData, title: e.target.value }) }}
-                                required
-                                type={"text"}
-                                defaultValue={title} />
-                        </div>
-                        <div className='kyrs-card-text_des'>
-                            <textarea
-                                required
-                                onChange={(e) => { setNewData({ ...newData, des: e.target.value }) }}
-                                defaultValue={des}
-                            ></textarea>
-                        </div>
-                        <div className="kyrs-card-text_block">
-                            <div>{directionCardList.teachers?.length > 1 ? 'Преподватели:' : 'Преподователь:'}</div>
-                            <div>
-                                {
-                                    teachers.length > 0 ? teachers?.map((el, index) => <label className='teachers-edit-label' key={index}>
-                                        <input
-                                            required
-                                            defaultValue={el}
-                                            onChange={(e) => addTeacher(e, index)}
-                                            type={"text"} />
-                                        <Image onClick={() => removeTeacher(index)} src={"/minus.png"} alt="deleteImg" width={1000} height={1000} />
-                                    </label>
-                                    )
-                                        : <label>
+                    </div>
+                </Link>
+                <div className='direction_edit-kyrs container'>
+                    <h4>Напровления</h4>
+                    <input
+                        onChange={(e) => addDirection(e)}
+                        type={"text"} defaultValue={direction} />
+                </div>
+                <div className="container">
+                    <div>
+                        <input
+                            onChange={({ target }) => handleChange(target, setFileData, setFile)}
+                            type={"file"} />
+                    </div>
+                    <div className="kyrs-card_main-block edit-card">
+                        {
+                            file ? <Image
+                                unoptimized
+                                src={file}
+                                alt={'Главная картинка'}
+                                width={300}
+                                height={500}
+                            /> : <Image
+                                unoptimized
+                                src={url || "/file-image.png"}
+                                alt={'Главная картинка'}
+                                width={300}
+                                height={500}
+                            />
+                        }
+                        <div className="kyrs-card_main-text">
+                            <div className="kyrs-card-text_title">
+                                <input
+                                    onChange={(e) => { setNewData({ ...newData, title: e.target.value }) }}
+                                    required
+                                    type={"text"}
+                                    defaultValue={title} />
+                            </div>
+                            <div className='kyrs-card-text_des'>
+                                <textarea
+                                    required
+                                    onChange={(e) => { setNewData({ ...newData, des: e.target.value }) }}
+                                    defaultValue={des}
+                                ></textarea>
+                            </div>
+                            <div className="kyrs-card-text_block">
+                                <div>{directionCardList.teachers?.length > 1 ? 'Преподватели:' : 'Преподователь:'}</div>
+                                <div>
+                                    {
+                                        teachers.length > 0 ? teachers?.map((el, index) => <label className='teachers-edit-label' key={index}>
                                             <input
-                                                onChange={(e) => addTeacher(e, 0)}
-                                                required type={"text"} />
+                                                required
+                                                defaultValue={el}
+                                                onChange={(e) => addTeacher(e, index)}
+                                                type={"text"} />
+                                            <Image onClick={() => removeTeacher(index)} src={"/minus.png"} alt="deleteImg" width={1000} height={1000} />
                                         </label>
-                                }
-                                <div className='add-edit-image'>
-                                    <Image
-                                        onClick={() => setTeachers([...teachers, ""])}
-                                        src={"/add.png"}
-                                        alt="addImg"
-                                        width={50}
-                                        height={50}
+                                        )
+                                            : <label>
+                                                <input
+                                                    onChange={(e) => addTeacher(e, 0)}
+                                                    required type={"text"} />
+                                            </label>
+                                    }
+                                    <div className='add-edit-image'>
+                                        <Image
+                                            onClick={() => setTeachers([...teachers, ""])}
+                                            src={"/add.png"}
+                                            alt="addImg"
+                                            width={50}
+                                            height={50}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="kyrs-card-text_block">
+                                <div>Регистрация открыта до:</div>
+                                <input type={"date"}
+                                    required
+                                    onChange={(e) => { setNewData({ ...newData, register: firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) }) }}
+                                    defaultValue={registerDate}
+                                />
+
+                            </div>
+                            <div className="kyrs-card-text_block">
+                                <div>Старт курса:</div>
+                                <div>
+                                    <input type={"date"}
+                                        required
+                                        onChange={(e) => { setNewData({ ...newData, start: firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) }) }}
+                                        defaultValue={startDate}
+
                                     />
                                 </div>
                             </div>
+                            <div className="kyrs-card-text_block">
+                                <div>Длительность:</div>
+                                <div>
+                                    <input type={"text"}
+                                        required
+                                        onChange={(e) => { setNewData({ ...newData, duration: e.target.value }) }}
+                                        defaultValue={duration} />
+                                </div>
+                            </div>
+                            <div className="kyrs-card-text_block">
+                                <div>Стоимость:</div>
+                                <div>
+                                    <input type={"number"}
+                                        required
+                                        onChange={(e) => { setNewData({ ...newData, price: e.target.value }) }}
+                                        defaultValue={price} />
+                                </div>
+                            </div>
+                            <div className="kyrs-card-text_block">
+                                <div>Свободные места:</div>
+                                <div>
+                                    <input type={"number"}
+                                        required
+                                        onChange={(e) => { setNewData({ ...newData, freePlace: e.target.value }) }}
+                                        defaultValue={freePlace} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="kyrs-card-text_block">
-                            <div>Регистрация открыта до:</div>
-                            <input type={"date"}
-                                required
-                                onChange={(e) => { setNewData({ ...newData, register: e.target.value }) }}
-                                defaultValue={registerDate}
+                    </div>
+                    <div className="direction-title">ВИДЕОПРИГЛАШЕНИЕ</div>
+                    <div className='video-input'>
+                        <div>
+                            <input
+                                onChange={({ target }) => handleChange(target, setVideoFileData, setVideoFile)}
+                                type={"file"}
+                                accept="video/mp4"
+                                defaultValue={videoInvite} />
+                        </div>
+                    </div>
+                    <div className="video-invite edit-video">
+                        {
+                            videoFileData ?
+                                <video
+                                    width="920"
+                                    height="518"
+                                    controls
+                                    src={videofile}
+                                ></video>
+                                : <video width="920" height="518" controls src={videoInvite}>
+                                </video>
+                        }
+                    </div>
+                </div>
+                <div className="kyrs-card_info edit-info">
+                    <div className="container">
+                        <div>
+                            {
+                                fileSecond ?
+                                    <Image
+                                        unoptimized
+                                        src={fileSecond}
+                                        alt={'Второя картинка'}
+                                        width={600}
+                                        height={700}
+                                    /> : <Image
+                                        unoptimized
+                                        src={secondImgUrl || "/file-image.png"}
+                                        alt={'Второя картинка'}
+                                        width={600}
+                                        height={700}
+                                    />
+                            }
+                            <input
+                                onChange={({ target }) => handleChange(target, setFileSecondData, setFileSecond)}
+                                className='edit-info_input'
+                                type={"file"}
+
                             />
-
                         </div>
-                        <div className="kyrs-card-text_block">
-                            <div>Старт курса:</div>
-                            <div>
-                                <input type={"date"}
-                                    required
-                                    onChange={(e) => { setNewData({ ...newData, start: e.target.value }) }}
-                                    defaultValue={startDate}
-
-                                />
+                        <div className="kyrs-card_about">
+                            <div className="kyrs-card_about-block">
+                                <div className="kyrs-card_about-title">ДЛЯ КОГО ЭТОТ КУРС?</div>
+                                <div className="kyrs-card_about-des">
+                                    <textarea required defaultValue={forWho}></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div className="kyrs-card-text_block">
-                            <div>Длительность:</div>
-                            <div>
-                                <input type={"text"}
-                                    required
-                                    onChange={(e) => { setNewData({ ...newData, duration: e.target.value }) }}
-                                    defaultValue={duration} />
-                            </div>
-                        </div>
-                        <div className="kyrs-card-text_block">
-                            <div>Стоимость:</div>
-                            <div>
-                                <input type={"number"}
-                                    required
-                                    onChange={(e) => { setNewData({ ...newData, price: e.target.value }) }}
-                                    defaultValue={price} />
-                            </div>
-                        </div>
-                        <div className="kyrs-card-text_block">
-                            <div>Свободные места:</div>
-                            <div>
-                                <input type={"number"}
-                                    required
-                                    onChange={(e) => { setNewData({ ...newData, freePlace: e.target.value }) }}
-                                    defaultValue={freePlace} />
+                            <div className="kyrs-card_about-block">
+                                <div className="kyrs-card_about-title">О КУРСЕ</div>
+                                <div className="kyrs-card_about-des">
+                                    <textarea required defaultValue={about}></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="direction-title">ВИДЕОПРИГЛАШЕНИЕ</div>
-                <div className='video-input'>
-                    <div>
-                        <input
-                            onChange={({ target }) => handleChange(target, setVideoFileData, setVideoFile)}
-                            type={"file"}
-                            accept="video/mp4"
-                            defaultValue={videoInvite} />
-                    </div>
-                </div>
-                <div className="video-invite edit-video">
-                    {
-                        videoFileData ?
-                            <video
-                                width="920"
-                                height="518"
-                                controls
-                                src={videofile}
-                            ></video>
-                            : <video width="920" height="518" controls src={videoInvite}>
-                            </video>
+                <div className="direction-title">ОТЗЫВЫ О КУРСЕ</div>
+                <div className="comments_wrapper">
+                    {comments.length > 0 ? (
+                        comments.map((el) => (
+                            <div key={el.id} className="comment">
+                                <div>
+                                    <div className="comment_name">{el.name}</div>
+                                </div>
+                                <div>{el.des}</div>
+                                <div onClick={() => { deleteComment(el.id) }} className='delete-comment'>
+                                    <Image src='/close.png' alt='close' width={30} height={30} />
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="comment comment-nothing">
+                            <div className="comment_name">Пока еще не было комментариев</div>
+                        </div>
+                    )
                     }
                 </div>
-            </div>
-            <div className="kyrs-card_info edit-info">
-                <div className="container">
-                    <div>
-                        {
-                            fileSecond ?
-                                <Image
-                                    unoptimized
-                                    src={fileSecond}
-                                    alt={'Второя картинка'}
-                                    width={600}
-                                    height={700}
-                                /> : <Image
-                                    unoptimized
-                                    src={secondImgUrl || "/file-image.png"}
-                                    alt={'Второя картинка'}
-                                    width={600}
-                                    height={700}
-                                />
-                        }
-                        <input
-                            onChange={({ target }) => handleChange(target, setFileSecondData, setFileSecond)}
-                            className='edit-info_input'
-                            type={"file"}
 
-                        />
-                    </div>
-                    <div className="kyrs-card_about">
-                        <div className="kyrs-card_about-block">
-                            <div className="kyrs-card_about-title">ДЛЯ КОГО ЭТОТ КУРС?</div>
-                            <div className="kyrs-card_about-des">
-                                <textarea required defaultValue={forWho}></textarea>
-                            </div>
-                        </div>
-                        <div className="kyrs-card_about-block">
-                            <div className="kyrs-card_about-title">О КУРСЕ</div>
-                            <div className="kyrs-card_about-des">
-                                <textarea required defaultValue={about}></textarea>
-                            </div>
-                        </div>
-                    </div>
+                <div className='btn-wrapper buttons'>
+                    <button className='btn'>Сохранить</button>
+                    <button onClick={Delete} className='btn-delete btn'>Удалить</button>
                 </div>
-            </div>
-            <div className="direction-title">ОТЗЫВЫ О КУРСЕ</div>
-            <div className="comments_wrapper">
-                {comments.length > 0 ? (
-                    comments.map((el) => (
-                        <div key={el.id} className="comment">
-                            <div>
-                                <div className="comment_name">{el.name}</div>
-                            </div>
-                            <div>{el.des}</div>
-                            <div onClick={() => { deleteComment(el.id) }} className='delete-comment'>
-                                <Image src='/close.png' alt='close' width={30} height={30} />
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <div className="comment comment-nothing">
-                        <div className="comment_name">Пока еще не было комментариев</div>
-                    </div>
-                )
-                }
-            </div>
+                <div onClick={() => setActive(false)} className={'updated ' + (active ? "active" : "")}>
+                    Данные изменились
+                </div>
 
-            <div className='btn-wrapper buttons'>
-                <button className='btn'>Сохранить</button>
-                <button onClick={Delete} className='btn-delete btn'>Удалить</button>
-            </div>
-            <div onClick={() => setActive(false)} className={'updated ' + (active ? "active" : "")}>
-                Данные изменились
-            </div>
-
-        </form>
+            </form>
+        </>
     );
 }

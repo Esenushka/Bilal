@@ -5,11 +5,13 @@ import MainSlider from '../common/MainSlider/MainSlider'
 import Quiz from '../common/Quiz/Quiz'
 import Image from "next/image"
 import { useEffect, useState } from 'react'
+import { db } from '../../config/firebase'
+import Preloader from '../common/Preloader/Preloader'
 
 export default function HomePage() {
     const [offset, setOffset] = useState();
     const [innerWidth, setInnerWidth] = useState(0)
-    
+
 
     const handleScroll = () => setOffset(window.pageYOffset);
 
@@ -22,9 +24,29 @@ export default function HomePage() {
         setInnerWidth(window.innerWidth)
     }, [])
 
+    const [directionCardList, setDirectionCardList] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        db.collection("directionCardList")
+            .get()
+            .then((snapshot) => {
+                setIsLoading(false)
+                const direction = []
+                snapshot.forEach((doc) => {
+                    direction.push({ ...doc.data(), id: doc.id })
+                })
+                setDirectionCardList(direction)
+            })
+    }, [])
+
+    if (isLoading) {
+        return <Preloader full />
+    }
+
     return (
         <div>
-            <MainSlider />
+            <MainSlider directionCardList={directionCardList} />
             <div className='direction-title'>Напровления обучения</div>
             <DirectionSlider />
             <Link href={"/kyrsy "}>

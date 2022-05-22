@@ -8,6 +8,7 @@ export default function blog() {
         <div>
             <Head>
                 <title>Блог</title>
+                <link rel='icon' href='/b2.png' />
             </Head>
             <Header />
             <BlogPage />

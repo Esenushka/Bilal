@@ -1,0 +1,32 @@
+.medias_wrapper{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 20px;
+    margin-top: 50px;
+    width: 60%;
+    > div{
+        grid-gap: 15px;
+        display: flex;
+        align-items: center;
+        input{
+            border: 1px solid gray;
+            outline: none;
+            border-radius: 30px;
+            padding: 10px 15px;
+            width: 250px;
+        }
+        img{
+            object-fit: contain;
+        }
+    }
+}
+@media(max-width: 900px){
+.medias_wrapper{
+    width: 80%;
+}
+}
+@media(max-width: 512px){
+    .medias_wrapper{
+        width: 100%;
+    }
+}

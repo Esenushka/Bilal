@@ -4,6 +4,7 @@ import BlockTop from '../HeaderKyrsTop/HeaderKyrsTop';
 import { useState, useEffect } from 'react';
 import { db } from '../../../config/firebase';
 import { useRouter } from 'next/router';
+import Preloader from '../Preloader/Preloader';
 
 export default function KyrsCardInside({
     title,
@@ -22,6 +23,7 @@ export default function KyrsCardInside({
     const [comments, setComments] = useState([])
     const [commentName, setCommentName] = useState();
     const [comment, setComment] = useState();
+    const [isLoading, setIsLoading] = useState(true)
 
     const router = useRouter()
     const id = router.query?.id
@@ -39,6 +41,7 @@ export default function KyrsCardInside({
         db.collection("directionCardList/" + id + "/comments")
             .get()
             .then((snapshot) => {
+                setIsLoading(false)
                 const commentData = []
                 snapshot.forEach((doc) => {
                     commentData.push({ ...doc.data(), id: doc.id })
@@ -46,6 +49,10 @@ export default function KyrsCardInside({
                 setComments(commentData)
             });
     }, [id]);
+
+    if (isLoading) {
+        return <Preloader full />
+    }
 
     return (
         <div>

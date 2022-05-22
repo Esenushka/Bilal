@@ -7,6 +7,7 @@ export default function EditKyrs() {
         <div>
             <Head>
                 <title>Изменение курса</title>
+                <link rel='icon' href='/b2.png' />
             </Head>
             <KyrsEditCard />
         </div>

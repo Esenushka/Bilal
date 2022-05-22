@@ -4,17 +4,20 @@ import KyrsCard from "../common/KyrsCard/KyrsCard";
 import Image from "next/image"
 import { db } from "../../config/firebase";
 import { useEffect, useState } from "react";
+import Preloader from "../common/Preloader/Preloader";
 
 export default function KyrsyPage() {
   const router = useRouter()
   const query = Object.keys(router.query)[0]
   const [directionCardList, setDirectionCardList] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
 
     db.collection("directionCardList")
       .get()
       .then((snapshot) => {
+        setIsLoading(false)
         const directionCards = []
         snapshot.forEach((doc) => {
           directionCards.push({ ...doc.data(), id: doc.id })
@@ -24,6 +27,9 @@ export default function KyrsyPage() {
 
   }, [])
 
+  if(isLoading){
+    return <Preloader full/>
+  }
 
   const Joined = (
     directionCardList.map((el) =>
