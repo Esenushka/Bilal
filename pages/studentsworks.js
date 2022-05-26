@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Footer from '../components/common/Footer/Footer';
 import Header from '../components/common/Header/Header';
 import StudentsWorkPage from '../components/pages/StudentsWorkPage';
 
@@ -13,7 +12,6 @@ export default function Studentsworks() {
       </Head>
       <Header />
       <StudentsWorkPage />
-      <Footer />
     </div>
   );
 }

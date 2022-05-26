@@ -79,7 +79,7 @@ export default function KyrsyPage() {
           Мы поможем с выбором курса
         </div>
         <div className='btn_wrapper'>
-          <Link href='#quiz'>
+          <Link href='/#quiz'>
             <button className='btn'>ПРОЙТИ ОПРОС</button>
           </Link>
         </div>

@@ -75,17 +75,29 @@ export default function KyrsCardInside({
                                 {teachers?.map((el, index) => teachers?.length > 1 ? el + (index === teachers?.length - 1 ? "" : ", ") : el)}
                             </div>
                         </div>
-                        <div className="kyrs-card-text_block">
-                            <div>Регистрация открыта до:</div>
-                            <div>{new Date(register?.seconds * 1000).toLocaleDateString()}</div>
-                        </div>
-                        <div className="kyrs-card-text_block">
-                            <div>Старт курса:</div>
-                            <div>{new Date(start?.seconds * 1000).toLocaleDateString()}</div>
-                        </div>
+                       {
+                           register ? 
+                                <div className="kyrs-card-text_block">
+                                    <div>Регистрация открыта до:</div>
+                                    <div>{new Date(register?.seconds * 1000).toLocaleDateString()}</div>
+                                </div> : ""
+                       }
+                       {
+                            start ? <div className="kyrs-card-text_block">
+                                <div>Старт курса:</div>
+                                <div>{new Date(start?.seconds * 1000).toLocaleDateString()}</div>
+                            </div> : ""
+                       }
                         <div className="kyrs-card-text_block">
                             <div>Длительность:</div>
-                            <div>{duration}</div>
+                            <div>
+                                {
+                                    duration
+                                }
+                                {
+                                    duration == 1 ? " час" : duration >= 2 || duration <=4 ? " часа" : " часов"
+                                }
+                            </div>
                         </div>
                         <div className="kyrs-card-text_block">
                             <div>Стоимость:</div>
@@ -179,7 +191,7 @@ export default function KyrsCardInside({
                         <input required type={'text'} placeholder="Введите ваш телефон" />
                         <div>Откуда вы узнали о нашей школе?</div>
                         <select required>
-                            <option selected value="" disabled>
+                            <option  value="" disabled>
                                 Нажмите и выбеите из списка
                             </option>
                             <option value="Самостоятельно - интернет, сайты">

@@ -46,7 +46,7 @@ export default function HeaderKyrsTop() {
                             Откуда вы узнали о нашей школе?
                         </div>
                         <select required>
-                            <option selected value="" disabled>Нажмите и выбеите из списка</option>
+                            <option  value="" disabled>Нажмите и выбеите из списка</option>
                             <option value="Самостоятельно - интернет, сайты">Самостоятельно - интернет, сайты</option>
                             <option value="Instagram">Instagram</option>
                             <option value="Самостоятельно - интернет, сайты">Самостоятельно - интернет, сайты</option>

@@ -1,223 +1,291 @@
 import React from 'react'
-import Slider from 'react-slick'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import Link from "next/link"
+import { db } from '../../../config/firebase'
+import KyrsQuizCard from './KyrsQuizCard'
+
 
 
 export default function Quiz() {
-    const settings = {
-        dots: false,
-        infinite: false,
-        swipe: false,
-        speed: 500,
-        slidesToShow: 1,
-        centerPadding: "300px",
-        centerMode: true,
-        responsive: [
-            {
-                breakpoint: 1300,
-                settings: {
-                    centerPadding: "140px"
-                }
+    const [active, setActive] = useState(0)
+    const [directionCardList, setDirectionCardList] = useState([])
+    const [child, setChild] = useState()
+    const [vyz, setVyz] = useState()
+    const [ready, setReady] = useState()
+    const [fashion, SetFashion] = useState()
+    const [academy, setAcademy] = useState()
+    const [digital, setDigital] = useState()
 
-            },
-            {
-                breakpoint: 960,
-                settings: {
-                    centerPadding: "0px"
-                }
-            }
-        ]
+    const handleChange = (name) => {
+        const quizBlock = document.getElementsByClassName("quiz_block")
+        quizBlock[active]?.classList.remove("active")
+        setActive(active + 1)
+        quizBlock[active + 1].classList.add("active")
+        const vyzData = document.getElementsByName(name)
+        vyzData.forEach((el) => el.checked ? setVyz(Number(el.dataset.vyz)) : "")
+        const childData = document.getElementsByName(name)
+        childData.forEach((el) => el.checked ? setChild(Number(el.dataset.child)) : "")
+        const readyData = document.getElementsByName(name)
+        readyData.forEach((el) => el.checked ? setReady(Number(el.dataset.ready)) : "")
+        const fashionData = document.getElementsByName(name)
+        fashionData.forEach((el) => el.checked ? SetFashion(Number(el.dataset.fashion)) : "")
+        const academyData = document.getElementsByName(name)
+        academyData.forEach((el) => el.checked ? setAcademy(Number(el.dataset.academy)) : "")
+        const digitalData = document.getElementsByName(name)
+        digitalData.forEach((el) => el.checked ? setDigital(Number(el.dataset.digital)) : "")
     }
+
+    useEffect(() => {
+        db.collection("directionCardList")
+            .get()
+            .then((snapshot) => {
+                const direction = []
+                snapshot.forEach((doc) => {
+                    direction.push({ ...doc.data(), id: doc.id })
+                })
+                setDirectionCardList(direction)
+            })
+    }, [])
+
     return (
-        <Slider className='quiz' {...settings}>
-            <div id="quiz" className='quiz_block'>
-                <div className='quiz_title'>ТОЛЬКО НАЧИНАЕТЕ СВОЙ ПУТЬ В ИНДУСТРИИ?</div>
-                <div className='quiz_des'>
-                    Пройдите квиз и узнайте, какая профессия
-                    подходит вам!
-                </div>
-                <video width="327" height="292" preload="auto" autoPlay="autoplay" muted={true}> <source type="video/mp4" src="https://animationschool.ru/wp-content/themes/as_underscores_theme/video/quiz_circle.mp4" /></video>
-                <div className='btn-wrapper '>
-                    <button className='btn quiz-btn'>
-                        НАЧАТЬ
-                    </button>
-                </div>
-            </div>
-            <div className='quiz_block'>
-                <div className='quiz_title'>ВОПРОС №1</div>
-                <div className='quiz_des'>
-                    Что вы любите больше:
-                    мультфильмы или видео-игры?
-                </div>
-                <div className='label_wrapper'>
-                    <label>
-                        <div>Определенно мультфильмы</div>
-                        <input defaultChecked name='radio1' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        <div>Определенно мультфильмы</div>
-                        <input name='radio1' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        <div>Определенно мультфильмы</div>
-                        <input name='radio1' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                </div>
-                <div className='btn-wrapper '>
-                    <button className='btn quiz-btn'>
-                        ДАЛЕЕЕ
-                    </button>
-                </div>
-            </div>
-            <div className='quiz_block'>
-                <div className='quiz_title'>ВОПРОС №2</div>
-                <div className='quiz_des'>
-                    Что вы любите больше:
-                    мультфильмы или видео-игры?
-                </div>
-                <div className='label_wrapper'>
-                    <label>
-                        Определенно мультфильмы
-                        <input defaultChecked name='radio2' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        Определенно мультфильмы
-                        <input name='radio2' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        Определенно мультфильмы
-                        <input name='radio2' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                </div>
-                <div className='btn-wrapper '>
-                    <button className='btn quiz-btn'>
-                        ДАЛЕЕЕ
-                    </button>
-                </div>
-            </div>
-            <div className='quiz_block'>
-                <div className='quiz_title'>ВОПРОС №3</div>
-                <div className='quiz_des'>
-                    Что вы любите больше:
-                    мультфильмы или видео-игры?
-                </div>
-                <div className='label_wrapper'>
-                    <label>
-                        Определенно мультфильмы
-                        <input defaultChecked name='radio3' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        Определенно мультфильмы
-                        <input name='radio3' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        Определенно мультфильмы
-                        <input name='radio3' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                </div>
-                <div className='btn-wrapper '>
-                    <button className='btn quiz-btn'>
-                        ДАЛЕЕЕ
-                    </button>
-                </div>
-            </div>
-            <div className='quiz_block'>
-                <div className='quiz_title'>ВОПРОС №4</div>
-                <div className='quiz_des'>
-                    Что вы любите больше:
-                    мультфильмы или видео-игры?
-                </div>
-                <div className='label_wrapper'>
-                    <label>
-                        Определенно мультфильмы
-                        <input defaultChecked name='radio4' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        Определенно мультфильмы
-                        <input name='radio4' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        Определенно мультфильмы
-                        <input name='radio4' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                </div>
-                <div className='btn-wrapper '>
-                    <button className='btn quiz-btn'>
-                        ДАЛЕЕЕ
-                    </button>
-                </div>
-            </div>
-            <div className='quiz_block'>
-                <div className='quiz_title'>ВОПРОС №5</div>
-                <div className='quiz_des'>
-                    Что вы любите больше:
-                    мультфильмы или видео-игры?
-                </div>
-                <div className='label_wrapper'>
-                    <label>
-                        Определенно мультфильмы
-                        <input defaultChecked name='radio5' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        Определенно мультфильмы
-                        <input name='radio5' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                    <label>
-                        Определенно мультфильмы
-                        <input name='radio5' type={"radio"} />
-                        <span className='checkmark'></span>
-                    </label>
-                </div>
-                <div className='btn-wrapper '>
-                    <button className='btn quiz-btn'>
-                        ДАЛЕЕЕ
-                    </button>
-                </div>
-            </div>
-            <div className='quiz_block'>
-                <div className='quiz_title'>ВОЗМОЖНО ВАС ПОДОЙДЕТ</div>
-                <div className='quiz_card'>
-                    <Image width={320} height={350} src="/card.jpg" alt="card" />
-                    <div className='quiz_card-info'>
-                        <div className='quiz_card-title'>
-                            3D аниматор в мультфильмах
-                        </div>
-                        <div className='quiz_card-des'>
-                            Изучаем 3D-анимацию с нуля и до стажировки на студии
-                        </div>
-                        <div className='quiz_card-teachers'>
-                            <div className='quiz_card-name'>Преподаватели:</div>
-                            Алексей Медведев, Владислав Калинин, Арсений Тургулайнен,
-                            Ксения Куценко, Владимир Загоруйко, Василиса Тузова,
-                            Глеб Ясиницкий, Василий Бурьяк, Владислав Храпко
-                        </div>
-                        <div className='quiz_card-start'>
-                            <div className='quiz_card-name'>Старт первого курса:</div>
-                            4 июня 2022
-                        </div>
-                        <div className='quiz_card-place'>
-                            <div className='quiz_card-name'>Свободные места:</div>
-                            Есть
-                        </div>
+        <div className='quiz_wrapper'>
+            <div className='quiz' >
+                <div id="quiz" className='quiz_block active'>
+                    <div className='quiz_title'>ТОЛЬКО НАЧИНАЕТЕ СВОЙ ПУТЬ В ИНДУСТРИИ?</div>
+                    <div className='quiz_des'>
+                        Пройдите квиз и узнайте, какая профессия
+                        подходит вам!
+                    </div>
+                    <video width="327" height="292" preload="auto" autoPlay="autoplay" muted={true}> <source type="video/mp4" src="https://animationschool.ru/wp-content/themes/as_underscores_theme/video/quiz_circle.mp4" /></video>
+                    <div className='btn-wrapper '>
+                        <button onClick={handleChange} className='btn quiz-btn'>
+                            НАЧАТЬ
+                        </button>
                     </div>
                 </div>
+                <div className='quiz_block'>
+                    <div className='quiz_title'>ВОПРОС №1</div>
+                    <div className='quiz_des'>
+                        Сколько вам лет?
+                    </div>
+                    <div className='label_wrapper'>
+                        <label>
+                            <div>5 - 11 лет</div>
+                            <input
+                                data-child={100} defaultChecked name='radio1' type={"radio"} />
+                            <span className='checkmark'></span>
+                        </label>
+                        <label>
+                            <div>Старше 12</div>
+                            <input
+                                data-child={0} name='radio1' type={"radio"} />
+                            <span className='checkmark'></span>
+                        </label>
+
+                    </div>
+                    <div className='btn-wrapper '>
+                        <button onClick={() => handleChange("radio1")} className='btn quiz-btn'>
+                            ДАЛЕЕЕ
+                        </button>
+                    </div>
+                </div>
+                {
+                    child == 0 ? <div>
+                        <div className={'quiz_block ' + (child == 0 ? "active" : "")}>
+                            <div className='quiz_title'>ВОПРОС №2</div>
+                            <div className='quiz_des'>
+                                Поступаете ли вы в ВУЗ с творческим направлением?
+                            </div>
+                            <div className='label_wrapper'>
+                                <label>
+                                    Да
+                                    <input data-vyz={100} defaultChecked name='radio2' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+
+                                    Нет
+                                    <input data-vyz={0} name='radio2' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+                                    Затрудняюсь ответить
+                                    <input data-vyz={0} name='radio2' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                            </div>
+                            <div className='btn-wrapper '>
+                                <button onClick={() => handleChange("radio2")} className='btn quiz-btn'>
+                                    ДАЛЕЕЕ
+                                </button>
+                            </div>
+                        </div>
+
+                    </div> : <div className='quiz_block '>
+                        <div className='quiz_title'>ВОЗМОЖНО ВАС ПОДОЙДЕТ</div>
+                        {
+                            directionCardList.map((el) => (
+                                child == el.dataChild ? <Link key={el.id} href={"/kyrsy/" + el.id}>
+                                    <div className="kyrs-card quiz-kyrs_card">
+                                        <Image
+                                            unoptimized
+                                            src={el.url}
+                                            alt={el.title}
+                                            width={350}
+                                            height={365}
+                                        />
+                                        <div className='kyrs-card_text_wrapper'>
+                                            <div className="kyrs-card_text">
+                                                <div className="kyrs-card_title">
+                                                    {el.title}
+                                                </div>
+                                                <div className='kyrs-card-text_des'>
+                                                    {el.des}
+                                                </div>
+                                                <div className="kyrs-card-text_block">
+                                                    <div>{el.teachers?.length > 1 ? "Преподователи:" : "Преподователь"}</div>
+                                                    <div>
+                                                        {el.teachers?.map((item, index) => el.teachers?.length > 1 ? item + (index === el.teachers?.length - 1 ? "" : ", ") : item)}
+                                                    </div>
+                                                </div>
+                                                {
+                                                    el.start ?
+                                                        <div className="kyrs-card-text_block">
+                                                            <div>Старт курса:</div>
+                                                            <div>
+                                                                {new Date(el.start?.seconds * 1000).toLocaleDateString()}
+                                                            </div>
+                                                        </div> :
+                                                        ""
+                                                }
+                                                <div className="kyrs-card-text_block">
+                                                    <div>Длительность:</div>
+                                                    <div>
+                                                        {
+                                                            el.duration
+                                                        }
+                                                        {
+                                                            el.duration == 1 ? " час" : el.duration == 2 ? " часа" : " часов"
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className="kyrs-card-text_block">
+                                                    <div>Стоимость:</div>
+                                                    <div>
+                                                        {el.price}
+                                                    </div>
+                                                </div>
+                                                <div className="kyrs-card-text_block">
+                                                    <div>Свободные места:</div>
+                                                    <div>
+                                                        {el.freePlace}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link> : ""
+                            ))
+                        }
+
+                    </div>
+                }
+                {
+                    vyz == 0 ? <div>
+                        <div className={'quiz_block ' + (vyz == 0 ? "active" : "")}>
+                            <div className='quiz_title'>ВОПРОС №3</div>
+                            <div className='quiz_des'>
+                                Чему вы хотите научиться?
+                            </div>
+                            <div className='label_wrapper'>
+                                <label>
+                                    Рисовать портреты, пейзажи, компазиции, натюрморты
+                                    <input data-academy={100} defaultChecked name='radio3' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+                                    Рисовать модные илюстрации, наряды на моделях
+                                    <input data-fashion={100} name='radio3' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+                                    Рисовать на графическом планшете, XXXXXXXX, Рисовать в формате 2D
+                                    <input data-digital={100} name='radio3' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+                                    Рисовать архитектуру или научиться чертить
+                                    <input data-academy={100} name='radio3' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                            </div>
+                            <div className='btn-wrapper '>
+                                <button onClick={() => handleChange("radio3")} className='btn quiz-btn'>
+                                    ДАЛЕЕЕ
+                                </button>
+                            </div>
+                        </div>
+
+                    </div> : <div>
+                        <div className={'quiz_block ' + (vyz == 100 ? "active" : "")}>
+                            <div className='quiz_title'>ВОПРОС №3</div>
+                            <div className='quiz_des'>
+                                Какую профессия вы выбрали?
+                            </div>
+                            <div className='label_wrapper'>
+                                <label>
+                                    Художник
+                                    <input data-ready={100} defaultChecked name='radio3_2' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+                                    Архитектор или Дизайнер интерьера
+                                    <input data-ready={100} name='radio3_2' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+                                    Дизайнер одежды
+                                    <input data-fashion={100} name='radio3_2' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+                                    Графический дизайнер
+                                    <input data-digital={100} name='radio3_2' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                                <label>
+                                    Другое
+                                    <input data-ready={100} name='radio3_2' type={"radio"} />
+                                    <span className='checkmark'></span>
+                                </label>
+                            </div>
+                            <div className='btn-wrapper '>
+                                <button onClick={() => handleChange("radio3_2")} className='btn quiz-btn'>
+                                    ДАЛЕЕЕ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div className='quiz_block'>
+                    <div className='quiz_title'>ВОЗМОЖНО ВАМ ПОДОЙДЕТ</div>
+                    {
+                        directionCardList.map((el) => (
+                            ready == el.dataReady ?
+                                <KyrsQuizCard key={el.id} {...el} /> :
+                                fashion == el.dataFashion ?
+                                    <KyrsQuizCard key={el.id}  {...el} /> :
+                                    academy == el.dataAcademy ?
+                                        <KyrsQuizCard key={el.id} {...el} /> :
+                                        digital == el.dataDigital ?
+                                            <KyrsQuizCard key={el.id} {...el} /> : ""
+                        ))
+                    }
+                </div>
+
+
             </div>
-
-
-        </Slider>
+        </div>
     )
 }

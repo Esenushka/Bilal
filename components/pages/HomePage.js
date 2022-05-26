@@ -49,11 +49,11 @@ export default function HomePage() {
             <MainSlider directionCardList={directionCardList} />
             <div className='direction-title'>Напровления обучения</div>
             <DirectionSlider />
-            <Link href={"/kyrsy "}>
-                <div className='btn-wrapper'>
+            <div className='btn-wrapper'>
+                <Link href={"/kyrsy "}>
                     <button className='btn'>Все курсы</button>
-                </div>
-            </Link>
+                </Link>
+            </div>
             <Quiz />
             <Lessons />
             <div className='container'>

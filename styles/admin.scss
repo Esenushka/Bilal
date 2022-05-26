@@ -167,10 +167,9 @@ $color: #66097b;
   .container {
     > div:nth-of-type(1) {
       display: flex;
-      justify-content: left;
-      width: 80%;
+      justify-content: center;
+      width: 75%;
       input {
-        width: 40%;
         border-bottom: none;
         border-radius: 20px 20px 0 0;
         margin-bottom: 0;
@@ -196,7 +195,7 @@ $color: #66097b;
   .kyrs-card_main-text {
     padding: 15px 15px;
   }
-  textarea {
+  textarea {  
     resize: none;
     outline: none;
     width: 100%;
@@ -221,11 +220,13 @@ $color: #66097b;
 .video-input {
   display: flex;
   justify-content: center;
+  width: 100%;
   div {
-    width: 80%;
+    display: flex;
+    align-items: center;
   }
   input {
-    width: 40%;
+    width: 100%;
     border-bottom: none;
     border-radius: 20px 20px 0 0;
     margin-bottom: 0;
@@ -234,8 +235,8 @@ $color: #66097b;
 }
 .edit-video {
   video {
-    width: 80%;
-    border-radius: 0 30px 30px 30px;
+    width: fit-content;
+    border-radius: 30px;
   }
 }
 .kyrs-edit-card {
@@ -342,6 +343,10 @@ $color: #66097b;
     }
     
   }
+}
+.quiz-kyrs_card{
+  width: fit-content;
+  margin: 25px auto;
 }
 @media (max-width: 960px) {
   .edit-info_input {

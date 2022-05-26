@@ -55,18 +55,22 @@ $color: #66097b;
   grid-gap: 25px;
 }
 .kyrs-card {
+background: white;
   height: fit-content;
   border-bottom: 4px solid #e2e2e2;
   border-right: 4px solid #e2e2e2;
   border-radius: 30px;
   overflow: hidden;
   position: relative;
-  width: fit-content;
+  width: 28%;
   cursor: pointer;
   margin-bottom: 30px;
   img {
     object-fit: cover;
     overflow: hidden;
+  }
+  span{
+    width: 100% !important;
   }
 }
 .kyrs-card_text_wrapper {
@@ -108,14 +112,16 @@ $color: #66097b;
   text-align: center;
 }
 .kyrs-card_main-block {
+  margin: 0 auto;
+  width: fit-content;
   display: flex;
   border-radius: 30px;
   overflow: hidden;
   border-bottom: 4px solid #e2e2e2;
   border-right: 4px solid #e2e2e2;
   margin-bottom: 50px;
-  span {
-    width: 80% !important;
+  > span {
+    width: 100% !important;
   }
   img {
     height: 100% !important;
@@ -124,7 +130,7 @@ $color: #66097b;
 }
 .kyrs-card_main-text {
   background: white;
-  padding: 30px 25px;
+  padding: 25px 30px 0 25px;
   .kyrs-card-text_title {
     font-size: 27px;
     font-weight: 700;
@@ -437,7 +443,7 @@ $color: #66097b;
   }
   .video-invite {
     video {
-      height: 380px;
+      height: fit-content;
       width: 100%;
     }
   }
@@ -456,8 +462,19 @@ $color: #66097b;
   .comment-inputs_wrapper form {
     width: 65%;
   }
+  .kyrs-card{
+    width: 40%;
+  }
+}
+@media(max-width: 768px){
+  .kyrs-card{
+    width: 70%;
+  }
 }
 @media (max-width: 512px) {
+  .kyrs-card{
+    width: 90%;
+  }
   .comment{
     width: 95%;
   }
@@ -473,7 +490,12 @@ $color: #66097b;
   }
   .video-invite {
     video {
-      height: 300px;
+      height: fit-content;
     }
+  }
+}
+@media(max-width: 420px){
+  .kyrs-card{
+    width: 100%;
   }
 }

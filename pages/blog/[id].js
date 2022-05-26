@@ -1,4 +1,3 @@
-import Footer from '../../components/common/Footer/Footer';
 import BlogCardInside from '../../components/common/BlogCard/BlogCardInside.js';
 import { useState, useEffect } from 'react';
 import { blogArticlesList } from '../../components/constants/blogArticlesList.js';
@@ -16,9 +15,9 @@ export default function KyrsCard() {
     <div>
       <Head>
         <title>{data.title}</title>
+        <link rel='icon' href='/b2.png'/>
       </Head>
       <BlogCardInside {...data} />
-      <Footer />
     </div>
   );
 }

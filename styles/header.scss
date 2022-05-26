@@ -5,6 +5,7 @@ $color: #66097b;
   height: 15vh;
   align-items: center;
   justify-content: space-evenly;
+  margin-bottom: 30px;
 }
 .logo{
   img{
@@ -28,7 +29,7 @@ $color: #66097b;
   color: $color;
 }
 .navbar a:hover {
-  color: black;
+  color: $color;
 }
 .header_phone-number {
   font-size: 20px;

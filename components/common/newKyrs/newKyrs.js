@@ -53,7 +53,8 @@ export default function NewKyrs() {
     const data = {
       ...newData,
       teachers: teachers,
-      urlDirection: urlDirection
+      urlDirection: urlDirection,
+      dataChild: 0
     }
     setReload(true)
     body.style.overflowY = "hidden"
@@ -61,11 +62,11 @@ export default function NewKyrs() {
       getUrl(fileData.name).then((url) => {
         data = { ...data, url: url }
         storageRef.ref("items/" + videoFileData.name).put(videoFileData).then(() => {
-          getUrl(videoFileData.name).then((url) => {
-            data = { ...data, videoInvite: url }
+          getUrl(videoFileData.name).then((secondUrl) => {
+            data = { ...data, videoInvite: secondUrl }
             storageRef.ref("items/" + fileSecondData.name).put(fileSecondData).then(() => {
-              getUrl(fileSecondData.name).then((url) => {
-                db.collection("directionCardList").add({ ...data, secondImgUrl: url })
+              getUrl(fileSecondData.name).then((thirdUrl) => {
+                db.collection("directionCardList").add({ ...data, secondImgUrl: thirdUrl })
                   .then(() => {
                     body.style.overflowY = "visible"
                     setReload(false)
@@ -94,15 +95,15 @@ export default function NewKyrs() {
 
 
   const handleChange = (target, setFilesData, setFiles) => {
-   if(target.files.length){
-     const reader = new FileReader();
-     setFilesData(target.files[0]);
-     reader.readAsDataURL(target.files[0]);
-     reader.onload = (e) => {
-       const newUrl = e.target.result;
-       setFiles(newUrl);
-     };
-   }
+    if (target.files.length) {
+      const reader = new FileReader();
+      setFilesData(target.files[0]);
+      reader.readAsDataURL(target.files[0]);
+      reader.onload = (e) => {
+        const newUrl = e.target.result;
+        setFiles(newUrl);
+      };
+    }
 
   };
 
@@ -228,8 +229,7 @@ export default function NewKyrs() {
             <div className="kyrs-card-text_block">
               <div>Регистрация открыта до:</div>
               <input type={"date"}
-                required
-                onChange={(e) => { setNewData({ ...newData, register: firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) }) }}
+                onChange={(e) => { setNewData({ ...newData, register: e.target.value ? firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) : "" }) }}
 
               />
 
@@ -238,8 +238,7 @@ export default function NewKyrs() {
               <div>Старт курса:</div>
               <div>
                 <input type={"date"}
-                  required
-                  onChange={(e) => { setNewData({ ...newData, start: firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) }) }}
+                  onChange={(e) => { setNewData({ ...newData, start: e.target.value ? firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) : "" }) }}
 
 
                 />
@@ -248,7 +247,7 @@ export default function NewKyrs() {
             <div className="kyrs-card-text_block">
               <div>Длительность:</div>
               <div>
-                <input type={"text"}
+                <input type={"number"}
                   required
                   onChange={(e) => { setNewData({ ...newData, duration: e.target.value }) }}
                 />
@@ -266,7 +265,7 @@ export default function NewKyrs() {
             <div className="kyrs-card-text_block">
               <div>Свободные места:</div>
               <div>
-                <input type={"number"}
+                <input type={"text"}
                   required
                   onChange={(e) => { setNewData({ ...newData, freePlace: e.target.value }) }}
                 />
@@ -280,7 +279,6 @@ export default function NewKyrs() {
             <input
               onChange={({ target }) => handleChange(target, setVideoFileData, setVideoFile)}
               type={"file"}
-              accept="video/mp4"
               required
             />
           </div>

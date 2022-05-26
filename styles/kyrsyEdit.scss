@@ -12,6 +12,15 @@
     transform: scale(1);
   }
 }
+.edit-card{
+  border: none;
+  .kyrs-card_main-text{
+    border-radius: 0 30px 30px 30px;
+  }
+  > span{
+    border-radius: 0 0 0 30px;
+  }
+}
 
 .added{
     span {
@@ -20,7 +29,6 @@
 }
 
 .kyrs_edit {
-  
   position: relative;
   margin-top: 50px;
   margin-left: 80px;

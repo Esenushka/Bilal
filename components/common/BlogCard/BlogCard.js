@@ -3,17 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export default function BlogCard({ imgUrl, title, des, id }) {
+export default function BlogCard({ MainImg, title, FirstText, id }) {
   const router = useRouter();
 
   return (
-    <Link href={`/post/${id}`}>
+    <Link href={router.pathname === "/admin/blog" ? `/admin/blog/${id}` : `/blog/${id}`}>
       <a>
         <div className="blog-card">
-          <Image unoptimized width={550} height={220} src={imgUrl} alt={title} />
-          <div className="blog-text">
+          <Image unoptimized width={550} height={220} src={MainImg || "/file-image.png"} alt={title} />
+          <div className="blog_text">
             <div>{title}</div>
-            <div>{des}</div>
+            <div>{FirstText}</div>
           </div>
         </div>
       </a>

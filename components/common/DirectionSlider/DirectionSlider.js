@@ -27,15 +27,23 @@ export default function DirectionSlider() {
         autoplay: true,
         autoplaySpeed: 5000,
         pauseOnHover: true,
-        slidesToShow: 4,
+        slidesToShow: 3,
         centerPadding: "90px",
         centerMode: true,
         responsive: [
             {
-                breakpoint: 1200,
+                breakpoint: 1300,
                 settings: {
                     slidesToShow: 3,
-                    centerPadding: "70px"
+                    centerPadding: "20px"
+                }
+
+            },
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 2,
+                    centerPadding: "100px"
                 }
 
             },
@@ -43,7 +51,7 @@ export default function DirectionSlider() {
                 breakpoint: 900,
                 settings: {
                     slidesToShow: 2,
-                    centerPadding: "100px"
+                    centerPadding: "50px"
                 }
             }
         ]
@@ -72,7 +80,7 @@ export default function DirectionSlider() {
             }
             <div className='response_direction container'>
                 {
-                    directionCardList.map((el) => <Link key={el.id} href={"/kyrsy" + "$" + el.urlDirection}>
+                    directionCardList.map((el) => <Link key={el.id} href={"/kyrsy" + "?" + el.urlDirection}>
                         <a>
                             <div>{el.direction}</div>
                             <div></div>

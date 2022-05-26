@@ -1,4 +1,3 @@
-import Footer from '../../components/common/Footer/Footer'
 import KyrsCardInside from '../../components/common/KyrsCard/KyrsCardInside'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -27,9 +26,9 @@ export default function KyrsCard() {
         <div>
             <Head>
                 <title>{directionCardList.title}</title>
+                <link rel='icon' href='/b2.png' />
             </Head>
             <KyrsCardInside {...directionCardList} />
-            <Footer />
         </div>
     )
 }

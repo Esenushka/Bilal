@@ -4,7 +4,6 @@ import { db, storageRef } from '../../../config/firebase';
 import { useRouter } from 'next/router';
 import Link from "next/link"
 import firebase from 'firebase/compat/app';
-import Preloader from '../Preloader/Preloader';
 
 export default function KyrsEditCard() {
     const [comments, setComments] = useState([]);
@@ -45,6 +44,7 @@ export default function KyrsEditCard() {
         db.collection("directionCardList")
             .get()
             .then((snapshot) => {
+
                 const directionCard = []
                 snapshot.forEach((doc) => {
                     directionCard.push({ ...doc.data(), id: doc.id })
@@ -94,13 +94,20 @@ export default function KyrsEditCard() {
         }
     }
 
+
     const submit = (e) => {
         e.preventDefault()
         const data = {
             ...newData,
             teachers: teachers,
-            urlDirectionL: urlDirection
+            urlDirection: urlDirection,
+            register: newData.register ? newData.register : "",
+            start: newData.start ? newData.start : "",
+            dataChild: 0,
+          
+
         }
+
         if (newData || urlDirection === true) {
             for (let key in data) {
                 if (data[key]) {
@@ -206,7 +213,7 @@ export default function KyrsEditCard() {
         answer = answer.replace(/^\-|-$/g, '');
         setUrlDirection(answer)
     }
-    
+
     return (
         <>
             <form onSubmit={submit} className='kyrs-edit-card'>
@@ -295,20 +302,21 @@ export default function KyrsEditCard() {
                                 </div>
                             </div>
                             <div className="kyrs-card-text_block">
-                                <div>Регистрация открыта до:</div>
+
+                                <div> Регистрация открыта до:</div>
                                 <input type={"date"}
-                                    required
-                                    onChange={(e) => { setNewData({ ...newData, register: firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) }) }}
+                                    onChange={(e) => { setNewData({ ...newData, register: (e.target.value ? firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) : "") }) }}
                                     defaultValue={registerDate}
                                 />
+
+
 
                             </div>
                             <div className="kyrs-card-text_block">
                                 <div>Старт курса:</div>
                                 <div>
                                     <input type={"date"}
-                                        required
-                                        onChange={(e) => { setNewData({ ...newData, start: firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) }) }}
+                                        onChange={(e) => { setNewData({ ...newData, start: (e.target.value ? firebase.firestore.Timestamp.fromDate(new Date(e.target.value)) : "") }) }}
                                         defaultValue={startDate}
 
                                     />
@@ -317,7 +325,7 @@ export default function KyrsEditCard() {
                             <div className="kyrs-card-text_block">
                                 <div>Длительность:</div>
                                 <div>
-                                    <input type={"text"}
+                                    <input type={"number"}
                                         required
                                         onChange={(e) => { setNewData({ ...newData, duration: e.target.value }) }}
                                         defaultValue={duration} />
@@ -335,7 +343,7 @@ export default function KyrsEditCard() {
                             <div className="kyrs-card-text_block">
                                 <div>Свободные места:</div>
                                 <div>
-                                    <input type={"number"}
+                                    <input type={"text"}
                                         required
                                         onChange={(e) => { setNewData({ ...newData, freePlace: e.target.value }) }}
                                         defaultValue={freePlace} />
@@ -349,7 +357,6 @@ export default function KyrsEditCard() {
                             <input
                                 onChange={({ target }) => handleChange(target, setVideoFileData, setVideoFile)}
                                 type={"file"}
-                                accept="video/mp4"
                                 defaultValue={videoInvite} />
                         </div>
                     </div>

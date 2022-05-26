@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { LessonsDesList } from '../../constants/LessonsDesList';
 import StudentsSlider from '../StudentsSlider/StudentsSlider.js';
 import { db } from '../../../config/firebase';
@@ -26,7 +25,7 @@ export default function Lessons() {
         snapshot.forEach((doc) => {
           direction.push({ ...doc.data(), id: doc.id })
         })
-        setDirectionCardList(direction[0])
+        setDirectionCardList(direction[direction.length - 1])
       })
   }, []);
 

@@ -37,10 +37,9 @@ $color: #66097b;
 }
 
 .main_slider-block {
-  margin-top: 30px;
-  height: 600px;
+  height: 400px;
   overflow: hidden;
-  width: 80%;
+  width: 70%;
   text-transform: uppercase;
   position: relative;
   color: white;
@@ -61,22 +60,22 @@ $color: #66097b;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    grid-gap: 40px;
+    grid-gap: 20px;
     width: 100%;
     position: absolute;
     left: 15px;
-    bottom: 70px;
+    bottom: 45px;
     text-align: center;
   }
 }
 .main_slider-block_name {
   width: 90%;
-  font-size: 40px;
+  font-size: 30px;
   text-shadow: 4px 4px 0 rgb(0 0 0 / 24%);
 }
 .main_slider-block_des {
   width: 90%;
-  font-size: 25px;
+  font-size: 20px;
   text-shadow: 4px 4px 0 rgb(0 0 0 / 24%);
 }
 .main_slider-block a {
@@ -98,33 +97,35 @@ $color: #66097b;
   border-left: 10px solid white;
 }
 .direction_card {
-  width: 255px;
-  height: 100%;
+  width: 300px;
+  height: 380px;
   border-radius: 30px;
   box-shadow: 4px 4px 0 #e2e2e2;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: white;
-  cursor: pointer;
   transition: 0.3s;
+  text-align: center;
 }
 .direction_card > span {
   border-radius: 30px 30px 0 0;
-  height: 80% !important;
+  height: 85% !important;
   width: 100% !important;
 }
 .direction_card > span > img {
-  object-fit: cover;
+  transform: translate(0px, 100px) scale(2);
+  object-fit: contain;
   transition: all 0.3s ease-in-out;
 }
 .direction_card:hover {
   box-shadow: 8px 8px 0 #e2e2e2;
   img {
-    transform: scale(1.07);
+    transform: translate(0px, 100px) scale(1.8);
   }
 }
-.direction_card > div {
+.direction_card > a {
+  cursor: pointer;
   color: black;
   position: relative;
   width: fit-content;
@@ -136,7 +137,7 @@ $color: #66097b;
   font-weight: 600;
   padding: 20px 0;
 }
-.direction_card > div > div:nth-of-type(2) {
+.direction_card > a > div:nth-of-type(2) {
   border: 7px solid transparent;
   border-left: 10px solid black;
 }
@@ -201,21 +202,38 @@ $color: #66097b;
   box-shadow: inset 4px 4px 0 rgb(0 0 0 / 24%);
 }
 
+.quiz_wrapper {
+  height: 850px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
 .quiz {
+  position: absolute;
   display: flex;
+  overflow: hidden;
+  width: 100%;
+  justify-content: center;
 }
 .quiz_block {
+  width: fit-content;
   background: white;
+  display: none;
   padding: 25px !important;
-  width: 700px !important;
-  height: 650px;
+  height: fit-content;
   border-radius: 30px;
   box-shadow: 4px 4px 0 #e2e2e2;
-  margin: 0 50px;
   transition: all 0.3s ease-in-out;
   text-align: center;
   margin-bottom: 80px;
   position: relative;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+.quiz_block.active {
+  opacity: 1;
+
+  display: block;
 }
 .quiz_title {
   width: 100% !important;
@@ -224,7 +242,7 @@ $color: #66097b;
   text-shadow: 4px 4px 0 #e2e2e2;
 }
 .quiz_des {
-  margin: 15px 0 25px 0;
+  margin: 15px auto 25px auto;
   font-size: 25px;
 }
 .quiz .slick-slide {
@@ -245,6 +263,7 @@ $color: #66097b;
   display: none !important;
 }
 .quiz .slick-next {
+  z-index: -1 !important;
   background: none !important;
   left: 41%;
   top: 77% !important;
@@ -259,8 +278,8 @@ $color: #66097b;
 .label_wrapper label {
   position: relative;
   border: 1px solid black;
-  width: 90%;
-  height: 70px;
+  padding: 25px 200px;
+  height: fit-content;
   border-radius: 50px;
   font-size: 17px;
   cursor: pointer;
@@ -268,6 +287,10 @@ $color: #66097b;
   align-items: center;
   justify-content: center;
   grid-gap: 15px;
+  span {
+    position: absolute;
+    right: 25px;
+  }
 }
 .label_wrapper {
   display: flex;
@@ -283,6 +306,7 @@ $color: #66097b;
   z-index: -1;
   top: 0;
   left: -1%;
+  opacity: 0;
 }
 .checkmark {
   width: 48px;
@@ -336,6 +360,13 @@ $color: #66097b;
   .quiz_card-info {
     bottom: 0px;
   }
+}
+
+.quiz_block.active .kyrs-card {
+  width: fit-content;
+  margin: 25px;
+  display: inline-block;
+  text-align: left;
 }
 
 .quiz_card-info {
@@ -610,6 +641,10 @@ $color: #66097b;
   }
 }
 @media (max-width: 960px) {
+  .fade_left,
+  .fade_right {
+    display: none !important;
+  }
   .students-work {
     height: 420px;
   }
@@ -630,8 +665,8 @@ $color: #66097b;
     width: 250px;
   }
 }
-@media (max-width: 769px) {
-  .students-work{
+@media (max-width: 768px) {
+  .students-work {
     height: fit-content;
   }
   .direction_cards {
@@ -649,13 +684,21 @@ $color: #66097b;
   }
 }
 @media (max-width: 700px) {
-  .students-work{
+  .quiz_block {
+    border-radius: 0;
+  }
+  .label_wrapper {
+    label {
+      padding: 25px 100px;
+    }
+  }
+  .students-work {
     width: 70% !important;
-    span{
+    span {
       width: 100% !important;
     }
-    img{
-      object-fit: cover ;
+    img {
+      object-fit: cover;
     }
   }
   .step-btn {
@@ -675,6 +718,17 @@ $color: #66097b;
   }
 }
 @media (max-width: 600px) {
+  .trainning_text {
+    > div {
+      width: fit-content;
+    }
+  }
+  .trainning_days {
+    > div {
+      margin-left: 15px;
+      width: fit-content;
+    }
+  }
   .main_slider-block {
     width: 75%;
   }
@@ -695,6 +749,15 @@ $color: #66097b;
   }
 }
 @media (max-width: 512px) {
+  .label_wrapper {
+    label {
+      padding: 20px 80px;
+    }
+    span {
+      position: relative;
+    }
+  }
+
   .main_slider-block {
     width: 85%;
     > div {
@@ -732,12 +795,6 @@ $color: #66097b;
   .trainning_text > div {
     width: 100%;
   }
-  .label_wrapper label {
-    border-radius: 25px;
-    font-size: 14px;
-    height: 80px;
-    flex-direction: column-reverse;
-  }
   .checkmark {
     width: 36px;
     height: 36px;
@@ -763,7 +820,7 @@ $color: #66097b;
     font-size: 45px;
   }
   .main_slider-block_des {
-    font-size: 28px;
+    font-size: 25px;
   }
   .direction-title {
     font-size: 35px;
@@ -771,7 +828,7 @@ $color: #66097b;
 }
 @media (max-width: 440px) {
   .main_slider-block_name {
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 700;
   }
 }
