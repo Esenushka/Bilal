@@ -194,7 +194,7 @@ export default function KyrsCardInside({
                     <Image unoptimized
                         src="https://animationschool.ru/wp-content/themes/as_underscores_theme/images/sh5.png"
                         alt="leftFormImage" width={300} height={500} />
-                    <form action={'telegram.php'} submit={(e)=>{e.preventDefault()}} method="POST" >
+                    <form action={id + '?telegram.php'} method="POST" >
                         <div className="direction-title">ЗАПИСАТЬСЯ</div>
                         <input name='name' onChange={(e) => setName(e.target.value)} required type={'text'} placeholder="Введите ваше имя и фамлию" />
                         <input name='email' onChange={(e) => setEmail(e.target.value)} required type={'text'} placeholder="Введите ваш эл.адрес" />
