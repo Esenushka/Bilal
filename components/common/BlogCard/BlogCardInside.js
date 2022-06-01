@@ -46,7 +46,7 @@ export default function BlogCardInside() {
         <div className='post-content'>
           <div className='blog-date'>
             {
-              new Date(blog.date?.seconds * 1000).toLocaleDateString()
+              blog.date
             }
           </div>
           <div className='blog-text_wrapper'>

@@ -15,7 +15,8 @@
     "react-dom": "^18.1.0",
     "react-slick": "^0.29.0",
     "sass": "^1.51.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "twilio": "^3.77.1"
   },
   "devDependencies": {
     "eslint": "8.14.0",

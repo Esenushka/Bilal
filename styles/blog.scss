@@ -157,6 +157,7 @@ $color: #66097b;
   flex-direction: column;
   align-items: center;
   input {
+    width: 100%;
     outline: none;
     padding: 10px 15px;
     border-radius: 30px 30px 0 0;
@@ -167,7 +168,7 @@ $color: #66097b;
     max-height: 550px !important;
   }
   img {
-    object-fit: contain;
+    object-fit: cover;
   }
 }
 .blog-date {
@@ -260,6 +261,9 @@ $color: #66097b;
   }
 }
 @media(max-width: 512px){
+  .blog-conatiner{
+    padding: 0 !important;
+  }
   .blog-img_main{
     span{
       max-height: 230px;

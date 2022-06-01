@@ -622,6 +622,15 @@ $color: #66097b;
     margin-bottom: 40px;
   }
 }
+.main-video {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  video {
+    height: fit-content;
+    border-radius: 30px;
+  }
+}
 @media (max-width: 1400px) {
   .main_slider-block_name {
     width: 80%;
@@ -641,6 +650,13 @@ $color: #66097b;
   }
 }
 @media (max-width: 960px) {
+  .main-video {
+    margin-bottom: 50px;
+    video {
+      width: 100%;
+      border-radius: 15px;
+    }
+  }
   .fade_left,
   .fade_right {
     display: none !important;
@@ -718,6 +734,12 @@ $color: #66097b;
   }
 }
 @media (max-width: 600px) {
+  .main-video {
+    padding: 0 !important;
+    video {
+      border-radius: 0;
+    }
+  }
   .trainning_text {
     > div {
       width: fit-content;

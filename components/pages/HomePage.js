@@ -54,6 +54,16 @@ export default function HomePage() {
                     <button className='btn'>Все курсы</button>
                 </Link>
             </div>
+            <div className='main-video container'>
+                <video
+                    src='/mainVideo.mp4'
+                    controls
+                    poster='/poster.png'
+                    width={920}
+                    height={520}
+                >
+                </video>
+            </div>
             <Quiz />
             <Lessons />
             <div className='container'>

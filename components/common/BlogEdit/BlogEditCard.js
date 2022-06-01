@@ -61,7 +61,7 @@ export default function BlogEditCard() {
         e.preventDefault()
         const data = {
             ...newBlog,
-            date: firebase.firestore.TimeStamp.fromDate(new Date())
+            date: new Date().toLocaleDateString()
         }
         setActive(true)
         for (let key in data) {
@@ -149,7 +149,7 @@ export default function BlogEditCard() {
                         <input onChange={({ target }) => handleChange(target, setFileData, setFile)} type={"file"} />
                     </div>
                 </div>
-                <div className="container">
+                <div className="container blog-container">
                     <div className='post-content'>
                         <div className='blog-date'>
                             {

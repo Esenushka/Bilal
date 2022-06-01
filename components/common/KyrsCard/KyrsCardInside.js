@@ -24,6 +24,12 @@ export default function KyrsCardInside({
     const [commentName, setCommentName] = useState();
     const [comment, setComment] = useState();
     const [isLoading, setIsLoading] = useState(true)
+    const [where, setWhere] = useState("Самостоятельно - интернет, сайты")
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+
+
 
     const router = useRouter()
     const id = router.query?.id
@@ -35,7 +41,11 @@ export default function KyrsCardInside({
             des: comment
         })
     };
-    const submit = () => { };
+
+    const submit = (e) => {
+        e.preventDefault()
+        
+    };
 
     useEffect(() => {
         db.collection("directionCardList/" + id + "/comments")
@@ -75,19 +85,19 @@ export default function KyrsCardInside({
                                 {teachers?.map((el, index) => teachers?.length > 1 ? el + (index === teachers?.length - 1 ? "" : ", ") : el)}
                             </div>
                         </div>
-                       {
-                           register ? 
+                        {
+                            register ?
                                 <div className="kyrs-card-text_block">
                                     <div>Регистрация открыта до:</div>
                                     <div>{new Date(register?.seconds * 1000).toLocaleDateString()}</div>
                                 </div> : ""
-                       }
-                       {
+                        }
+                        {
                             start ? <div className="kyrs-card-text_block">
                                 <div>Старт курса:</div>
                                 <div>{new Date(start?.seconds * 1000).toLocaleDateString()}</div>
                             </div> : ""
-                       }
+                        }
                         <div className="kyrs-card-text_block">
                             <div>Длительность:</div>
                             <div>
@@ -95,7 +105,7 @@ export default function KyrsCardInside({
                                     duration
                                 }
                                 {
-                                    duration == 1 ? " час" : duration >= 2 || duration <=4 ? " часа" : " часов"
+                                    duration == 1 ? " час" : duration >= 2 || duration <= 4 ? " часа" : " часов"
                                 }
                             </div>
                         </div>
@@ -184,14 +194,14 @@ export default function KyrsCardInside({
                     <Image unoptimized
                         src="https://animationschool.ru/wp-content/themes/as_underscores_theme/images/sh5.png"
                         alt="leftFormImage" width={300} height={500} />
-                    <form onSubmit={submit}>
+                    <form action={'telegram.php'} submit={(e)=>{e.preventDefault()}} method="POST" >
                         <div className="direction-title">ЗАПИСАТЬСЯ</div>
-                        <input required type={'text'} placeholder="Введите ваше имя и фамлию" />
-                        <input required type={'text'} placeholder="Введите ваш эл.адрес" />
-                        <input required type={'text'} placeholder="Введите ваш телефон" />
+                        <input name='name' onChange={(e) => setName(e.target.value)} required type={'text'} placeholder="Введите ваше имя и фамлию" />
+                        <input name='email' onChange={(e) => setEmail(e.target.value)} required type={'text'} placeholder="Введите ваш эл.адрес" />
+                        <input name='phone' onChange={(e) => setPhone(e.target.value)} required type={'text'} placeholder="Введите ваш телефон" />
                         <div>Откуда вы узнали о нашей школе?</div>
-                        <select required>
-                            <option  value="" disabled>
+                        <select  onChange={(e) => setWhere(e.target.value)} required>
+                            <option value="" disabled>
                                 Нажмите и выбеите из списка
                             </option>
                             <option value="Самостоятельно - интернет, сайты">
@@ -208,7 +218,7 @@ export default function KyrsCardInside({
                         </select>
                         <div>выберите из списка</div>
                         <div className="btn-wrapper">
-                            <button className="btn">Отправить</button>
+                            <button  className="btn">Отправить</button>
                         </div>
                         <label>
                             <input required defaultChecked type={'checkbox'} />
