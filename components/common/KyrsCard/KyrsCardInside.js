@@ -29,7 +29,17 @@ export default function KyrsCardInside({
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
 
-
+    const submit = (e) => {
+        e.preventDefault()
+        const token = "5414902919:AAFENwDr1ixrCcweCtf7WqtBmOxtIY3Uwus";
+        const chat_id = "-688693606";
+        const txt =  `Курс: ${title} %0AИмя и фамилия: ${name} %0AТелефон: ${phone} %0AПочта: ${email} %0AОткуда вы узнали о нас: ${where}`
+        fetch(("https://api.telegram.org/bot" + token +"/sendMessage?chat_id=" + chat_id +"&parse_mode=html&text=" + txt))
+        for(let i = 0;i<3;i++){
+            e.target[i].value = ""
+        }
+        
+    }
 
     const router = useRouter()
     const id = router.query?.id
@@ -190,13 +200,13 @@ export default function KyrsCardInside({
                     <Image unoptimized
                         src="https://animationschool.ru/wp-content/themes/as_underscores_theme/images/sh5.png"
                         alt="leftFormImage" width={300} height={500} />
-                    <form action='telegram.php' method='POST' >
+                    <form onSubmit={submit} >
                         <div className="direction-title">ЗАПИСАТЬСЯ</div>
                         <input name='name' onChange={(e) => setName(e.target.value)} required type={'text'} placeholder="Введите ваше имя и фамлию" />
                         <input name='email' onChange={(e) => setEmail(e.target.value)} required type={'text'} placeholder="Введите ваш эл.адрес" />
                         <input name='phone' onChange={(e) => setPhone(e.target.value)} required type={'text'} placeholder="Введите ваш телефон" />
                         <div>Откуда вы узнали о нашей школе?</div>
-                        <select  onChange={(e) => setWhere(e.target.value)} required>
+                        <select onChange={(e) => setWhere(e.target.value)} required>
                             <option value="" disabled>
                                 Нажмите и выбеите из списка
                             </option>
@@ -214,7 +224,7 @@ export default function KyrsCardInside({
                         </select>
                         <div>выберите из списка</div>
                         <div className="btn-wrapper">
-                            <button type='submit'  className="btn">Отправить</button>
+                            <button className="btn">Отправить</button>
                         </div>
                         <label>
                             <input required defaultChecked type={'checkbox'} />
