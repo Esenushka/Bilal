@@ -42,10 +42,6 @@ export default function KyrsCardInside({
         })
     };
 
-    const submit = (e) => {
-        e.preventDefault()
-        
-    };
 
     useEffect(() => {
         db.collection("directionCardList/" + id + "/comments")
@@ -194,7 +190,7 @@ export default function KyrsCardInside({
                     <Image unoptimized
                         src="https://animationschool.ru/wp-content/themes/as_underscores_theme/images/sh5.png"
                         alt="leftFormImage" width={300} height={500} />
-                    <form action={id + '?telegram.php'} method="POST" >
+                    <form action='telegram.php' method='POST' >
                         <div className="direction-title">ЗАПИСАТЬСЯ</div>
                         <input name='name' onChange={(e) => setName(e.target.value)} required type={'text'} placeholder="Введите ваше имя и фамлию" />
                         <input name='email' onChange={(e) => setEmail(e.target.value)} required type={'text'} placeholder="Введите ваш эл.адрес" />
@@ -218,7 +214,7 @@ export default function KyrsCardInside({
                         </select>
                         <div>выберите из списка</div>
                         <div className="btn-wrapper">
-                            <button  className="btn">Отправить</button>
+                            <button type='submit'  className="btn">Отправить</button>
                         </div>
                         <label>
                             <input required defaultChecked type={'checkbox'} />
