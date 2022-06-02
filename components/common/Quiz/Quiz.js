@@ -18,7 +18,7 @@ export default function Quiz() {
     const [digital, setDigital] = useState()
 
     const handleChange = (name) => {
-        const quizBlock = document.getElementsByClassName("quiz_block")
+        const quizBlock = document.getElementsByClassName("quiz_block-wrapper")
         quizBlock[active]?.classList.remove("active")
         setActive(active + 1)
         quizBlock[active + 1].classList.add("active")
@@ -51,7 +51,7 @@ export default function Quiz() {
     return (
         <div className='quiz_wrapper'>
             <div className='quiz' >
-                <div>
+                <div className='quiz_block-wrapper active'>
                     <div id="quiz" className='quiz_block active'>
                         <div className='quiz_title'>ТОЛЬКО НАЧИНАЕТЕ СВОЙ ПУТЬ В ИНДУСТРИИ?</div>
                         <div className='quiz_des'>
@@ -66,7 +66,7 @@ export default function Quiz() {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className='quiz_block-wrapper'>
                     <div className='quiz_block'>
                         <div className='quiz_title'>ВОПРОС №1</div>
                         <div className='quiz_des'>
@@ -95,7 +95,7 @@ export default function Quiz() {
                 </div>
                 </div>
                 {
-                    child == 0 ? <div>
+                    child == 0 ? <div className={'quiz_block-wrapper ' + (child == 0 ? "active" : "")}>
                         <div className={'quiz_block ' + (child == 0 ? "active" : "")}>
                             <div className='quiz_title'>ВОПРОС №2</div>
                             <div className='quiz_des'>
@@ -126,7 +126,7 @@ export default function Quiz() {
                             </div>
                         </div>
 
-                    </div> : <div className='quiz_block child-quiz'>
+                    </div> : <div className='quiz_block child-quiz quiz_block-wrapper'>
                         <div className='quiz_title'>ВОЗМОЖНО ВАС ПОДОЙДЕТ</div>
                         {
                             directionCardList.map((el) => (
@@ -196,7 +196,7 @@ export default function Quiz() {
                     </div>
                 }
                 {
-                    vyz == 0 ? <div>
+                    vyz == 0 ? <div className={"quiz_block-wrapper " + (vyz == 0 ? "active" : "")}>
                         <div className={'quiz_block ' + (vyz == 0 ? "active" : "")}>
                             <div className='quiz_title'>ВОПРОС №3</div>
                             <div className='quiz_des'>
@@ -231,7 +231,7 @@ export default function Quiz() {
                             </div>
                         </div>
 
-                    </div> : <div>
+                    </div> : <div className={"quiz_block-wrapper " + (vyz === 100 ? "active" : "")}>
                         <div className={'quiz_block ' + (vyz == 100 ? "active" : "")}>
                             <div className='quiz_title'>ВОПРОС №3</div>
                             <div className='quiz_des'>
@@ -272,7 +272,7 @@ export default function Quiz() {
                         </div>
                     </div>
                 }
-               <div>
+                <div className='quiz_block-wrapper'>
                     <div className='quiz_block'>
                         <div className='quiz_title'>ВОЗМОЖНО ВАМ ПОДОЙДЕТ</div>
                         {

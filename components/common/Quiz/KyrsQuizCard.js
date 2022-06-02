@@ -5,7 +5,7 @@ import Image from "next/image"
 export default function KyrsQuizCard(props) {
   return (
           <Link key={props.id} href={"/kyrsy/" + props.id}>
-              <div className="kyrs-card">
+              <div className="kyrs-card kyrs-card_quiz">
                   <Image
                       unoptimized
                       src={props.url}

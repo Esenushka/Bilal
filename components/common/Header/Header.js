@@ -52,7 +52,7 @@ export default function Header() {
             Курсы
           </NavLink>
           <NavLink
-            href={'#'}>
+            href={'/studentsworks'}>
             Работы студентов
           </NavLink>
           <NavLink
