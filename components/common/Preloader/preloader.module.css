@@ -14,7 +14,7 @@
   align-items: center;
   -webkit-box-pack: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   max-width: 100vw;
   /*background-color: #ffffff;*/
 }
@@ -25,9 +25,11 @@
   height: auto;
   stroke-linecap: round;
 }
-.img {
+.img{
+  position: relative !important;
+}
+.img img{
   object-fit: contain;
-  position: absolute !important;
 }
 .circle {
   fill: none;
