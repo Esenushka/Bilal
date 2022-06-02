@@ -6,7 +6,7 @@ export default function newblog() {
     <div>
       <Head>
         <title>Новая Статья</title>
-        <link rel='icon' href='/b2.svg' />
+        <link rel='icon' href='/b2.png' />
       </Head>
       <NewBlog />
     </div>

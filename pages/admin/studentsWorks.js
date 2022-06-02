@@ -9,7 +9,7 @@ export default function StudentsWorks({ props }) {
     <div>
       <Head>
         <title>Работы студентов</title>
-        <link rel="icon" href="/b2.svg" />
+        <link rel="icon" href="/b2.png" />
 
       </Head>
       <AdminNavBar {...props} />

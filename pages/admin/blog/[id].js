@@ -6,7 +6,7 @@ export default function blogEdit() {
     <div>
         <Head>
             <title>Изменение Статьи</title>
-              <link rel='icon' href='/b2.svg' />
+              <link rel='icon' href='/b2.png' />
         </Head>
        <BlogEditCard/> 
     </div>

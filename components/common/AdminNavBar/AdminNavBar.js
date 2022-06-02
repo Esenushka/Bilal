@@ -121,7 +121,7 @@ export default function AdminNavBar() {
             <div className='header container'>
                 <div className="logo">
                     <NavLink href={'/'}>
-                        <Image width={100} height={100} src="/b2.svg" alt="Logo" />
+                        <Image width={100} height={100} src="/b2.png" alt="Logo" />
                     </NavLink>
                 </div>
                 <div

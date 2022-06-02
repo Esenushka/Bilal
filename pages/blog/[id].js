@@ -15,7 +15,7 @@ export default function KyrsCard() {
     <div>
       <Head>
         <title>{data.title}</title>
-        <link rel='icon' href='/b2.svg'/>
+        <link rel='icon' href='/b2.png'/>
       </Head>
       <BlogCardInside {...data} />
     </div>

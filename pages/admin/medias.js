@@ -9,7 +9,7 @@ export default function Medias({props}) {
         <title>
           Контакты
         </title>
-        <link rel="icon" href="/b2.svg" />
+        <link rel="icon" href="/b2.png" />
       </Head>
         <AdminNavBar {...props}/>
         <Media/>

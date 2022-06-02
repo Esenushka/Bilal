@@ -26,7 +26,7 @@ export default function KyrsCard() {
         <div>
             <Head>
                 <title>{directionCardList.title}</title>
-                <link rel='icon' href='/b2.svg' />
+                <link rel='icon' href='/b2.png' />
             </Head>
             <KyrsCardInside {...directionCardList} />
         </div>
