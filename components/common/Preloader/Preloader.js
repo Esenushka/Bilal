@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const Preloader = ({ full }) => {
     return (
-        <div className={full ? css.wrapper : css.pad}>
+        <div className={css.wrapper}>
             <div className={css.container}>
                 <svg className={css.loader} viewBox="0 0 340 340">
                     <circle className={css.circle} cx="170" cy="170" r="160" stroke="#66097b" />
