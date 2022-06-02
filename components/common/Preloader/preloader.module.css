@@ -28,9 +28,14 @@
 }
 
 .img {
-  top: 0;
-  object-fit: contain;
+  height: fit-content;
   position: absolute !important;
+}
+.img span{
+  height: fit-content !important;
+}
+.img img{
+  object-fit: contain;
 }
 
 .circle {
