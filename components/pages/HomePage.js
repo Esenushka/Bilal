@@ -40,7 +40,7 @@ export default function HomePage() {
             })
     }, [])
 
-    if (!isLoading) {
+    if (isLoading) {
         return <Preloader full />
     }
 
