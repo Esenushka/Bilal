@@ -6,6 +6,7 @@
   width: 100%;
   background: white;
 }
+
 .container {
   margin-top: 0px;
   display: -webkit-box;
@@ -16,7 +17,7 @@
   justify-content: center;
   height: 100%;
   max-width: 100vw;
-  /*background-color: #ffffff;*/
+  position: relative;
 }
 
 .loader {
@@ -25,11 +26,13 @@
   height: auto;
   stroke-linecap: round;
 }
+
 .img {
-  top: 0 !important;
+  top: 0;
   object-fit: contain;
   position: absolute !important;
 }
+
 .circle {
   fill: none;
   stroke-width: 3.5;
@@ -45,37 +48,47 @@
   transform-origin: 170px 170px;
   will-change: transform;
 }
+
 .circle:nth-of-type(1) {
   stroke-dasharray: 550px;
 }
+
 .circle:nth-of-type(2) {
   stroke-dasharray: 500px;
 }
+
 .circle:nth-of-type(3) {
   stroke-dasharray: 450px;
 }
+
 .circle:nth-of-type(4) {
   stroke-dasharray: 300px;
 }
+
 .circle:nth-of-type(5) {
   stroke-dasharray: 150px;
 }
+
 .circle:nth-of-type(1) {
   -webkit-animation-delay: -0.15s;
   animation-delay: -0.15s;
 }
+
 .circle:nth-of-type(2) {
   -webkit-animation-delay: -0.3s;
   animation-delay: -0.3s;
 }
+
 .circle:nth-of-type(3) {
   -webkit-animation-delay: -0.45s;
   animation-delay: -0.45s;
 }
+
 .circle:nth-of-type(4) {
   -webkit-animation-delay: -0.6s;
   animation-delay: -0.6s;
 }
+
 .circle:nth-of-type(5) {
   -webkit-animation-delay: -0.85s;
   animation-delay: -0.85s;
