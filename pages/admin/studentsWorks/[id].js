@@ -22,7 +22,7 @@ export default function StudentsWork() {
         <div>
             <Head>
                 <title>Изменение работы студента</title>
-                <link rel="icon" href="/b2.png" />
+                <link rel="icon" href="/b2.svg" />
 
             </Head>
             <StudentsEdit idData={id} />

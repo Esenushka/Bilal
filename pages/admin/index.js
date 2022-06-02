@@ -28,7 +28,7 @@ export default function Admin({ isAuth }) {
         <title>
           Вход в админ панель
         </title>
-        <link rel="icon" href="/b2.png" />
+        <link rel="icon" href="/b2.svg" />
 
       </Head>
       <form onSubmit={submit}>

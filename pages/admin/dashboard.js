@@ -7,7 +7,7 @@ export default function Dashboard(props) {
     <div>
       <Head>
           <title>Курсы</title>
-        <link rel="icon" href="/b2.png" />
+        <link rel="icon" href="/b2.svg" />
       </Head>
       <AdminNavBar {...props}/>
       <KyrsEdit/>

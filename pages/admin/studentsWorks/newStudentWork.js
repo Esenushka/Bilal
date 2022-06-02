@@ -24,7 +24,7 @@ export default function StudentsWork() {
                 <title>
                     Новая работа студента
                 </title>
-                <link rel="icon" href="/b2.png" />
+                <link rel="icon" href="/b2.svg" />
 
             </Head>
             <NewStudentWork idData={id} />

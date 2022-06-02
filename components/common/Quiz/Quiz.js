@@ -51,44 +51,48 @@ export default function Quiz() {
     return (
         <div className='quiz_wrapper'>
             <div className='quiz' >
-                <div id="quiz" className='quiz_block active'>
-                    <div className='quiz_title'>ТОЛЬКО НАЧИНАЕТЕ СВОЙ ПУТЬ В ИНДУСТРИИ?</div>
-                    <div className='quiz_des'>
-                        Пройдите квиз и узнайте, какая профессия
-                        подходит вам!
-                    </div>
-                    <video width="327" height="292" preload="auto" autoPlay="autoplay" muted={true}> <source type="video/mp4" src="https://animationschool.ru/wp-content/themes/as_underscores_theme/video/quiz_circle.mp4" /></video>
-                    <div className='btn-wrapper '>
-                        <button onClick={handleChange} className='btn quiz-btn'>
-                            НАЧАТЬ
-                        </button>
+                <div>
+                    <div id="quiz" className='quiz_block active'>
+                        <div className='quiz_title'>ТОЛЬКО НАЧИНАЕТЕ СВОЙ ПУТЬ В ИНДУСТРИИ?</div>
+                        <div className='quiz_des'>
+                            Пройдите квиз и узнайте, какая профессия
+                            подходит вам!
+                        </div>
+                        <video width="327" height="292" preload="auto" autoPlay="autoplay" muted={true}> <source type="video/mp4" src="https://animationschool.ru/wp-content/themes/as_underscores_theme/video/quiz_circle.mp4" /></video>
+                        <div className='btn-wrapper quiz-btn_wrapper '>
+                            <button onClick={handleChange} className='btn quiz-btn'>
+                                НАЧАТЬ
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div className='quiz_block'>
-                    <div className='quiz_title'>ВОПРОС №1</div>
-                    <div className='quiz_des'>
-                        Сколько вам лет?
-                    </div>
-                    <div className='label_wrapper'>
-                        <label>
-                            <div>5 - 11 лет</div>
-                            <input
-                                data-child={100} defaultChecked name='radio1' type={"radio"} />
-                            <span className='checkmark'></span>
-                        </label>
-                        <label>
-                            <div>Старше 12</div>
-                            <input
-                                data-child={0} name='radio1' type={"radio"} />
-                            <span className='checkmark'></span>
-                        </label>
+                <div>
+                    <div className='quiz_block'>
+                        <div className='quiz_title'>ВОПРОС №1</div>
+                        <div className='quiz_des'>
+                            Сколько вам лет?
+                        </div>
+                        <div className='label_wrapper'>
+                            <label>
+                                <div>5 - 11 лет</div>
+                                <input
+                                    data-child={100} defaultChecked name='radio1' type={"radio"} />
+                                <span className='checkmark'></span>
+                            </label>
+                            <label>
+                                <div>Старше 12</div>
+                                <input
+                                    data-child={0} name='radio1' type={"radio"} />
+                                <span className='checkmark'></span>
+                            </label>
 
-                    </div>
-                    <div className='btn-wrapper '>
-                        <button onClick={() => handleChange("radio1")} className='btn quiz-btn'>
-                            ДАЛЕЕЕ
-                        </button>
-                    </div>
+                        </div>
+                        <div className='btn-wrapper quiz-btn_wrapper '>
+                            <button onClick={() => handleChange("radio1")} className='btn quiz-btn'>
+                                ДАЛЕЕЕ
+                            </button>
+                        </div>
+                </div>
                 </div>
                 {
                     child == 0 ? <div>
@@ -115,19 +119,19 @@ export default function Quiz() {
                                     <span className='checkmark'></span>
                                 </label>
                             </div>
-                            <div className='btn-wrapper '>
+                            <div className='btn-wrapper quiz-btn_wrapper '>
                                 <button onClick={() => handleChange("radio2")} className='btn quiz-btn'>
                                     ДАЛЕЕЕ
                                 </button>
                             </div>
                         </div>
 
-                    </div> : <div className='quiz_block '>
+                    </div> : <div className='quiz_block child-quiz'>
                         <div className='quiz_title'>ВОЗМОЖНО ВАС ПОДОЙДЕТ</div>
                         {
                             directionCardList.map((el) => (
                                 child == el.dataChild ? <Link key={el.id} href={"/kyrsy/" + el.id}>
-                                    <div className="kyrs-card quiz-kyrs_card">
+                                    <div className="kyrs-card quiz-kyrs_card ">
                                         <Image
                                             unoptimized
                                             src={el.url}
@@ -220,7 +224,7 @@ export default function Quiz() {
                                     <span className='checkmark'></span>
                                 </label>
                             </div>
-                            <div className='btn-wrapper '>
+                            <div className='btn-wrapper quiz-btn_wrapper '>
                                 <button onClick={() => handleChange("radio3")} className='btn quiz-btn'>
                                     ДАЛЕЕЕ
                                 </button>
@@ -260,7 +264,7 @@ export default function Quiz() {
                                     <span className='checkmark'></span>
                                 </label>
                             </div>
-                            <div className='btn-wrapper '>
+                            <div className='btn-wrapper quiz-btn_wrapper '>
                                 <button onClick={() => handleChange("radio3_2")} className='btn quiz-btn'>
                                     ДАЛЕЕЕ
                                 </button>
@@ -268,21 +272,23 @@ export default function Quiz() {
                         </div>
                     </div>
                 }
-                <div className='quiz_block'>
-                    <div className='quiz_title'>ВОЗМОЖНО ВАМ ПОДОЙДЕТ</div>
-                    {
-                        directionCardList.map((el) => (
-                            ready == el.dataReady ?
-                                <KyrsQuizCard key={el.id} {...el} /> :
-                                fashion == el.dataFashion ?
-                                    <KyrsQuizCard key={el.id}  {...el} /> :
-                                    academy == el.dataAcademy ?
-                                        <KyrsQuizCard key={el.id} {...el} /> :
-                                        digital == el.dataDigital ?
-                                            <KyrsQuizCard key={el.id} {...el} /> : ""
-                        ))
-                    }
-                </div>
+               <div>
+                    <div className='quiz_block'>
+                        <div className='quiz_title'>ВОЗМОЖНО ВАМ ПОДОЙДЕТ</div>
+                        {
+                            directionCardList.map((el) => (
+                                ready == el.dataReady ?
+                                    <KyrsQuizCard key={el.id} {...el} /> :
+                                    fashion == el.dataFashion ?
+                                        <KyrsQuizCard key={el.id}  {...el} /> :
+                                        academy == el.dataAcademy ?
+                                            <KyrsQuizCard key={el.id} {...el} /> :
+                                            digital == el.dataDigital ?
+                                                <KyrsQuizCard key={el.id} {...el} /> : ""
+                            ))
+                        }
+                    </div>
+               </div>
 
 
             </div>

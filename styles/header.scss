@@ -6,8 +6,13 @@ $color: #66097b;
   align-items: center;
   justify-content: space-evenly;
   margin-bottom: 30px;
+  padding-top: 15px;
 }
 .logo{
+  height: 80px;
+  span{
+    height: 80px !important;
+  }
   img{
     object-fit: contain;
   }

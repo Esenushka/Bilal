@@ -6,7 +6,7 @@ export default function newKyrs() {
     <div>
       <Head>
         <title>Новый курс</title>
-        <link rel='icon' href='/b2.png' />
+        <link rel='icon' href='/b2.svg' />
       </Head>
       <NewKyrs />
     </div>
