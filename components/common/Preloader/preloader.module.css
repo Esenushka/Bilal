@@ -29,9 +29,10 @@
   height: auto;
   stroke-linecap: round;
 }
-.img {
+.img{
   object-fit: contain;
   position: absolute !important;
+  top: 30px;
 }
 .circle {
   fill: none;
