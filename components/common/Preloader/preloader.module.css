@@ -25,14 +25,11 @@
   width: 100%;
   height: auto;
   stroke-linecap: round;
+  position: relative;
+  margin: 0;
 }
-
-.img {
-  height: fit-content;
-  position: absolute !important;
-}
-.img span{
-  height: fit-content !important;
+.img{
+  position: absolute;
 }
 .img img{
   object-fit: contain;
