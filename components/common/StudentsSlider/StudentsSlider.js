@@ -4,10 +4,9 @@ import Slider from 'react-slick/lib/slider';
 import { useEffect, useState } from 'react';
 import { db } from '../../../config/firebase.js';
 import { useRouter } from "next/router"
-import Link from "next/link"
 import Preloader from '../Preloader/Preloader.js';
 
-export default function StudentsSlider({ id }) {
+export default function StudentsSlider({ id, home }) {
   const rout = useRouter()
 
   const settings = {
@@ -15,16 +14,24 @@ export default function StudentsSlider({ id }) {
     infinite: true,
     speed: 500,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 4000,
     pauseOnHover: true,
-    centerPadding: '150px',
+    centerPadding: '120px',
     centerMode: true,
     slidesToShow: 3,
     responsive: [
       {
+        breakpoint: 1350,
+        settings: {
+          centerPadding: '250px',
+          slidesToShow: 2,
+        },
+      },
+      {
         breakpoint: 1200,
         settings: {
-          centerPadding: '110px',
+          centerPadding: "200px",
+          slidesToShow: 2,
         },
       },
       {
@@ -35,15 +42,16 @@ export default function StudentsSlider({ id }) {
         },
       },
       {
-        breakpoint: 900,
+        breakpoint: 960,
         settings: {
-          centerMode: false,
-          centerPadding: 0,
+          centerPadding: "200px",
+          slidesToShow: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
+          centerPadding: "150px",
           slidesToShow: 1,
         },
       },
@@ -51,7 +59,7 @@ export default function StudentsSlider({ id }) {
         breakpoint: 650,
         settings: {
           slidesToShow: 1,
-          centerMode: false,
+          centerPadding: "100px"
         },
       },
       {
@@ -65,6 +73,7 @@ export default function StudentsSlider({ id }) {
   };
 
   const [students, setStudents] = useState([])
+  const [directionCardList, setDirectionCardList] = useState({})
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -80,42 +89,60 @@ export default function StudentsSlider({ id }) {
       })
   }, [id])
 
-  if(isLoading){
-    return <Preloader full/>
+
+  useEffect(() => {
+    db.collection("directionCardList")
+      .get()
+      .then((snapshot) => {
+        setIsLoading(false)
+        const directionCard = []
+        snapshot.forEach((doc) => {
+          directionCard.push({ ...doc.data(), id: doc.id })
+        })
+        setDirectionCardList(directionCard.find((el) => el.id === id))
+      })
+  }, [id])
+
+
+  if (isLoading) {
+    return <Preloader full />
   }
-
   return (
-    <div className='students_wrapper'>
-      {
-        students.length < 4 ?
 
+    <>
+      <div className='students_wrapper'>
+        {
+          students.length < 4 ?
+            <>
 
-          <div className='response-students'>
-            {students.map((el) => (
-              <div className="students-work" key={el.id}>
-                <Image unoptimized width={300} height={450} src={el.url} alt={el.name} />
-                <div>
-                  <div>{el.name}</div>
-                  <div>{el.des}</div>
-                </div>
+              <div className='direction-title'>{directionCardList?.direction}</div>
+              <div className='response-students'>
+
+                {students.map((el) => (
+                  <div className="students-work" key={el.id}>
+                    <Image unoptimized layout="intrinsic" width={300} height={450} src={el.url} alt={directionCardList?.direction} />
+
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
 
 
-          :
-          <Slider {...settings}>
-            {students.map((el) => (
-              <div className="students-work" key={el.id}>
-                <Image unoptimized width={300} height={450} src={el.url} alt={el.name} />
-                <div>
-                  <div>{el.name}</div>
-                  <div>{el.des}</div>
-                </div>
-              </div>
-            ))}
-          </Slider>
-      }
-    </div>
+            : <div className='students_slider-wrapper'>
+              {!home ? <div className='direction-title'>{directionCardList?.direction}</div> : ""}
+              <Slider {...settings}>
+                {students.map((el) => (
+                  <div key={el.id}>
+                    <div className="students-work students-work-slider">
+                      <Image unoptimized width={300} height={450} src={el.url} alt={directionCardList?.direction} />
+
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+        }
+      </div>
+    </>
   );
 }

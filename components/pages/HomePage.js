@@ -47,7 +47,7 @@ export default function HomePage() {
     return (
         <div>
             <MainSlider directionCardList={directionCardList} />
-            <div className='direction-title'>Напровления обучения</div>
+            <div className='direction-title'>Направления обучения</div>
             <DirectionSlider />
             <div className='btn-wrapper'>
                 <Link href={"/kyrsy "}>

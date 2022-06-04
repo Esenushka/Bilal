@@ -25,10 +25,6 @@ export default function StudentsEditCard({ id, direction }) {
                     <Link href={"/admin/studentsWorks/" + el.id} key={el.id}>
                         <a className="students-work">
                             <Image unoptimized width={300} height={450} src={el.url} alt={el.name} />
-                            <div>
-                                <div>{el.name}</div>
-                                <div>{el.des}</div>
-                            </div>
                         </a>
                     </Link>
                 ))}

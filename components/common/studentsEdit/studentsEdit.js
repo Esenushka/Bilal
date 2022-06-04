@@ -7,12 +7,11 @@ import Preloader from '../Preloader/Preloader'
 
 export default function StudentsEdit({ idData }) {
     const [studentsWork, setStudentsWork] = useState({})
-    const [newStudentWork, setNewStudentWork] = useState({})
     const [file, setFile] = useState("");
     const [fileData, setFileData] = useState("");
     const [active, setActive] = useState(false)
     const [directionId, setDirectionId] = useState("")
-    const [isLoading,setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
 
     const rout = useRouter()
     const id = rout.query.id
@@ -32,7 +31,7 @@ export default function StudentsEdit({ idData }) {
             db.collection("directionCardList/" + el + "/studentWork")
                 .get()
                 .then((snapshot) => {
-                    setIsLoading(true)
+                    setIsLoading(false)
                     snapshot.forEach((doc) => {
                         if (doc.id === id) {
                             setStudentsWork({ ...doc.data(), id: doc.id })
@@ -59,12 +58,6 @@ export default function StudentsEdit({ idData }) {
 
     const submit = (e) => {
         e.preventDefault()
-        if (newStudentWork) {
-            for (let key in newStudentWork) {
-                db.collection("directionCardList/" + directionId + "/studentWork").doc(id).update({ [key]: newStudentWork[key] })
-                setActive(true)
-            }
-        }
         if (fileData) {
             storageRef.ref("items/" + fileData.name).put(fileData).then(() => {
                 getUrl(fileData.name).then((url) => {
@@ -108,37 +101,27 @@ export default function StudentsEdit({ idData }) {
             </Link>
             <div className='kyrs-cards_wrapper edit-students'>
                 <a className={"students-work "}>
-                    {
-                        file ?
-                            <Image
-                                unoptimized
-                                width={300}
-                                height={450}
-                                src={file}
-                                alt={studentsWork.name}
-                            /> :
-                            <Image
-                                unoptimized
-                                width={300}
-                                height={450}
-                                src={studentsWork.url || "/file-image.png"}
-                                alt={studentsWork.name}
-                            />
-                    }
-                    <div>
-                        <div>{newStudentWork.name || studentsWork.name}</div>
-                        <div>{newStudentWork.des || studentsWork.des}</div>
-                    </div>
+                    <form onSubmit={submit}>
+                        <input type={"file"} onChange={({ target }) => handleChange(target)} />
+                        {
+                            file ?
+                                <Image
+                                    unoptimized
+                                    width={300}
+                                    height={450}
+                                    src={file}
+                                    alt={studentsWork.name}
+                                /> :
+                                <Image
+                                    unoptimized
+                                    width={300}
+                                    height={450}
+                                    src={studentsWork.url || "/file-image.png"}
+                                    alt={studentsWork.name}
+                                />
+                        }
+                    </form>
                 </a>
-                <form onSubmit={submit}>
-                    <input type={"file"} onChange={({ target }) => handleChange(target)} />
-                    <input required type={"text"}
-                        onChange={(e) => setNewStudentWork({ ...newStudentWork, name: e.target.value })}
-                        defaultValue={studentsWork.name} />
-                    <input required type={"text"}
-                        onChange={(e) => setNewStudentWork({ ...newStudentWork, des: e.target.value })}
-                        defaultValue={studentsWork.des} />
-                </form>
                 <div className='btn-wrapper'>
                     <button onClick={submit} className='btn'>
                         Сохранить
@@ -147,6 +130,7 @@ export default function StudentsEdit({ idData }) {
                         Удалить
                     </button>
                 </div>
+
                 <div onClick={() => setActive(false)} className={'updated ' + (active ? "active" : "")}>
                     Данные изменились
                 </div>

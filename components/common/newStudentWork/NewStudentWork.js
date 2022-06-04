@@ -67,29 +67,19 @@ export default function NewStudentWork({ idData }) {
                 </div>
             </Link>
             <div className='kyrs-cards_wrapper edit-students'>
-                <a className={"students-work " + (!file ? "activeImage" : "")}>
-                    {
-                        <Image
-                            unoptimized
-                            width={300}
-                            height={450}
-                            src={file || "/file-image.png"}
-                            alt={newStudentWork.name}
-                        />
-                    }
-                    <div>
-                        <div>{newStudentWork.name}</div>
-                        <div>{newStudentWork.des}</div>
-                    </div>
-                </a>
                 <form onSubmit={submit}>
                     <input required type={"file"} onChange={({ target }) => handleChange(target)} />
-                    <input required type={"text"}
-                        onChange={(e) => setNewStudentWork({ ...newStudentWork, name: e.target.value })}
-                    />
-                    <input required type={"text"}
-                        onChange={(e) => setNewStudentWork({ ...newStudentWork, des: e.target.value })}
-                    />
+                    <a className={"students-work " + (!file ? "activeImage" : "")}>
+                        {
+                            <Image
+                                unoptimized
+                                width={300}
+                                height={450}
+                                src={file || "/file-image.png"}
+                                alt={newStudentWork.name}
+                            />
+                        }
+                    </a>
                     <div className='btn-wrapper'>
                         <button className='btn'>
                             Добавить

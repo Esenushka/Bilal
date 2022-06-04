@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { blogArticlesList } from '../../components/constants/blogArticlesList.js';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Header from '../../components/common/Header/Header.js';
 
 export default function KyrsCard() {
   const [data, setData] = useState({});
@@ -14,9 +15,10 @@ export default function KyrsCard() {
   return (
     <div>
       <Head>
-        <title>{data.title}</title>
+        <title>Блог</title>
         <link rel='icon' href='/b2.png'/>
       </Head>
+      <Header />
       <BlogCardInside {...data} />
     </div>
   );

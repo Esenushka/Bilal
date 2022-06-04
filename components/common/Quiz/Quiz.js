@@ -127,7 +127,7 @@ export default function Quiz() {
                         </div>
 
                     </div> : <div className='quiz_block child-quiz quiz_block-wrapper'>
-                        <div className='quiz_title'>ВОЗМОЖНО ВАС ПОДОЙДЕТ</div>
+                        <div className='quiz_title'>ВОЗМОЖНО ВАМ ПОДОЙДЕТ</div>
                         {
                             directionCardList.map((el) => (
                                 child == el.dataChild ? <Link key={el.id} href={"/kyrsy/" + el.id}>

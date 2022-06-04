@@ -1,4 +1,3 @@
-import Header from '../Header/Header.js';
 import Image from "next/image"
 import { db } from '../../../config/firebase.js';
 import { useEffect, useState } from 'react';
@@ -31,7 +30,6 @@ export default function BlogCardInside() {
 
   return (
     <div>
-      <Header />
       <div className="container blog-container">
         <div className=" post-block-top">
           <div className="block-top">

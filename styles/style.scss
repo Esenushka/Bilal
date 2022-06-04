@@ -534,20 +534,22 @@ $color: #66097b;
     margin-bottom: 50px;
   }
 }
+.students_slider-wrapper{
+  max-width: 100vw;
+}
 .students-work {
-  width: fit-content !important;
   position: relative;
   margin: 0 25px 20px 25px;
   border-radius: 30px;
-  border-bottom: 4px solid #e2e2e2;
-  border-right: 4px solid #e2e2e2;
-  span {
+  span{
     border-radius: 30px;
   }
-  img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover;
+  img{
+    width: fit-content !important;
+    height: fit-content !important;
+    max-height: fit-content !important;
+    min-height:  fit-content !important;
+    border-radius: 30px;
   }
   > div {
     padding: 15px 10px;
@@ -652,6 +654,11 @@ $color: #66097b;
 .kyrs-card_quiz{
   width: 70% !important;
 }
+.students_wrapper{
+  .slick-slide > div > div{
+  width: fit-content !important;
+}
+}
 @media (max-width: 1400px) {
   .main_slider-block_name {
     width: 80%;
@@ -681,9 +688,6 @@ $color: #66097b;
   .fade_left,
   .fade_right {
     display: none !important;
-  }
-  .students-work {
-    height: 420px;
   }
 }
 @media (max-width: 900px) {
@@ -738,15 +742,6 @@ $color: #66097b;
   .label_wrapper {
     label {
       padding: 25px 100px;
-    }
-  }
-  .students-work {
-    width: 70% !important;
-    span {
-      width: 100% !important;
-    }
-    img {
-      object-fit: cover;
     }
   }
   .step-btn {
