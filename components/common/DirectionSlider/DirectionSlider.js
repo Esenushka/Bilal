@@ -16,7 +16,7 @@ export default function DirectionSlider() {
                 snapshot.forEach((doc) => {
                     direction.push({ ...doc.data(), id: doc.id })
                 })
-                setDirectionCardList(direction)
+                setDirectionCardList(direction.reverse())
             })
     }, [])
     const settings = {

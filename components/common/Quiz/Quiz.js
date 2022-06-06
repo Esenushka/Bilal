@@ -214,7 +214,7 @@ export default function Quiz() {
                                     <span className='checkmark'></span>
                                 </label>
                                 <label>
-                                    Рисовать на графическом планшете, XXXXXXXX, Рисовать в формате 2D
+                                    Рисовать на графическом планшете, Рисовать в цифре, Рисовать в формате 2D
                                     <input data-digital={100} name='radio3' type={"radio"} />
                                     <span className='checkmark'></span>
                                 </label>

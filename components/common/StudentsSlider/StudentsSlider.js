@@ -15,9 +15,10 @@ export default function StudentsSlider({ id, home }) {
     speed: 500,
     autoplay: true,
     autoplaySpeed: 4000,
-    pauseOnHover: true,
+    pauseOnHover: false,
     centerPadding: '120px',
     centerMode: true,
+    swipeToSlide: true,
     slidesToShow: 3,
     responsive: [
       {

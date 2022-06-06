@@ -25,13 +25,11 @@ export default function HomePage() {
     }, [])
 
     const [directionCardList, setDirectionCardList] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         db.collection("directionCardList")
             .get()
             .then((snapshot) => {
-                setIsLoading(false)
                 const direction = []
                 snapshot.forEach((doc) => {
                     direction.push({ ...doc.data(), id: doc.id })
@@ -39,10 +37,6 @@ export default function HomePage() {
                 setDirectionCardList(direction)
             })
     }, [])
-
-    if (isLoading) {
-        return <Preloader full />
-    }
 
     return (
         <div>
