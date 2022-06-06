@@ -546,10 +546,10 @@ $color: #66097b;
     border-radius: 30px;
   }
   img{
-    width: fit-content !important;
-    height: fit-content !important;
-    max-height: fit-content !important;
-    min-height:  fit-content !important;
+    width: 100% !important;
+    height: max-content !important;
+    max-height: max-content !important;
+    min-height: max-content !important;
     border-radius: 30px;
   }
   > div {
