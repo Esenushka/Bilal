@@ -6,7 +6,7 @@ import Quiz from '../common/Quiz/Quiz'
 import Image from "next/image"
 import { useEffect, useState } from 'react'
 import { db } from '../../config/firebase'
-import Preloader from '../common/Preloader/Preloader'
+// import Preloader from '../common/Preloader/Preloader'
 
 export default function HomePage() {
     const [offset, setOffset] = useState();
