@@ -31,9 +31,9 @@ export default function KyrsCardInside({
 
     const submit = (e) => {
         e.preventDefault()
-        const token = "5414902919:AAFENwDr1ixrCcweCtf7WqtBmOxtIY3Uwus";
-        const chat_id = "-688693606";
-        const txt =  `Курс: ${title} %0AИмя и фамилия: ${name} %0AТелефон: ${phone} %0AПочта: ${email} %0AОткуда вы узнали о нас: ${where}`
+        const token = "5328639824:AAGSPH3Gwemj7cYrdDezh2Uu0r4onzfwK0o";
+        const chat_id = "-745355640";
+        const txt =  `Курс: ${title} %0AИмя и фамилия: ${name} %0AТелефон: ${phone} %0AWhatsApp: ${email} %0AОткуда вы узнали о нас: ${where}`
         fetch(("https://api.telegram.org/bot" + token +"/sendMessage?chat_id=" + chat_id +"&parse_mode=html&text=" + txt))
         for(let i = 0;i<3;i++){
             e.target[i].value = ""
@@ -203,7 +203,7 @@ export default function KyrsCardInside({
                     <form onSubmit={submit} >
                         <div className="direction-title">ЗАПИСАТЬСЯ</div>
                         <input name='name' onChange={(e) => setName(e.target.value)} required type={'text'} placeholder="Введите ваше имя и фамлию" />
-                        <input name='email' onChange={(e) => setEmail(e.target.value)} required type={'text'} placeholder="Введите ваш эл.адрес" />
+                        <input name='email' onChange={(e) => setEmail(e.target.value)} required type={'text'} placeholder="Введите ваш номер WhatsApp" />
                         <input name='phone' onChange={(e) => setPhone(e.target.value)} required type={'text'} placeholder="Введите ваш телефон" />
                         <div>Откуда вы узнали о нашей школе?</div>
                         <select onChange={(e) => setWhere(e.target.value)} required>
