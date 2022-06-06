@@ -64,7 +64,7 @@ export default function HomePage() {
                 <div className='step_wrapper'>
                     {innerWidth > 990 ? <Image className={'fade_left ' + (innerWidth > 1200 ? (offset > 3500 ? "active" : "") : (offset > 4100 ? "active" : ""))} width={270} height={270} src={"/sh1.png"} alt="sh1" /> : ""}
                     <div className='direction-title'>
-                        ШАГНИТЕ В МИР АНИМАЦИИ
+                        ШАГНИТЕ В МИР ИСКУССТВО
                     </div>
                     <div className='studios_des'>
                         Выберите курс или пройдите опрос

@@ -53,7 +53,7 @@ export default function Quiz() {
             <div className='quiz' >
                 <div className='quiz_block-wrapper active'>
                     <div id="quiz" className='quiz_block active'>
-                        <div className='quiz_title'>ТОЛЬКО НАЧИНАЕТЕ СВОЙ ПУТЬ В ИНДУСТРИИ?</div>
+                        <div className='quiz_title'>ТОЛЬКО НАЧИНАЕТЕ СВОЙ ПУТЬ В МИР ИСКУССТВО ?</div>
                         <div className='quiz_des'>
                             Пройдите квиз и узнайте, какая профессия
                             подходит вам!
