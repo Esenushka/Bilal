@@ -13,7 +13,7 @@ export default function StudentsSlider({ id, home }) {
     dots: false,
     infinite: true,
     speed: 500,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     pauseOnHover: false,
     centerPadding: '120px',
@@ -121,7 +121,7 @@ export default function StudentsSlider({ id, home }) {
 
                 {students.map((el) => (
                   <div className="students-work" key={el.id}>
-                    <Image loading='eager' unoptimized layout="intrinsic" width={300} height={450} src={el.url} alt={directionCardList?.direction} />
+                    <Image loading='eager'  unoptimized layout="intrinsic" src={el.url} alt={directionCardList?.direction} />
 
                   </div>
                 ))}
