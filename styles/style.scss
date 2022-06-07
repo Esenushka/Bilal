@@ -619,14 +619,13 @@ $color: #66097b;
   overflow: hidden;
   span {
     width: 100% !important;
-    height: auto !important;
     span{
       height: 0 !important;
     }
   }
   img {
     position: relative !important;
-    height: max-content !important;
+    height: fit-content !important;
     max-height: max-content !important;
     min-height: max-content !important;
     width: 100%;
