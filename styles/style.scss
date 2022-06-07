@@ -618,13 +618,17 @@ $color: #66097b;
   display: flex;
   align-items: center;
   overflow: hidden;
+  -webkit-appearance: none;
   span {
+  -webkit-appearance: none;
     width: 100% !important;
     span{
+  -webkit-appearance: none;
       height: 0 !important;
     }
   }
   img {
+  -webkit-appearance: none;
     position: relative !important;
     height: max-content !important;
     max-height: max-content !important;
