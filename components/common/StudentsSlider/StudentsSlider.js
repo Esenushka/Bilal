@@ -135,7 +135,7 @@ export default function StudentsSlider({ id, home }) {
                 {students.map((el) => (
                   <div key={el.id}>
                     <div className="students-work students-work-slider">
-                      <Image loading='eager' unoptimized width={150} height={250} layout="intrinsic" src={el.url} alt={directionCardList?.direction} />
+                      <Image loading='eager' unoptimized width={0} height={0} layout="responsive" src={el.url} alt={directionCardList?.direction} />
                     </div>
                   </div>
                 ))}
