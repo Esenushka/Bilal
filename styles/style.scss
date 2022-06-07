@@ -618,14 +618,21 @@ $color: #66097b;
   align-items: center;
   overflow: hidden;
   span {
+    width: fit-content !important;
+    height: fit-content !important;
       span {
         height: fit-content !important;
       }
     }
   img {
+    
     height: max-content !important;
     max-height: fit-content !important;
+    max-height: -webkit-fit-content !important;
+    min-height: -webkit-fit-content !important;
+    height: -webkit-fit-content !important;
     min-height: fit-content !important;
+    object-fit: contain;
     border-radius: 30px;
   }
 
