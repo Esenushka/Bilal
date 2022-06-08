@@ -88,7 +88,7 @@ export default function NewBlog() {
         <>
             <Link href="/admin/blog">
                 <div className='back-to-dasboard'>
-                    <Image
+                    <Image loading="eager"
                         unoptimized
                         width={40}
                         height={40}
@@ -109,7 +109,7 @@ export default function NewBlog() {
                         </div>
                         <div className={"post-img " + (!file ? "blogImage" : "")}>
                             {
-                                <Image
+                                <Image loading="eager"
                                     unoptimized
                                     width={1000}
                                     height={1000}
@@ -141,7 +141,7 @@ export default function NewBlog() {
                         <div className={'blog-img_main ' + (!fileSecond ? "blogImage" : "")}>
                             <input required onChange={({ target }) => handleChange(target, setFileSecondData, setFileSecond)} type={"file"} />
                             {
-                                <Image
+                                <Image loading="eager"
                                     unoptimized
                                     width={1000}
                                     height={1000}

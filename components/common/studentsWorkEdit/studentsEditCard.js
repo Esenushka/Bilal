@@ -25,14 +25,14 @@ export default function StudentsEditCard({ id, direction }) {
             <div className='response-students'>
                 <Link href={"/admin/studentsWorks/newStudentWork?" + id} >
                     <a className="students-work students-add">
-                        <Image unoptimized width={300} height={450} src={"/add.png"} alt={"add"} />
+                        <Image loading="eager" unoptimized width={300} height={450} src={"/add.png"} alt={"add"} />
                     </a>
 
                 </Link>
                 {studentsWork.map((el) => (
                     <Link href={"/admin/studentsWorks/" + el.id} key={el.id}>
                         <a className="students-work">
-                            <Image unoptimized width={300} height={450} src={el.url} alt={el.name} />
+                            <Image loading="eager" unoptimized width={300} height={450} src={el.url} alt={el.name} />
                         </a>
                     </Link>
                 ))}

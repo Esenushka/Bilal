@@ -76,7 +76,7 @@ export default function KyrsCardInside({
             <Header />
             <div className="container">
                 <div className="kyrs-card_main-block">
-                    <Image
+                    <Image loading="eager"
                         unoptimized
                         src={url || "/file-image.png"}
                         alt={'Главная картинка'}
@@ -138,7 +138,7 @@ export default function KyrsCardInside({
             <div className="kyrs-card_info">
                 <div className="container">
                     <div>
-                        <Image
+                        <Image loading="eager"
                             unoptimized
                             src={secondImgUrl || "/file-image.png"}
                             alt={'Второя картинка'}
@@ -197,7 +197,7 @@ export default function KyrsCardInside({
             </div>
             <div className="container">
                 <div className="forma">
-                    <Image unoptimized
+                    <Image loading="eager" unoptimized
                         src="https://animationschool.ru/wp-content/themes/as_underscores_theme/images/sh5.png"
                         alt="leftFormImage" width={300} height={500} />
                     <form onSubmit={submit} >
@@ -234,7 +234,7 @@ export default function KyrsCardInside({
                             </div>
                         </label>
                     </form>
-                    <Image
+                    <Image loading="eager"
                         unoptimized
                         src="https://animationschool.ru/wp-content/themes/as_underscores_theme/images/sh6.png"
                         alt="rightFormImage"

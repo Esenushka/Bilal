@@ -8,7 +8,7 @@ export default function HeaderKyrsTop() {
         <>
             <div className='header-kyrs_wrapper'>
                 <div className='header-kyrs'>
-                    <Image
+                    <Image loading="eager"
                     unoptimized
                        
                         src="//animationschool.ru/wp-content/themes/as_underscores_theme/css/../images/ha1.png"
@@ -23,7 +23,7 @@ export default function HeaderKyrsTop() {
                         </button>
                     </div>
 
-                    <Image
+                    <Image loading="eager"
                     unoptimized
                       
                         src="//animationschool.ru/wp-content/themes/as_underscores_theme/css/../images/ha2.png"

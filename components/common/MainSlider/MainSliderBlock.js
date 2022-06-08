@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function MainSliderBlock({ url, name, des,id }) {
     return (
         <div className="main_slider-block">
-            <Image
+            <Image loading="eager"
                 unoptimized
                 width={1000}
                 height={1000}

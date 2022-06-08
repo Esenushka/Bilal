@@ -35,7 +35,7 @@ export default function Media() {
         <>
         <form onSubmit={submit} className='container medias_wrapper'>
             <div>
-                <Image
+                <Image loading="eager"
                     src={"/whatsapp.png"}
                     alt={"whatsapp"}
                     width={50}
@@ -44,7 +44,7 @@ export default function Media() {
                 <input onChange={(e) => setNewContacts({ ...newContacts, whatsapp: e.target.value })} placeholder="Whatsapp" defaultValue={contacts.whatsapp} required type={"tel"} />
             </div>
             <div>
-                <Image
+                <Image loading="eager"
                     src={"/telegram.png"}
                     alt={"telegram"}
                     width={50}
@@ -53,7 +53,7 @@ export default function Media() {
                 <input onChange={(e) => setNewContacts({ ...newContacts, telegram: e.target.value })} placeholder="Telegram" defaultValue={contacts.telegram} required type={"text"} />
             </div>
             <div>
-                <Image
+                <Image loading="eager"
                     src={"/instagram.png"}
                     alt={"instagram"}
                     width={50}
@@ -62,7 +62,7 @@ export default function Media() {
                 <input onChange={(e) => setNewContacts({ ...newContacts, instagram: e.target.value })} placeholder="Instagram" defaultValue={contacts.instagram} required type={"text"} />
             </div>
             <div>
-                <Image
+                <Image loading="eager"
                     src={"/gmail.png"}
                     alt={"gmail"}
                     width={50}
@@ -71,7 +71,7 @@ export default function Media() {
                 <input onChange={(e) => setNewContacts({ ...newContacts, gmail: e.target.value })} placeholder="Email" defaultValue={contacts.gmail} required type={"email"} />
             </div>
             <div>
-                <Image
+                <Image loading="eager"
                     src={"/telephone.png"}
                     alt={"telephone"}
                     width={50}

@@ -41,7 +41,7 @@ export default function BlogEdit() {
               <Link href={"/admin/blog/new-blog"}>
                   <a>
                       <div className="blog-card blog-add">
-                          <Image unoptimized width={550} height={220} src={"/add.png"} alt={"add"} />
+                          <Image loading="eager" unoptimized width={550} height={220} src={"/add.png"} alt={"add"} />
                       </div>
                   </a>
               </Link>

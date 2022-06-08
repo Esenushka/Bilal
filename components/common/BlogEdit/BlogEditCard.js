@@ -15,6 +15,8 @@ export default function BlogEditCard() {
     const [fileSecondData, setFileSecondData] = useState("");
     const [active, setActive] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const [more, setMore] = useState([])
+
 
     const rout = useRouter()
     const id = rout.query.id
@@ -27,12 +29,12 @@ export default function BlogEditCard() {
                 snapshot.forEach((doc) => {
                     if (doc.id === id) {
                         setBlog({ ...doc.data(), id: doc.id })
+                        setMore([...doc.data().more])
                     }
                 })
             })
+
     }, [id]);
-
-
 
     const getUrl = async (name) => await storageRef
         .ref()
@@ -55,13 +57,29 @@ export default function BlogEditCard() {
 
     };
 
+    const handleChangeMore = (target, index, img) => {
+        if (target.files.length) {
+            const reader = new FileReader();
+            reader.readAsDataURL(target.files[0]);
+            reader.onload = (e) => {
+                const newUrl = e.target.result;
+                more[index] = { file: newUrl, img: img, type: "img", fileData: target.files[0] }
+                setMore([...more]);
+            };
+        }
+
+    };
+
+    const handleChangeText = (e, index) => {
+        more[index] = { text: e.target.value, type: "text" }
+        setMore([...more])
+    }
 
 
     const submit = (e) => {
         e.preventDefault()
         const data = {
             ...newBlog,
-            date: new Date().toLocaleDateString()
         }
         setActive(true)
         for (let key in data) {
@@ -71,6 +89,21 @@ export default function BlogEditCard() {
                 })
             }
         }
+        more.forEach((el, index) => {
+            if (el.fileData) {
+                storageRef.ref("items/" + el.fileData.name).put(el.fileData).then(() => {
+                    getUrl(el.fileData.name).then((url) => {
+                        more[index] = { img: url, type: "img" }
+                        setMore([...more])
+                        db.collection("blog").doc(id).update({
+                            more: more
+                        })
+                    })
+                })
+            }
+        })
+        
+
         if (fileData) {
             storageRef.ref("items/" + fileData.name).put(fileData).then(() => {
                 getUrl(fileData.name).then((url) => {
@@ -100,15 +133,26 @@ export default function BlogEditCard() {
         }
     }
 
-    if(isLoading){
-        return <Preloader full/>
+    const addImage = () => {
+        setMore([...more, { img: "", type: "img" }])
+    }
+
+    const addText = () => {
+
+        setMore([...more, { text: "", type: "text" }])
+    }
+
+    console.log(more);
+
+    if (isLoading) {
+        return <Preloader full />
     }
 
     return (
         <>
             <Link href="/admin/blog">
                 <div className='back-to-dasboard'>
-                    <Image
+                    <Image loading="eager"
                         unoptimized
                         width={40}
                         height={40}
@@ -130,13 +174,13 @@ export default function BlogEditCard() {
                         </div>
                         <div className={"post-img "}>
                             {
-                                file ? <Image
+                                file ? <Image loading="eager"
                                     unoptimized
                                     width={1000}
                                     height={1000}
                                     src={file}
                                     alt="Post image" /> :
-                                    <Image
+                                    <Image loading="eager"
                                         unoptimized
                                         width={1000}
                                         height={1000}
@@ -153,7 +197,7 @@ export default function BlogEditCard() {
                     <div className='post-content'>
                         <div className='blog-date'>
                             {
-                                new Date().toLocaleDateString()
+                                <input type="date" onChange={(e) => setNewBlog({ ...newBlog, date: e.target.value })} defaultValue={blog.date} />
                             }
                         </div>
                         <div className='blog-text_wrapper'>
@@ -168,13 +212,13 @@ export default function BlogEditCard() {
                             <input onChange={({ target }) => handleChange(target, setFileSecondData, setFileSecond)} type={"file"} />
                             {
                                 fileSecond ?
-                                    <Image
+                                    <Image loading="eager"
                                         unoptimized
                                         width={1000}
                                         height={1000}
                                         src={fileSecond}
                                         alt="Post image" />
-                                    : <Image
+                                    : <Image loading="eager"
                                         unoptimized
                                         width={1000}
                                         height={1000}
@@ -192,9 +236,50 @@ export default function BlogEditCard() {
                                 </div>
                             </div>
                         </div>
+                        {
+                            more?.map((el, index) =>
+                                el.img !== undefined ? <div key={index} className='blog-img_main'>
+                                    <input onChange={({ target }) => handleChangeMore(target, index, el.img)} type={"file"} />
+                                    {
+                                        el.file ?
+                                            <Image loading="eager"
+                                                unoptimized
+                                                width={1000}
+                                                height={1000}
+                                                src={el.file}
+                                                alt="Post image" />
+                                            : <Image loading="eager"
+                                                unoptimized
+                                                width={1000}
+                                                height={1000}
+                                                src={el.img || "/file-image.png"}
+                                                alt="Post image" />
 
+                                    }
+                                </div> : <div key={index} className='blog-text_wrapper'>
+                                    <div className='blog-text_wrapper'>
+                                        <div className='blog-text'>
+                                            <textarea
+                                                onChange={(e) => handleChangeText(e, index)}
+                                                required defaultValue={el.text}>
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            )
+                        }
+                        <div className="btn-wrapper buttons blog-btn">
+                            <div onClick={addImage}>
+                                Добавить фото
+                            </div>
+                            <div onClick={addText}>
+                                Добавить Текст
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div className="btn-wrapper buttons">
                     <button className="btn">
                         Сохранить

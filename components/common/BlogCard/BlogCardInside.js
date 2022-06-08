@@ -36,7 +36,7 @@ export default function BlogCardInside() {
             <h2>{blog.title}</h2>
           </div>
           <div className="post-img">
-            <Image unoptimized width={1000} height={1000} src={blog.titleImg || "/file-image.png"} alt="Post image" />
+            <Image loading="eager" unoptimized width={1000} height={1000} src={blog.titleImg || "/file-image.png"} alt="Post image" />
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default function BlogCardInside() {
             
           </div>
           <div className='blog-img_main'>
-            <Image unoptimized width={1000} height={1000} src={blog.MainImg || "/file-image.png"} alt="Post image" />
+            <Image loading="eager" unoptimized width={1000} height={1000} src={blog.MainImg || "/file-image.png"} alt="Post image" />
           </div>
           <div className='blog-text_wrapper'>
             <div className="blog-text">

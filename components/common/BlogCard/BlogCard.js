@@ -10,7 +10,7 @@ export default function BlogCard({ MainImg, title, FirstText, id }) {
     <Link href={router.pathname === "/admin/blog" ? `/admin/blog/${id}` : `/blog/${id}`}>
       <a>
         <div className="blog-card">
-          <Image unoptimized width={550} height={220} src={MainImg || "/file-image.png"} alt={title} />
+          <Image loading="eager" unoptimized width={550} height={220} src={MainImg || "/file-image.png"} alt={title} />
           <div className="blog_text">
             <div>{title}</div>
             <div>{FirstText}</div>

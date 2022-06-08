@@ -6,7 +6,7 @@ export default function KyrsQuizCard(props) {
   return (
           <Link key={props.id} href={"/kyrsy/" + props.id}>
               <div className="kyrs-card kyrs-card_quiz">
-                  <Image
+                  <Image loading="eager"
                       unoptimized
                       src={props.url}
                       alt={props.title}

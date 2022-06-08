@@ -74,7 +74,7 @@ export default function StudentsWorkPage() {
       <div className='container'>
         <div className="step_wrapper kyrs_wrapper">
           {
-            <Image
+            <Image loading="eager"
               className={'kyrs-fade_left '}
               width={270}
               height={270}
@@ -89,7 +89,7 @@ export default function StudentsWorkPage() {
               <button className="btn">ПРОЙТИ ОПРОС</button>
             </Link>
           </div>
-          <Image className={'kyrs-fade_right '} width={250} height={250} src={'/sh2.png'} alt="sh2" />
+          <Image loading="eager" className={'kyrs-fade_right '} width={250} height={250} src={'/sh2.png'} alt="sh2" />
         </div>
       </div>
     </div>

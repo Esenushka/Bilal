@@ -31,6 +31,21 @@ $color: #66097b;
   justify-content: center;
   height: 100px;
 }
+.back-to{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50px;
+}
+.edit-card{
+  img{
+    margin: 0 !important;
+    height: fit-content !important;
+    min-height: fit-content !important;
+  object-fit: contain !important;
+  border-radius: 0 0 0 30px;
+  }
+}
 .admin_navbar {
   position: absolute;
   width: 510px;
@@ -353,6 +368,21 @@ $color: #66097b;
 .quiz-kyrs_card{
   width: fit-content;
   margin: 25px auto;
+}
+.blog-btn{
+  margin-top: 35px;
+  div{
+    border: 1px solid $color;
+    padding: 10px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    color: $color;
+    transition: .3s;
+  }
+  div:hover{
+    background: $color;
+    color: white;
+  }
 }
 @media (max-width: 960px) {
   .edit-info_input {

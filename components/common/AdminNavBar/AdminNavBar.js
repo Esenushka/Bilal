@@ -27,7 +27,7 @@ export default function AdminNavBar() {
                             <div style={{ "--clr": "#77d94a" }}>
                                 <span className='icon'>
 
-                                    <Image
+                                    <Image loading="eager"
                                         src="/online-course.png"
                                         alt='course'
                                         width={35}
@@ -42,7 +42,7 @@ export default function AdminNavBar() {
                             <p>Работа студетов</p>
                             <div style={{ "--clr": "#d9944a" }} >
                                 <span className='icon'>
-                                    <Image
+                                    <Image loading="eager"
                                         src="/graduated.png"
                                         alt='course'
                                         width={35}
@@ -58,7 +58,7 @@ export default function AdminNavBar() {
 
                             <div style={{ "--clr": "#5b4ad9" }}>
                                 <span className='icon'>
-                                    <Image
+                                    <Image loading="eager"
                                         src="/social-media.png"
                                         alt='course'
                                         width={35}
@@ -74,7 +74,7 @@ export default function AdminNavBar() {
 
                             <div style={{ "--clr": "#d94abe" }} >
                                 <span className='icon'>
-                                    <Image
+                                    <Image loading="eager"
                                         src="/blogging.png"
                                         alt='course'
                                         width={35}
@@ -89,7 +89,7 @@ export default function AdminNavBar() {
                             <p>Главная</p>
                             <div style={{ "--clr": "#d9944a" }} >
                                 <span className='icon'>
-                                    <Image
+                                    <Image loading="eager"
                                         src="/home.png"
                                         alt='course'
                                         width={35}
@@ -105,7 +105,7 @@ export default function AdminNavBar() {
 
                             <div style={{ "--clr": "#d94a4a" }} >
                                 <span className='icon'>
-                                    <Image
+                                    <Image loading="eager"
                                         src="/logout.png"
                                         alt='course'
                                         width={35}
@@ -121,7 +121,7 @@ export default function AdminNavBar() {
             <div className='header container'>
                 <div className="logo">
                     <NavLink href={'/'}>
-                        <Image width={100} height={100} src="/b2.png" alt="Logo" />
+                        <Image loading="eager" width={100} height={100} src="/b2.png" alt="Logo" />
                     </NavLink>
                 </div>
                 <div

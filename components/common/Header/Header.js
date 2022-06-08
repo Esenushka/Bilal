@@ -11,7 +11,7 @@ export default function Header() {
         <div className="header">
           <div className="logo">
             <NavLink href={'/'}>
-              <Image width={100} height={100} src="/b2.png" alt="Logo" />
+              <Image loading="eager" width={100} height={100} src="/b2.png" alt="Logo" />
             </NavLink>
           </div>
           <div className="navbar">
@@ -24,7 +24,7 @@ export default function Header() {
                 <div>+996 559 98 07 07</div>
                 <div>
                   {' '}
-                  <Image width={50} height={50} src="/phone-button.png" alt="phoneButton" />
+                  <Image loading="eager" width={50} height={50} src="/phone-button.png" alt="phoneButton" />
                 </div>
               </div>
               <div className="header_phone-modal">

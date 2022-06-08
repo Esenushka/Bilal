@@ -141,17 +141,19 @@ export default function NewKyrs() {
   }
   return (
     <form onSubmit={submit} className='kyrs-edit-card'>
-      <Link href="/admin/dashboard">
-        <div className='back-to-dasboard'>
-          <Image
-            unoptimized
-            width={40}
-            height={40}
-            alt='arrow'
-            src={"/right-arrow.png"}
-          />
-        </div>
-      </Link>
+      <div className='back-to'>
+        <Link href="/admin/dashboard">
+          <div className='back-to-dasboard'>
+            <Image loading="eager"
+              unoptimized
+              width={40}
+              height={40}
+              alt='arrow'
+              src={"/right-arrow.png"}
+            />
+          </div>
+        </Link>
+      </div>
       <div className='direction_edit-kyrs container'>
         <h4>Напровления</h4>
         <input
@@ -168,13 +170,13 @@ export default function NewKyrs() {
         </div>
         <div className={"kyrs-card_main-block edit-card " + (!file ? "activeImage" : "")}>
           {
-            file ? <Image
+            file ? <Image loading="eager"
               unoptimized
               src={file}
               alt={'Главная картинка'}
               width={300}
               height={500}
-            /> : <Image
+            /> : <Image loading="eager"
               unoptimized
               src={"/file-image.png"}
               alt={'Главная картинка'}
@@ -206,7 +208,7 @@ export default function NewKyrs() {
                       required
                       onChange={(e) => addTeacher(e, index)}
                       type={"text"} />
-                    <Image onClick={() => removeTeacher(index)} src={"/minus.png"} alt="deleteImg" width={1000} height={1000} />
+                    <Image loading="eager" onClick={() => removeTeacher(index)} src={"/minus.png"} alt="deleteImg" width={1000} height={1000} />
                   </label>
                   )
                     : <label>
@@ -216,7 +218,7 @@ export default function NewKyrs() {
                     </label>
                 }
                 <div className='add-edit-image'>
-                  <Image
+                  <Image loading="eager"
                     onClick={() => setTeachers([...teachers, ""])}
                     src={"/add.png"}
                     alt="addImg"
@@ -247,7 +249,7 @@ export default function NewKyrs() {
             <div className="kyrs-card-text_block">
               <div>Длительность:</div>
               <div>
-                <input type={"number"}
+                <input type={"text"}
                   required
                   onChange={(e) => { setNewData({ ...newData, duration: e.target.value }) }}
                 />
@@ -302,13 +304,13 @@ export default function NewKyrs() {
           <div className={!fileSecond ? "activeImage" : ""}>
             {
               fileSecond ?
-                <Image
+                <Image loading="eager"
                   unoptimized
                   src={fileSecond}
                   alt={'Второя картинка'}
                   width={600}
                   height={700}
-                /> : <Image
+                /> : <Image loading="eager"
                   unoptimized
                   src={"/file-image.png"}
                   alt={'Второя картинка'}

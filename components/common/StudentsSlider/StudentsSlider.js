@@ -13,7 +13,7 @@ export default function StudentsSlider({ id, home }) {
     dots: false,
     infinite: true,
     speed: 500,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 4000,
     pauseOnHover: false,
     centerPadding: '120px',

@@ -132,7 +132,7 @@ export default function Quiz() {
                             directionCardList.map((el) => (
                                 child == el.dataChild ? <Link key={el.id} href={"/kyrsy/" + el.id}>
                                     <div className="kyrs-card quiz-kyrs_card ">
-                                        <Image
+                                        <Image loading="eager"
                                             unoptimized
                                             src={el.url}
                                             alt={el.title}

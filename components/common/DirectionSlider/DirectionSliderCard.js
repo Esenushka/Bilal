@@ -8,7 +8,7 @@ export default function DirectionSliderCard({ url, direction, id, urlDirection }
     return (
         <div>
             <div className='direction_card'>
-                <Image
+                <Image loading="eager"
                     unoptimized
                     width={255}
                     height={230}

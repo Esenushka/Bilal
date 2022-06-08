@@ -217,17 +217,19 @@ export default function KyrsEditCard() {
     return (
         <>
             <form onSubmit={submit} className='kyrs-edit-card'>
-                <Link href="/admin/dashboard">
-                    <div className='back-to-dasboard'>
-                        <Image
-                            unoptimized
-                            width={40}
-                            height={40}
-                            alt='arrow'
-                            src={"/right-arrow.png"}
-                        />
-                    </div>
-                </Link>
+                <div className='back-to'>
+                    <Link href="/admin/dashboard">
+                        <div className='back-to-dasboard'>
+                            <Image loading="eager"
+                                unoptimized
+                                width={40}
+                                height={40}
+                                alt='arrow'
+                                src={"/right-arrow.png"}
+                            />
+                        </div>
+                    </Link>
+                </div>
                 <div className='direction_edit-kyrs container'>
                     <h4>Напровления</h4>
                     <input
@@ -242,13 +244,13 @@ export default function KyrsEditCard() {
                     </div>
                     <div className="kyrs-card_main-block edit-card">
                         {
-                            file ? <Image
+                            file ? <Image loading="eager"
                                 unoptimized
                                 src={file}
                                 alt={'Главная картинка'}
                                 width={300}
                                 height={500}
-                            /> : <Image
+                            /> : <Image loading="eager"
                                 unoptimized
                                 src={url || "/file-image.png"}
                                 alt={'Главная картинка'}
@@ -281,7 +283,7 @@ export default function KyrsEditCard() {
                                                 defaultValue={el}
                                                 onChange={(e) => addTeacher(e, index)}
                                                 type={"text"} />
-                                            <Image onClick={() => removeTeacher(index)} src={"/minus.png"} alt="deleteImg" width={1000} height={1000} />
+                                            <Image loading="eager" onClick={() => removeTeacher(index)} src={"/minus.png"} alt="deleteImg" width={1000} height={1000} />
                                         </label>
                                         )
                                             : <label>
@@ -291,7 +293,7 @@ export default function KyrsEditCard() {
                                             </label>
                                     }
                                     <div className='add-edit-image'>
-                                        <Image
+                                        <Image loading="eager"
                                             onClick={() => setTeachers([...teachers, ""])}
                                             src={"/add.png"}
                                             alt="addImg"
@@ -325,7 +327,7 @@ export default function KyrsEditCard() {
                             <div className="kyrs-card-text_block">
                                 <div>Длительность:</div>
                                 <div>
-                                    <input type={"number"}
+                                    <input type={"text"}
                                         required
                                         onChange={(e) => { setNewData({ ...newData, duration: e.target.value }) }}
                                         defaultValue={duration} />
@@ -379,13 +381,13 @@ export default function KyrsEditCard() {
                         <div>
                             {
                                 fileSecond ?
-                                    <Image
+                                    <Image loading="eager"
                                         unoptimized
                                         src={fileSecond}
                                         alt={'Второя картинка'}
                                         width={600}
                                         height={700}
-                                    /> : <Image
+                                    /> : <Image loading="eager"
                                         unoptimized
                                         src={secondImgUrl || "/file-image.png"}
                                         alt={'Второя картинка'}
@@ -404,13 +406,13 @@ export default function KyrsEditCard() {
                             <div className="kyrs-card_about-block">
                                 <div className="kyrs-card_about-title">ДЛЯ КОГО ЭТОТ КУРС?</div>
                                 <div className="kyrs-card_about-des">
-                                    <textarea required defaultValue={forWho}></textarea>
+                                    <textarea required onChange={(e)=>{setNewData({...newData,forWho: e.target.value})}} defaultValue={forWho}></textarea>
                                 </div>
                             </div>
                             <div className="kyrs-card_about-block">
                                 <div className="kyrs-card_about-title">О КУРСЕ</div>
                                 <div className="kyrs-card_about-des">
-                                    <textarea required defaultValue={about}></textarea>
+                                    <textarea required onChange={(e) => { setNewData({ ...newData,  about: e.target.value }) }} defaultValue={about}></textarea>
                                 </div>
                             </div>
                         </div>
@@ -426,7 +428,7 @@ export default function KyrsEditCard() {
                                 </div>
                                 <div>{el.des}</div>
                                 <div onClick={() => { deleteComment(el.id) }} className='delete-comment'>
-                                    <Image src='/close.png' alt='close' width={30} height={30} />
+                                    <Image loading="eager" src='/close.png' alt='close' width={30} height={30} />
                                 </div>
                             </div>
                         ))

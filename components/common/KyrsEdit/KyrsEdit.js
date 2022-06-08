@@ -41,7 +41,7 @@ export default function KyrsEdit() {
                }
                 <Link href={"/admin/kyrs/newKyrs"}>
                     <div className="kyrs-card edit-card-add">
-                        <Image
+                        <Image loading="eager"
                             src={"/add.png"}
                             alt="addImg"
                             width={350}

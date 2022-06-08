@@ -10,7 +10,7 @@ export default function KyrsCard({ url, title, teachers, start, duration, price,
     return (
         <Link href={router.pathname === "/admin/dashboard" ? ("/admin/kyrs/" + id) : ("/kyrsy/" + id)}>
             <div className="kyrs-card">
-                <Image
+                <Image loading="eager"
                     unoptimized
                     src={url}
                     alt={title}
@@ -48,7 +48,7 @@ export default function KyrsCard({ url, title, teachers, start, duration, price,
                                     duration
                                 }
                                 {
-                                    duration == 1 ? " час" : duration == 2 ? " часа" : " часов"
+                                    Number(duration) <= 1 ? " час" : Number(duration) < 5 ? " часа" : " часов"
                                 }
                             </div>
                         </div>

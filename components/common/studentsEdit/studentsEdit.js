@@ -88,31 +88,33 @@ export default function StudentsEdit({ idData }) {
     }
     return (
         <div className='edit-students_wrapper'>
-            <Link href="/admin/studentsWorks">
-                <div className='back-to-dasboard'>
-                    <Image
-                        unoptimized
-                        width={40}
-                        height={40}
-                        alt='arrow'
-                        src={"/right-arrow.png"}
-                    />
-                </div>
-            </Link>
+            <div className='back-to'>
+                <Link href="/admin/studentsWorks">
+                    <div className='back-to-dasboard'>
+                        <Image loading="eager"
+                            unoptimized
+                            width={40}
+                            height={40}
+                            alt='arrow'
+                            src={"/right-arrow.png"}
+                        />
+                    </div>
+                </Link>
+            </div>
             <div className='kyrs-cards_wrapper edit-students'>
                 <a className={"students-work "}>
                     <form onSubmit={submit}>
                         <input type={"file"} onChange={({ target }) => handleChange(target)} />
                         {
                             file ?
-                                <Image
+                                <Image loading="eager"
                                     unoptimized
                                     width={300}
                                     height={450}
                                     src={file}
                                     alt={studentsWork.name}
                                 /> :
-                                <Image
+                                <Image loading="eager"
                                     unoptimized
                                     width={300}
                                     height={450}
