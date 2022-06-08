@@ -615,16 +615,12 @@ $color: #66097b;
   display: flex;
   justify-content: center;
   position: relative;
-  border-radius: 30px;
-  span{
-    border-radius: 30px;
-  }
+ 
   img {
     object-fit: contain;
     height: max-content !important;
     max-height: max-content !important;
     min-height: max-content !important;
-   border-radius: 30px;
    
   }
 
