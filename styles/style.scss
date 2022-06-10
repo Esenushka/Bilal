@@ -774,7 +774,7 @@ $color: #66097b;
 @media (max-width: 960px) {
   .main-video {
     margin-bottom: 50px;
-
+    height: 400px;
     video {
       width: 100%;
       border-radius: 15px;
@@ -825,7 +825,9 @@ $color: #66097b;
   .response_direction {
     display: block;
   }
-
+.main-video{
+  height: 320px;
+}
   .main_slider-block {
     width: 55%;
     margin: 0 auto;
@@ -870,11 +872,16 @@ $color: #66097b;
   .main_slider-block_des {
     font-size: 22px;
   }
+  .main-video{
+    height: 250px;
+  }
 }
 
 @media (max-width: 600px) {
   .main-video {
+    height: 200px;
     padding: 0 !important;
+    
 
     video {
       border-radius: 0;
@@ -1017,6 +1024,9 @@ $color: #66097b;
 }
 
 @media (max-width: 440px) {
+  .main-video{
+    height: 150px;
+  }
   .main_slider-block_name {
     font-size: 30px;
     font-weight: 700;
@@ -1024,5 +1034,10 @@ $color: #66097b;
 
   .kyrs-card_quiz {
     width: 100% !important;
+  }
+}
+@media(max-width: 330px){
+  .main-video{
+    height: 100px;
   }
 }

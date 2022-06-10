@@ -6,7 +6,7 @@ export default function MainSlider({directionCardList}) {
         dots: false,
         infinite: true,
         speed: 500,
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 2000,
         pauseOnHover: true,
         centerPadding: "0px",
