@@ -6,7 +6,7 @@ import { db } from '../../../config/firebase.js';
 import { useRouter } from "next/router"
 import Preloader from '../Preloader/Preloader.js';
 
-export default function StudentsSlider({ id, home }) {
+export default function StudentsSlider({ id, home,notStudents }) {
   const rout = useRouter()
 
   const settings = {
@@ -111,38 +111,41 @@ export default function StudentsSlider({ id, home }) {
   return (
 
     <>
-      <div className='students_wrapper'>
-        {
-          students.length < 4 ?
-            <>
+      {
+        notStudents ? "" : 
+          <div className='students_wrapper'>
+            {
+              students.length < 4 ?
+                <>
 
-              <div className='direction-title'>{directionCardList?.direction}</div>
-              <div className='response-students'>
+                  <div className='direction-title'>{directionCardList?.direction}</div>
+                  <div className='response-students'>
 
-                {students.map((el) => (
-                  <div className="students-work" key={el.id}>
-                    <Image loading='eager' unoptimized layout="intrinsic" width={300} height={450} src={el.url} alt={directionCardList?.direction} />
+                    {students.map((el) => (
+                      <div className="students-work" key={el.id}>
+                        <Image loading='eager' unoptimized layout="intrinsic" width={300} height={450} src={el.url} alt={directionCardList?.direction} />
 
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </>
+                </>
 
 
-            : <div className='students_slider-wrapper'>
-              {!home ? <div className='direction-title'>{directionCardList?.direction}</div> : ""}
-              <Slider {...settings}>
-                {students.map((el) => (
-                  <div key={el.id}>
-                    <div className="students-work students-work-slider">
-                      <Image loading='eager' unoptimized width={300} height={450}  layout="intrinsic" src={el.url} alt={directionCardList?.direction} />
-                    </div>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-        }
-      </div>
+                : <div className='students_slider-wrapper'>
+                  {!home ? <div className='direction-title'>{directionCardList?.direction}</div> : ""}
+                  <Slider {...settings}>
+                    {students.map((el) => (
+                      <div key={el.id}>
+                        <div className="students-work students-work-slider">
+                          <Image loading='eager' unoptimized width={300} height={450} layout="intrinsic" src={el.url} alt={directionCardList?.direction} />
+                        </div>
+                      </div>
+                    ))}
+                  </Slider>
+                </div>
+            }
+          </div>
+      }
     </>
   );
 }

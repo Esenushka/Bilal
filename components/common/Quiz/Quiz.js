@@ -49,10 +49,10 @@ export default function Quiz() {
     }, [])
 
     return (
-        <div className='quiz_wrapper'>
+        <div id='quiz' className='quiz_wrapper'>
             <div className='quiz' >
                 <div className='quiz_block-wrapper active'>
-                    <div id="quiz" className='quiz_block active'>
+                    <div className='quiz_block active'>
                         <div className='quiz_title'>ТОЛЬКО НАЧИНАЕТЕ СВОЙ ПУТЬ В МИР ИСКУССТВО ?</div>
                         <div className='quiz_des'>
                             Пройдите квиз и узнайте, какая профессия

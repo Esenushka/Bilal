@@ -12,6 +12,7 @@ export default function NewStudentWork({ idData }) {
 
     const rout = useRouter()
     const id = Object.keys(rout.query)[0]
+    const direction = Object.keys(rout.query)[1]
 
     const getUrl = async (name) => await storageRef
         .ref()
@@ -45,7 +46,7 @@ export default function NewStudentWork({ idData }) {
                         ...newStudentWork, url: url
                     }).then(() => {
                         setActive(false)
-                        rout.push("/admin/studentsWorks")
+                        rout.push("/admin/studentsWorks?" + direction)
                     })
                 })
             })
@@ -56,7 +57,7 @@ export default function NewStudentWork({ idData }) {
     return (
         <div className='edit-students_wrapper'>
             <div className='back-to'>
-                <Link href="/admin/studentsWorks">
+                <Link href={"/admin/studentsWorks?" + direction}>
                     <div className='back-to-dasboard'>
                         <Image loading="eager"
                             unoptimized

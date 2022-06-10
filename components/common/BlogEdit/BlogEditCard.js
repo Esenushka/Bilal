@@ -8,6 +8,8 @@ import firebase from "firebase/compat/app";
 
 export default function BlogEditCard() {
     const [blog, setBlog] = useState({})
+    const [blogData, setBlogData] = useState({})
+
     const [newBlog, setNewBlog] = useState({})
     const [file, setFile] = useState("");
     const [fileData, setFileData] = useState("");
@@ -16,7 +18,7 @@ export default function BlogEditCard() {
     const [active, setActive] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [more, setMore] = useState([])
-
+    const [added, setAdded] = useState(0)
 
     const rout = useRouter()
     const id = rout.query.id
@@ -26,15 +28,18 @@ export default function BlogEditCard() {
             .get()
             .then((snapshot) => {
                 setIsLoading(false)
+                const blogs = []
                 snapshot.forEach((doc) => {
                     if (doc.id === id) {
+                        blogs.push({...doc.data(),id:doc.id})
                         setBlog({ ...doc.data(), id: doc.id })
                         setMore([...doc.data().more])
                     }
                 })
+                setBlogData(blogs)
             })
 
-    }, [id]);
+    }, [id, added]);
 
     const getUrl = async (name) => await storageRef
         .ref()
@@ -63,15 +68,20 @@ export default function BlogEditCard() {
             reader.readAsDataURL(target.files[0]);
             reader.onload = (e) => {
                 const newUrl = e.target.result;
-                more[index] = { file: newUrl, img: img, type: "img", fileData: target.files[0] }
-                setMore([...more]);
+                storageRef.ref("items/" + target.files[0].name).put(target.files[0]).then(() => {
+                    getUrl(target.files[0].name).then((url) => {
+                        more[index] = { img: url,file: newUrl }
+                        setMore([...more])
+                        
+                    })
+                })
             };
         }
 
     };
 
     const handleChangeText = (e, index) => {
-        more[index] = { text: e.target.value, type: "text" }
+        more[index] = { text: e.target.value }
         setMore([...more])
     }
 
@@ -88,21 +98,11 @@ export default function BlogEditCard() {
                     [key]: data[key]
                 })
             }
-        }
-        more.forEach((el, index) => {
-            if (el.fileData) {
-                storageRef.ref("items/" + el.fileData.name).put(el.fileData).then(() => {
-                    getUrl(el.fileData.name).then((url) => {
-                        more[index] = { img: url, type: "img" }
-                        setMore([...more])
-                        db.collection("blog").doc(id).update({
-                            more: more
-                        })
-                    })
-                })
-            }
+        }       
+
+        db.collection("blog").doc(id).update({
+            more: more
         })
-        
 
         if (fileData) {
             storageRef.ref("items/" + fileData.name).put(fileData).then(() => {
@@ -114,7 +114,7 @@ export default function BlogEditCard() {
         if (fileSecondData) {
             storageRef.ref("items/" + fileSecondData.name).put(fileSecondData).then(() => {
                 getUrl(fileSecondData.name).then((url) => {
-                    db.collection("blog").doc(id).update({ titleImg: url })
+                    db.collection("blog").doc(id).update({ MainImg: url })
                 })
             })
         }
@@ -134,15 +134,14 @@ export default function BlogEditCard() {
     }
 
     const addImage = () => {
-        setMore([...more, { img: "", type: "img" }])
+        setMore([...more, { img: ""}])
     }
 
     const addText = () => {
 
-        setMore([...more, { text: "", type: "text" }])
+        setMore([...more, { text: ""}])
     }
 
-    console.log(more);
 
     if (isLoading) {
         return <Preloader full />
@@ -164,8 +163,8 @@ export default function BlogEditCard() {
             <form onSubmit={submit} className='blog-edit_wrapper'>
 
                 <div className="container">
-                    <div className=" post-block-top">
-                        <div className="block-top">
+                    <div className=" post-block-top blog-top-edit">
+                        <div className="block-top ">
                             <textarea
                                 onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
                                 required
@@ -226,20 +225,10 @@ export default function BlogEditCard() {
                                         alt="Post image" />
                             }
                         </div>
-                        <div className='blog-text_wrapper'>
-                            <div className='blog-text_wrapper'>
-                                <div className='blog-text'>
-                                    <textarea
-                                        onChange={(e) => setNewBlog({ ...newBlog, SecondText: e.target.value })}
-                                        required defaultValue={blog.SecondText}>
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
                         {
                             more?.map((el, index) =>
                                 el.img !== undefined ? <div key={index} className='blog-img_main'>
-                                    <input onChange={({ target }) => handleChangeMore(target, index, el.img)} type={"file"} />
+                                    <input required onChange={({ target }) => handleChangeMore(target, index, el.img)} type={"file"} />
                                     {
                                         el.file ?
                                             <Image loading="eager"
@@ -280,19 +269,20 @@ export default function BlogEditCard() {
                     </div>
                 </div>
 
-                <div className="btn-wrapper buttons">
-                    <button className="btn">
-                        Сохранить
-                    </button>
-                    <button onClick={Delete} className="btn btn-delete">
-                        Удалить
-                    </button>
-                </div>
+
                 <div onClick={() => setActive(false)} className={'updated ' + (active ? "active" : "")}>
                     Данные изменились
                 </div>
 
             </form>
+            <div className="btn-wrapper buttons">
+                <button onClick={submit} className="btn">
+                    Сохранить
+                </button>
+                <button onClick={Delete} className="btn btn-delete">
+                    Удалить
+                </button>
+            </div>
         </>
 
     );

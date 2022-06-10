@@ -61,32 +61,33 @@ $color: #66097b;
   }
 
   >div {
-    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     grid-gap: 20px;
     width: 100%;
     position: absolute;
-    left: 15px;
     bottom: 45px;
     text-align: center;
   }
 }
 
 .main_slider-block_name {
-  width: 90%;
+  margin: 0 auto;
+  width: fit-content;
   font-size: 30px;
   text-shadow: 4px 4px 0 rgb(0 0 0 / 24%);
 }
 
 .main_slider-block_des {
-  width: 90%;
+  margin: 0 auto;
+  width: fit-content;
   font-size: 20px;
   text-shadow: 4px 4px 0 rgb(0 0 0 / 24%);
 }
 
 .main_slider-block a {
+  margin-left: 15px;
   color: white;
   width: fit-content;
   display: flex;
@@ -731,6 +732,7 @@ $color: #66097b;
 }
 
 .main-video {
+  height: 520px;
   display: flex;
   justify-content: center;
   margin-bottom: 100px;

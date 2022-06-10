@@ -47,7 +47,7 @@ export default function StudentsWorkPage() {
       </div>
       <div className="kyrs-filter">
         {
-          directionCardList.map((el) => <Link key={el.id} href={router.pathname + "?" + el.urlDirection}>
+          directionCardList.map((el) => el.notStudents ? "" : <Link key={el.id} href={router.pathname + "?" + el.urlDirection}>
             <a className={query === el.urlDirection ? "active" : ""}>
               {el.direction}
             </a>

@@ -3,20 +3,43 @@ import { db, storageRef } from '../../../config/firebase.js';
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/router"
 import Link from "next/link"
+import Preloader from "../Preloader/Preloader.js";
 import firebase from "firebase/compat/app";
 
-export default function NewBlog() {
+export default function BlogEditCard() {
+    const [blog, setBlog] = useState({})
+    const [blogData, setBlogData] = useState({})
+
     const [newBlog, setNewBlog] = useState({})
     const [file, setFile] = useState("");
     const [fileData, setFileData] = useState("");
     const [fileSecond, setFileSecond] = useState("");
     const [fileSecondData, setFileSecondData] = useState("");
     const [active, setActive] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [more, setMore] = useState([])
+    const [added, setAdded] = useState(0)
 
     const rout = useRouter()
     const id = rout.query.id
 
+    useEffect(() => {
+        db.collection("blog")
+            .get()
+            .then((snapshot) => {
+                setIsLoading(false)
+                const blogs = []
+                snapshot.forEach((doc) => {
+                    if (doc.id === id) {
+                        blogs.push({ ...doc.data(), id: doc.id })
+                        setBlog({ ...doc.data(), id: doc.id })
+                        setMore([...doc.data().more])
+                    }
+                })
+                setBlogData(blogs)
+            })
 
+    }, [id, added]);
 
     const getUrl = async (name) => await storageRef
         .ref()
@@ -39,50 +62,73 @@ export default function NewBlog() {
 
     };
 
+    const handleChangeMore = (target, index, img) => {
+        if (target.files.length) {
+            const reader = new FileReader();
+            reader.readAsDataURL(target.files[0]);
+            reader.onload = (e) => {
+                const newUrl = e.target.result;
+                storageRef.ref("items/" + target.files[0].name).put(target.files[0]).then(() => {
+                    getUrl(target.files[0].name).then((url) => {
+                        more[index] = { img: url, file: newUrl }
+                        setMore([...more])
+
+                    })
+                })
+            };
+        }
+
+    };
+
+    const handleChangeText = (e, index) => {
+        more[index] = { text: e.target.value }
+        setMore([...more])
+    }
 
 
     const submit = (e) => {
         e.preventDefault()
-        const body = document.getElementsByTagName("body")[0]
-        const data = {
-            ...newBlog,
-            date: firebase.firestore.TimeStamp.fromDate(new Date())
-        }
-        body.style.overflowY = "hidden"
+
         setActive(true)
+
 
         if (fileData) {
             storageRef.ref("items/" + fileData.name).put(fileData).then(() => {
                 getUrl(fileData.name).then((url) => {
-                    data = {
-                        ...data,
-                        titleImg: url
-                    }
-                    storageRef.ref("items/" + fileSecondData.name).put(fileSecondData).then(() => {
-                        getUrl(fileSecondData.name).then((secondUrl) => {
-                            db.collection("blog").add({
-                                ...data,
-                                MainImg: secondUrl
+                    if (fileSecondData) {
+                        storageRef.ref("items/" + fileSecondData.name).put(fileSecondData).then(() => {
+                            getUrl(fileSecondData.name).then((url2) => {
+                                db.collection("blog").add({ ...newBlog, more: more, titleImg: url, MainImg: url2 })
+                                    .then(() => {
+                                        setActive(false)
+                                        rout.push("/admin/blog")
+                                    })
                             })
-                                .then(() => {
-                                    body.style.overflowY = "visible"
-                                    setActive(false)
-                                    router.push("/admin/blog")
-                                })
                         })
-                    })
+                    }
                 })
             })
         }
-        if (fileSecondData) {
+        
 
-        }
-        setTimeout(() => {
-            setActive(false)
-        }, 5000)
+
     }
 
 
+
+    const addImage = () => {
+        setMore([...more, { img: "" }])
+    }
+
+    const addText = () => {
+
+        setMore([...more, { text: "" }])
+    }
+
+
+    if (isLoading) {
+        return <Preloader full />
+    }
 
     return (
         <>
@@ -100,34 +146,32 @@ export default function NewBlog() {
             <form onSubmit={submit} className='blog-edit_wrapper'>
 
                 <div className="container">
-                    <div className=" post-block-top">
-                        <div className="block-top">
+                    <div className=" post-block-top blog-top-edit">
+                        <div className="block-top ">
                             <textarea
                                 onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
                                 required
                             ></textarea>
                         </div>
-                        <div className={"post-img " + (!file ? "blogImage" : "")}>
-                            {
-                                <Image loading="eager"
-                                    unoptimized
-                                    width={1000}
-                                    height={1000}
-                                    src={file || "/file-image.png"}
-                                    alt="Post image" />
+                        <div className={"post-img "}>
 
-                            }
+                            <Image loading="eager"
+                                unoptimized
+                                width={1000}
+                                height={1000}
+                                src={file || "/file-image.png"}
+                                alt="Post image" />
                         </div>
                     </div>
                     <div className='blog-file_input'>
                         <input required onChange={({ target }) => handleChange(target, setFileData, setFile)} type={"file"} />
                     </div>
                 </div>
-                <div className="container">
+                <div className="container blog-container">
                     <div className='post-content'>
                         <div className='blog-date'>
                             {
-                                new Date().toLocaleDateString()
+                                <input type="date" onChange={(e) => setNewBlog({ ...newBlog, date: e.target.value })} />
                             }
                         </div>
                         <div className='blog-text_wrapper'>
@@ -138,31 +182,54 @@ export default function NewBlog() {
                                 </textarea>
                             </div>
                         </div>
-                        <div className={'blog-img_main ' + (!fileSecond ? "blogImage" : "")}>
+                        <div className='blog-img_main'>
                             <input required onChange={({ target }) => handleChange(target, setFileSecondData, setFileSecond)} type={"file"} />
-                            {
-                                <Image loading="eager"
-                                    unoptimized
-                                    width={1000}
-                                    height={1000}
-                                    src={fileSecond || "/file-image.png"}
-                                    alt="Post image" />
-                            }
+
+                            <Image loading="eager"
+                                unoptimized
+                                width={1000}
+                                height={1000}
+                                src={fileSecond || "/file-image.png"}
+                                alt="Post image" />
+
                         </div>
-                        <div className='blog-text_wrapper'>
-                            <div className='blog-text_wrapper'>
-                                <div className='blog-text'>
-                                    <textarea
-                                        onChange={(e) => setNewBlog({ ...newBlog, SecondText: e.target.value })}
-                                        required >
-                                    </textarea>
+                        {
+                            more?.map((el, index) =>
+                                el.img !== undefined ? <div key={index} className='blog-img_main'>
+                                    <input required onChange={({ target }) => handleChangeMore(target, index, el.img)} type={"file"} />
+
+                                    <Image loading="eager"
+                                        unoptimized
+                                        width={1000}
+                                        height={1000}
+                                        src={el.file || "/file-image.png"}
+                                        alt="Post image" />
+
+                                </div> : <div key={index} className='blog-text_wrapper'>
+                                    <div className='blog-text_wrapper'>
+                                        <div className='blog-text'>
+                                            <textarea
+                                                onChange={(e) => handleChangeText(e, index)}
+                                                required>
+                                            </textarea>
+                                        </div>
+                                    </div>
                                 </div>
+
+                            )
+                        }
+                        <div className="btn-wrapper buttons blog-btn">
+                            <div onClick={addImage}>
+                                Добавить фото
+                            </div>
+                            <div onClick={addText}>
+                                Добавить Текст
                             </div>
                         </div>
-
                     </div>
                 </div>
-                <div className="btn-wrapper ">
+
+                <div className="btn-wrapper buttons">
                     <button className="btn">
                         Добавить
                     </button>

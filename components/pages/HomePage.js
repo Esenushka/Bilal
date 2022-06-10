@@ -62,7 +62,6 @@ export default function HomePage() {
             <Lessons />
             <div className='container'>
                 <div className='step_wrapper'>
-                    {innerWidth > 990 ? <Image loading="eager" className={'fade_left ' + (innerWidth > 1200 ? (offset > 3500 ? "active" : "") : (offset > 4100 ? "active" : ""))} width={270} height={270} src={"/sh1.png"} alt="sh1" /> : ""}
                     <div className='direction-title'>
                         ШАГНИТЕ В МИР ИСКУССТВО
                     </div>
@@ -77,7 +76,6 @@ export default function HomePage() {
                             <button className='btn'>ПРОЙТИ ОПРОС</button>
                         </a>
                     </div>
-                    {innerWidth > 990 ? <Image loading="eager" className={'fade_right ' + (innerWidth > 1200 ? (offset > 3500 ? "active" : "") : (offset > 4100 ? "active" : ""))} width={250} height={250} src={"/sh2.png"} alt="sh2" /> : ""}
                 </div>
             </div>
         </div>

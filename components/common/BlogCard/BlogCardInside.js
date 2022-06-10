@@ -44,7 +44,7 @@ export default function BlogCardInside() {
         <div className='post-content'>
           <div className='blog-date'>
             {
-              blog.date
+              new Date(blog.date).toLocaleDateString()
             }
           </div>
           <div className='blog-text_wrapper'>
@@ -56,14 +56,20 @@ export default function BlogCardInside() {
           <div className='blog-img_main'>
             <Image loading="eager" unoptimized width={1000} height={1000} src={blog.MainImg || "/file-image.png"} alt="Post image" />
           </div>
-          <div className='blog-text_wrapper'>
-            <div className="blog-text">
-                {
-                  blog.SecondText
-                }
+          {
+            blog?.more.map((el) => el.img ?
+              <div className='blog-img_main'>
+                <Image loading="eager" unoptimized width={1000} height={1000} src={el.img || "/file-image.png"} alt="Post image" />
+              </div> : <div className='blog-text_wrapper'>
+                <div className='blog-text'>
+                  {el.text}
+                </div>
+
               </div>
-          </div>
+            )
+          }
         </div>
+        
       </div>
     </div>
   );
