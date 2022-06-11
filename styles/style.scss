@@ -5,6 +5,13 @@ $color: #66097b;
   width: 100%;
   margin: 0 auto;
 }
+.main_wrapper{
+  height: 450px;
+}
+
+.direction_wrapper{
+  height: 400px;
+}
 
 @media (max-width: 1200px) {
   .container {
@@ -172,7 +179,7 @@ $color: #66097b;
 
 .response_direction {
   display: none;
-
+  height: calc(90px * 6);
   >a {
     color: black;
     background-color: #fff;
@@ -594,6 +601,7 @@ $color: #66097b;
   background-size: cover;
   .direction-title {
     margin-bottom: 15px;
+    text-shadow: none;
   }
 
   .studios_des {
@@ -883,7 +891,7 @@ $color: #66097b;
   .main-video {
     height: 200px;
     padding: 0 !important;
-    
+
 
     video {
       border-radius: 0;
@@ -1028,6 +1036,7 @@ $color: #66097b;
 @media (max-width: 440px) {
   .main-video{
     height: 150px;
+    margin-bottom: 15px;
   }
   .main_slider-block_name {
     font-size: 30px;
@@ -1040,6 +1049,7 @@ $color: #66097b;
 }
 @media(max-width: 330px){
   .main-video{
-    height: 100px;
+    height: 200px;
+    margin: 0;
   }
 }

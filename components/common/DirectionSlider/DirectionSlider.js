@@ -60,6 +60,7 @@ export default function DirectionSlider() {
 
     return (
         <div>
+            <div className="direction_wrapper">
             {
                 directionCardList?.length < 5 ? <div className='direction_cards'>
                     {directionCardList.map((el) => <DirectionSliderCard key={el.id} url={el.url}
@@ -78,10 +79,11 @@ export default function DirectionSlider() {
 
                     </Slider>
             }
-            <div className='response_direction container'>
+            </div>
+            <div  className='response_direction container'>
                 {
                     directionCardList.map((el) => <Link key={el.id} href={"/kyrsy" + "?" + el.urlDirection}>
-                        <a>
+                        <a >
                             <div>{el.direction}</div>
                             <div></div>
                         </a>
