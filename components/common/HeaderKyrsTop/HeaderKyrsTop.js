@@ -8,29 +8,11 @@ export default function HeaderKyrsTop() {
         <>
             <div className='header-kyrs_wrapper'>
                 <div className='header-kyrs'>
-                    <Image loading="eager"
-                    unoptimized
-                       
-                        src="//animationschool.ru/wp-content/themes/as_underscores_theme/css/../images/ha1.png"
-                        alt='header-kyrs_left'
-                        width={1000}
-                        height={200}
-                    />
-
                     <div className='btn_wrapper'>
                         <button onClick={() => setActive(!active)} className='btn'>
                             ЗАПИСАТЬСЯ НА КУРС
                         </button>
                     </div>
-
-                    <Image loading="eager"
-                    unoptimized
-                      
-                        src="//animationschool.ru/wp-content/themes/as_underscores_theme/css/../images/ha2.png"
-                        alt='header-kyrs_left'
-                        width={1000}
-                        height={200}
-                    />
                 </div>
             </div>
             <div onClick={() => setActive(false)} className={"block-top_modal " + (active ? "active" : "")}>
@@ -49,8 +31,12 @@ export default function HeaderKyrsTop() {
                             <option  value="" disabled>Нажмите и выбеите из списка</option>
                             <option value="Самостоятельно - интернет, сайты">Самостоятельно - интернет, сайты</option>
                             <option value="Instagram">Instagram</option>
-                            <option value="Самостоятельно - интернет, сайты">Самостоятельно - интернет, сайты</option>
-                            <option value="Самостоятельно - интернет, сайты">Самостоятельно - интернет, сайты</option>
+                            <option value="Через знакомых">
+                                Через знакомых
+                            </option>
+                            <option value="Раньше обучался">
+                                Раньше обучался
+                            </option>
                             <option value="Другое">Другое</option>
                         </select>
                         <div>выберите из списка</div>

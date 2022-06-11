@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export default function BlogCard({ titleImg, title, FirstText, id }) {
+export default function BlogCard({ titleImg, title, id,more }) {
   const router = useRouter();
 
   return (
@@ -13,7 +13,7 @@ export default function BlogCard({ titleImg, title, FirstText, id }) {
           <Image loading="eager" unoptimized width={550} height={220} src={titleImg || "/file-image.png"} alt={title} />
           <div className="blog_text">
             <div>{title}</div>
-            <div>{FirstText}</div>
+            <div>{more.find((el) => el.text)?.text}</div>
           </div>
         </div>
       </a>

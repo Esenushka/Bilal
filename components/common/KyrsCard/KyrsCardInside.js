@@ -197,9 +197,7 @@ export default function KyrsCardInside({
             </div>
             <div className="container">
                 <div className="forma">
-                    <Image loading="eager" unoptimized
-                        src="https://animationschool.ru/wp-content/themes/as_underscores_theme/images/sh5.png"
-                        alt="leftFormImage" width={300} height={500} />
+                   
                     <form onSubmit={submit} >
                         <div className="direction-title">ЗАПИСАТЬСЯ</div>
                         <input name='name' onChange={(e) => setName(e.target.value)} required type={'text'} placeholder="Введите ваше имя и фамлию" />
@@ -214,11 +212,11 @@ export default function KyrsCardInside({
                                 Самостоятельно - интернет, сайты
                             </option>
                             <option value="Instagram">Instagram</option>
-                            <option value="Самостоятельно - интернет, сайты">
-                                Самостоятельно - интернет, сайты
+                            <option value="Через знакомых">
+                                Через знакомых
                             </option>
-                            <option value="Самостоятельно - интернет, сайты">
-                                Самостоятельно - интернет, сайты
+                            <option value="Раньше обучался">
+                                Раньше обучался
                             </option>
                             <option value="Другое">Другое</option>
                         </select>
@@ -234,13 +232,6 @@ export default function KyrsCardInside({
                             </div>
                         </label>
                     </form>
-                    <Image loading="eager"
-                        unoptimized
-                        src="https://animationschool.ru/wp-content/themes/as_underscores_theme/images/sh6.png"
-                        alt="rightFormImage"
-                        width={300}
-                        height={500}
-                    />
                 </div>
             </div>
         </div>

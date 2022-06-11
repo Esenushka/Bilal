@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from "next/link"
 import { db } from '../../../config/firebase'
 import KyrsQuizCard from './KyrsQuizCard'
+import useRouter from "next/router"
 
 
 
@@ -58,7 +59,7 @@ export default function Quiz() {
                             Пройдите квиз и узнайте, какая профессия
                             подходит вам!
                         </div>
-                        <video width="327" height="292" preload="auto" autoPlay="autoplay" muted={true}> <source type="video/mp4" src="https://animationschool.ru/wp-content/themes/as_underscores_theme/video/quiz_circle.mp4" /></video>
+                        <Image width={327} height={292} src="/quizLogo.png" alt="quziLogo"  />
                         <div className='btn-wrapper quiz-btn_wrapper '>
                             <button onClick={handleChange} className='btn quiz-btn'>
                                 НАЧАТЬ

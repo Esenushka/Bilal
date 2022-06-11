@@ -105,9 +105,6 @@ export default function StudentsSlider({ id, home,notStudents }) {
   }, [id])
 
 
-  if (isLoading) {
-    return <Preloader full />
-  }
   return (
 
     <>

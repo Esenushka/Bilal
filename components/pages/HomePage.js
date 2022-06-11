@@ -6,23 +6,8 @@ import Quiz from '../common/Quiz/Quiz'
 import Image from "next/image"
 import { useEffect, useState } from 'react'
 import { db } from '../../config/firebase'
-// import Preloader from '../common/Preloader/Preloader'
 
 export default function HomePage() {
-    const [offset, setOffset] = useState();
-    const [innerWidth, setInnerWidth] = useState(0)
-
-
-    const handleScroll = () => setOffset(window.pageYOffset);
-
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    })
-
-    useEffect(() => {
-        setInnerWidth(window.innerWidth)
-    }, [])
 
     const [directionCardList, setDirectionCardList] = useState([])
 

@@ -1,8 +1,6 @@
 $color: #66097b;
 
-.blog_block-top {
-  background-image: url(https://animationschool.ru/wp-content/themes/as_underscores_theme/images/blog-top.jpg);
-}
+
 .blog-card {
   position: relative;
   overflow: hidden;
@@ -30,6 +28,7 @@ $color: #66097b;
   width: 100%;
   padding: 0 15px;
   top: 250px;
+  height: 100%;
   transition: 0.5s;
   div:nth-of-type(1) {
     font-size: 24px;
@@ -155,6 +154,7 @@ $color: #66097b;
   border-radius: 30px 30px 0 30px !important;
 }
 .blog-img_main {
+  position: relative;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -204,6 +204,7 @@ $color: #66097b;
   }
 }
 .blog-text {
+  position: relative;
   textarea {
     width: 100%;
     height: 250px;

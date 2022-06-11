@@ -3,43 +3,17 @@ import { db, storageRef } from '../../../config/firebase.js';
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/router"
 import Link from "next/link"
-import Preloader from "../Preloader/Preloader.js";
-import firebase from "firebase/compat/app";
 
 export default function BlogEditCard() {
-    const [blog, setBlog] = useState({})
-    const [blogData, setBlogData] = useState({})
 
     const [newBlog, setNewBlog] = useState({})
     const [file, setFile] = useState("");
     const [fileData, setFileData] = useState("");
-    const [fileSecond, setFileSecond] = useState("");
-    const [fileSecondData, setFileSecondData] = useState("");
     const [active, setActive] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
     const [more, setMore] = useState([])
-    const [added, setAdded] = useState(0)
 
     const rout = useRouter()
-    const id = rout.query.id
 
-    useEffect(() => {
-        db.collection("blog")
-            .get()
-            .then((snapshot) => {
-                setIsLoading(false)
-                const blogs = []
-                snapshot.forEach((doc) => {
-                    if (doc.id === id) {
-                        blogs.push({ ...doc.data(), id: doc.id })
-                        setBlog({ ...doc.data(), id: doc.id })
-                        setMore([...doc.data().more])
-                    }
-                })
-                setBlogData(blogs)
-            })
-
-    }, [id, added]);
 
     const getUrl = async (name) => await storageRef
         .ref()
@@ -95,17 +69,11 @@ export default function BlogEditCard() {
         if (fileData) {
             storageRef.ref("items/" + fileData.name).put(fileData).then(() => {
                 getUrl(fileData.name).then((url) => {
-                    if (fileSecondData) {
-                        storageRef.ref("items/" + fileSecondData.name).put(fileSecondData).then(() => {
-                            getUrl(fileSecondData.name).then((url2) => {
-                                db.collection("blog").add({ ...newBlog, more: more, titleImg: url, MainImg: url2 })
-                                    .then(() => {
-                                        setActive(false)
-                                        rout.push("/admin/blog")
-                                    })
-                            })
+                    db.collection("blog").add({ ...newBlog, more: more, titleImg: url })
+                        .then(() => {
+                            setActive(false)
+                            rout.push("/admin/blog")
                         })
-                    }
                 })
             })
         }
@@ -126,9 +94,7 @@ export default function BlogEditCard() {
     }
 
 
-    if (isLoading) {
-        return <Preloader full />
-    }
+   
 
     return (
         <>
@@ -174,25 +140,7 @@ export default function BlogEditCard() {
                                 <input type="date" onChange={(e) => setNewBlog({ ...newBlog, date: e.target.value })} />
                             }
                         </div>
-                        <div className='blog-text_wrapper'>
-                            <div className='blog-text'>
-                                <textarea
-                                    onChange={(e) => setNewBlog({ ...newBlog, FirstText: e.target.value })}
-                                    required >
-                                </textarea>
-                            </div>
-                        </div>
-                        <div className='blog-img_main'>
-                            <input required onChange={({ target }) => handleChange(target, setFileSecondData, setFileSecond)} type={"file"} />
-
-                            <Image loading="eager"
-                                unoptimized
-                                width={1000}
-                                height={1000}
-                                src={fileSecond || "/file-image.png"}
-                                alt="Post image" />
-
-                        </div>
+                        
                         {
                             more?.map((el, index) =>
                                 el.img !== undefined ? <div key={index} className='blog-img_main'>

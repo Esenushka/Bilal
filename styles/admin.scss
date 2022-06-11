@@ -26,6 +26,11 @@ $color: #66097b;
     margin-top: 10px;
   }
 }
+.blog-delete_img{
+  position: absolute;
+  right: -7%;
+  cursor: pointer;
+}
 .admin_navbar-wrapper {
   display: flex;
   justify-content: center;
@@ -436,6 +441,9 @@ $color: #66097b;
     width: 100%;
     justify-content: center;
   }
+    .blog-delete_img {
+      right: -12%;
+    }
 }
 .kyrs-card-text_des {
   margin-bottom: 15px;
@@ -444,6 +452,9 @@ $color: #66097b;
   }
 }
 @media (max-width: 768px) {
+  .blog-delete_img {
+    right: -10%;
+    }
   .kyrs-edit-card .container > div:nth-of-type(1) {
     justify-content: center;
     width: 100%;
@@ -456,6 +467,12 @@ $color: #66097b;
       width: 60%;
     }
   }
+}
+@media(max-width:630px){
+  .blog-delete_img {
+    top: -40px;
+    right: 5px;
+    }
 }
 @media (max-width: 512px) {
   .edit-students{

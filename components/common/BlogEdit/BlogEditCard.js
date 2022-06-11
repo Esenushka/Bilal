@@ -4,21 +4,15 @@ import { useEffect, useState } from 'react';
 import { useRouter } from "next/router"
 import Link from "next/link"
 import Preloader from "../Preloader/Preloader.js";
-import firebase from "firebase/compat/app";
 
 export default function BlogEditCard() {
     const [blog, setBlog] = useState({})
-    const [blogData, setBlogData] = useState({})
-
     const [newBlog, setNewBlog] = useState({})
     const [file, setFile] = useState("");
     const [fileData, setFileData] = useState("");
-    const [fileSecond, setFileSecond] = useState("");
-    const [fileSecondData, setFileSecondData] = useState("");
     const [active, setActive] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [more, setMore] = useState([])
-    const [added, setAdded] = useState(0)
 
     const rout = useRouter()
     const id = rout.query.id
@@ -28,18 +22,15 @@ export default function BlogEditCard() {
             .get()
             .then((snapshot) => {
                 setIsLoading(false)
-                const blogs = []
                 snapshot.forEach((doc) => {
                     if (doc.id === id) {
-                        blogs.push({...doc.data(),id:doc.id})
                         setBlog({ ...doc.data(), id: doc.id })
                         setMore([...doc.data().more])
                     }
                 })
-                setBlogData(blogs)
             })
 
-    }, [id, added]);
+    }, [id]);
 
     const getUrl = async (name) => await storageRef
         .ref()
@@ -70,9 +61,9 @@ export default function BlogEditCard() {
                 const newUrl = e.target.result;
                 storageRef.ref("items/" + target.files[0].name).put(target.files[0]).then(() => {
                     getUrl(target.files[0].name).then((url) => {
-                        more[index] = { img: url,file: newUrl }
+                        more[index] = { img: url, file: newUrl }
                         setMore([...more])
-                        
+
                     })
                 })
             };
@@ -81,7 +72,7 @@ export default function BlogEditCard() {
     };
 
     const handleChangeText = (e, index) => {
-        more[index] = { text: e.target.value }
+        more.splice(index,1,{text: e.target.value})
         setMore([...more])
     }
 
@@ -98,7 +89,7 @@ export default function BlogEditCard() {
                     [key]: data[key]
                 })
             }
-        }       
+        }
 
         db.collection("blog").doc(id).update({
             more: more
@@ -111,13 +102,7 @@ export default function BlogEditCard() {
                 })
             })
         }
-        if (fileSecondData) {
-            storageRef.ref("items/" + fileSecondData.name).put(fileSecondData).then(() => {
-                getUrl(fileSecondData.name).then((url) => {
-                    db.collection("blog").doc(id).update({ MainImg: url })
-                })
-            })
-        }
+
         setTimeout(() => {
             setActive(false)
         }, 5000)
@@ -134,15 +119,19 @@ export default function BlogEditCard() {
     }
 
     const addImage = () => {
-        setMore([...more, { img: ""}])
+        setMore([...more, { img: "" }])
     }
 
     const addText = () => {
 
-        setMore([...more, { text: ""}])
+        setMore([...more, { text: "" }])
     }
 
-
+    const RemoveItem = (index) => {
+       more.splice(index,1)
+       setMore([...more])
+    }
+    
     if (isLoading) {
         return <Preloader full />
     }
@@ -199,36 +188,12 @@ export default function BlogEditCard() {
                                 <input type="date" onChange={(e) => setNewBlog({ ...newBlog, date: e.target.value })} defaultValue={blog.date} />
                             }
                         </div>
-                        <div className='blog-text_wrapper'>
-                            <div className='blog-text'>
-                                <textarea
-                                    onChange={(e) => setNewBlog({ ...newBlog, FirstText: e.target.value })}
-                                    required defaultValue={blog.FirstText}>
-                                </textarea>
-                            </div>
-                        </div>
-                        <div className='blog-img_main'>
-                            <input onChange={({ target }) => handleChange(target, setFileSecondData, setFileSecond)} type={"file"} />
-                            {
-                                fileSecond ?
-                                    <Image loading="eager"
-                                        unoptimized
-                                        width={1000}
-                                        height={1000}
-                                        src={fileSecond}
-                                        alt="Post image" />
-                                    : <Image loading="eager"
-                                        unoptimized
-                                        width={1000}
-                                        height={1000}
-                                        src={blog.MainImg || "/file-image.png"}
-                                        alt="Post image" />
-                            }
-                        </div>
+
                         {
                             more?.map((el, index) =>
                                 el.img !== undefined ? <div key={index} className='blog-img_main'>
                                     <input required onChange={({ target }) => handleChangeMore(target, index, el.img)} type={"file"} />
+                                    <div className="blog-delete_img"><Image onClick={()=>RemoveItem(index)} loading="eager" unoptimized width={30} height={30} src="/minus.png" alt="delete" /></div>
                                     {
                                         el.file ?
                                             <Image loading="eager"
@@ -248,10 +213,14 @@ export default function BlogEditCard() {
                                 </div> : <div key={index} className='blog-text_wrapper'>
                                     <div className='blog-text_wrapper'>
                                         <div className='blog-text'>
+                                            <div className="blog-delete_img">
+                                                    <Image onClick={() => RemoveItem(index)} loading="eager" unoptimized width={30} height={30} src="/minus.png" alt="delete" />
+                                            </div>
                                             <textarea
                                                 onChange={(e) => handleChangeText(e, index)}
                                                 required defaultValue={el.text}>
                                             </textarea>
+
                                         </div>
                                     </div>
                                 </div>

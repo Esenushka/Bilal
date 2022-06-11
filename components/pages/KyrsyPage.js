@@ -68,7 +68,7 @@ export default function KyrsyPage() {
         }
 
       </div>
-      <div className='step_wrapper kyrs_wrapper'>
+      <div className='step_wrapper kyrs_wrapper_quiz'>
         <div className='direction-title'>
           НЕ ЗНАЕТЕ С ЧЕГО НАЧАТЬ?
         </div>
