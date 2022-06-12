@@ -52,3 +52,10 @@ $color: #66097b;
     margin: 0;
   }
 }
+@media(max-width: 768px){
+  .contacts-block{
+    > div:nth-of-type(2){
+      height: fit-content;
+    }
+  }
+}

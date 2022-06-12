@@ -55,7 +55,7 @@ $color: #66097b;
   background: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
 
   span {
     z-index: -1 !important;
@@ -497,7 +497,7 @@ $color: #66097b;
 .trainning_days>div {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   padding-right: 25px;
   height: 100px;
   width: 320px;
@@ -818,11 +818,7 @@ $color: #66097b;
 }
 
 @media (max-width: 768px) {
-  .step_wrapper {
-    span {
-      display: none !important;
-    }
-  }
+ 
 
   .direction_cards {
     display: none;
