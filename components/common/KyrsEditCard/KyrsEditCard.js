@@ -150,9 +150,9 @@ export default function KyrsEditCard() {
         }, 6000)
     }
 
-    const removeTeacher = (teacherIndex) => {
-        const filtered = teachers.filter((el, index) => teacherIndex !== index)
-        setTeachers(filtered)
+    const removeTeacher = (index) => {
+        teachers.splice(index,1)
+        setTeachers([...teachers])
     }
 
     const addTeacher = (e, index) => {
@@ -279,8 +279,8 @@ export default function KyrsEditCard() {
                                     {
                                         teachers.length > 0 ? teachers?.map((el, index) => <label className='teachers-edit-label' key={index}>
                                             <input
+                                                value={teachers[index]}
                                                 required
-                                                defaultValue={el}
                                                 onChange={(e) => addTeacher(e, index)}
                                                 type={"text"} />
                                             <Image loading="eager" onClick={() => removeTeacher(index)} src={"/minus.png"} alt="deleteImg" width={1000} height={1000} />

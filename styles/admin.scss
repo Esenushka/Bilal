@@ -278,6 +278,7 @@ $color: #66097b;
     width: 30px !important;
   }
   img {
+    border-radius: 0 !important;
     cursor: pointer;
     object-fit: contain;
   }
@@ -307,7 +308,7 @@ $color: #66097b;
 .activeImage{
   border-radius: 30px;
   border: 1px solid gray;
-  span{
+  > span{
     transform: scale(0.4);
     border-radius: 50px;
     img{

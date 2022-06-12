@@ -82,9 +82,9 @@ export default function NewKyrs() {
 
   }
 
-  const removeTeacher = (teacherIndex) => {
-    const filtered = teachers.filter((el, index) => teacherIndex !== index)
-    setTeachers(filtered)
+  const removeTeacher = (index) => {
+    teachers.splice(index, 1)
+    setTeachers([...teachers])
   }
 
   const addTeacher = (e, index) => {
@@ -205,6 +205,7 @@ export default function NewKyrs() {
                 {
                   teachers.length > 0 ? teachers?.map((el, index) => <label className='teachers-edit-label' key={index}>
                     <input
+                      value={teachers[index]}
                       required
                       onChange={(e) => addTeacher(e, index)}
                       type={"text"} />

@@ -134,6 +134,9 @@
   span{
     width: fit-content !important;
   }
+  img{
+    border-radius: 0 !important;
+  }
 }
 @media(max-width: 960px){
   .kyrs_edit-wrapper{

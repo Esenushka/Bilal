@@ -128,7 +128,7 @@ export default function BlogEditCard() {
     }
 
     const RemoveItem = (index) => {
-       more.splice(index,1)
+       more.splice(index ,1)
        setMore([...more])
     }
     
@@ -191,7 +191,7 @@ export default function BlogEditCard() {
 
                         {
                             more?.map((el, index) =>
-                                el.img !== undefined ? <div key={index} className='blog-img_main'>
+                                el?.img !== undefined ? <div key={index} className='blog-img_main'>
                                     <input required onChange={({ target }) => handleChangeMore(target, index, el.img)} type={"file"} />
                                     <div className="blog-delete_img"><Image onClick={()=>RemoveItem(index)} loading="eager" unoptimized width={30} height={30} src="/minus.png" alt="delete" /></div>
                                     {
@@ -218,7 +218,7 @@ export default function BlogEditCard() {
                                             </div>
                                             <textarea
                                                 onChange={(e) => handleChangeText(e, index)}
-                                                required defaultValue={el.text}>
+                                                required value={more[index]?.text} >
                                             </textarea>
 
                                         </div>
