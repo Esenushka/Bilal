@@ -18,7 +18,8 @@ export default function KyrsCardInside({
     freePlace,
     forWho,
     about,
-    videoInvite
+    videoInvite,
+    des
 }) {
     const [comments, setComments] = useState([])
     const [commentName, setCommentName] = useState();
@@ -85,6 +86,9 @@ export default function KyrsCardInside({
                     />
                     <div className="kyrs-card_main-text">
                         <div className="kyrs-card-text_title">{title}</div>
+                        <div className='kyrs-card-text_des'>
+                            {des}
+                        </div>
                         <div className="kyrs-card-text_block">
                             <div>{teachers?.length > 1 ? 'Преподватели:' : 'Преподователь:'}</div>
                             <div>

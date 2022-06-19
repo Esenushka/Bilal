@@ -1025,7 +1025,7 @@ $color: #66097b;
   }
 
   .direction-title {
-    font-size: 35px;
+    font-size: 25px;
   }
 }
 
@@ -1044,6 +1044,9 @@ $color: #66097b;
   }
 }
 @media(max-width: 330px){
+  .direction-title{
+    font-size: 20px;
+  }
   .main-video{
     height: 200px;
     margin: 0;

@@ -4,9 +4,6 @@ import { useEffect, useState } from 'react'
 import Link from "next/link"
 import { db } from '../../../config/firebase'
 import KyrsQuizCard from './KyrsQuizCard'
-import useRouter from "next/router"
-
-
 
 export default function Quiz() {
     const [active, setActive] = useState(0)
